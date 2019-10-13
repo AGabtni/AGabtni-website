@@ -1,18 +1,62 @@
-<mat-toolbar   >
+
+<mat-toolbar class="custom-toolbar" color = "primary" [class.mat-elevation-z4]="true">
   	
-</mat-toolbar>
-<mat-toolbar class="custom-toolbar" color = "primary" [class.mat-elevation-z7]="true">
+   <mat-toolbar-row class="title-row" >
+   		<span id="title" > {{title}}</span>
+   		<span class="spacer"></span>
   	
-   <mat-toolbar-row id="title-row" >
-   		<span > Shop example</span>
+  		<a class="button" ><mat-icon aria-hidden="false" aria-label="Example heart icon">search</mat-icon></a>
+    	<a class="button"><mat-icon aria-hidden="false" aria-label="Example delete icon">shopping_cart</mat-icon></a>
+
+
+
 	</mat-toolbar-row>
 
 
-   <mat-toolbar-row>
-   	
-  	<span class="spacer"></span>
-  	<a class="button" ><mat-icon aria-hidden="false" aria-label="Example heart icon">search</mat-icon></a>
-    <a class="button"><mat-icon aria-hidden="false" aria-label="Example delete icon">shopping_cart</mat-icon></a>
+   <mat-toolbar-row  >
+   		<div class="drpdown-menu">
+
+			<div *ngFor="let cat of categories" class="dropdown">
+				<button mat-button [matMenuTriggerFor]="menu" class="dropbtn">{{cat.title}}</button>
+				<mat-menu #menu="matMenu" backdropClass="custom-dropdown-menu">
+					<div *ngFor="let catg of cat.nest" class="column">
+								<h5>Category {{cat.title}} {{catg.subcategory}} </h5>
+								<button mat-menu-item>Link 1</button>
+								<button mat-menu-item>Link 1</button>
+								<button mat-menu-item>Link 1</button>
+					</div>
+
+				</mat-menu>
+
+			</div>
+
+
+		</div>
+   		<!--
+   		<div class = "dropdown-menu">		
+	   		<div *ngFor="let cat of categories" class="dropdown">
+	   			<button class="dropbtn">{{cat.title}}
+
+	   			</button>
+
+
+	   			<div class = "dropdown-content">
+	   				<div class="row">
+						<div *ngFor="let catg of cat.nest" class="column">
+							<h3>Category {{cat.title}} {{catg.subcategory}} </h3>
+							<a href="#">Link 1</a>
+							<a href="#">Link 2</a>
+							<a href="#">Link 3</a>
+						</div>
+					</div>
+	   				
+	   			</div>
+
+	   					
+	   		</div>
+		</div>
+
+		-->
 
    </mat-toolbar-row>
 

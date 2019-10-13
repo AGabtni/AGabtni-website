@@ -1,7 +1,6 @@
 .spacer {
   /* This fills the remaining space, by using flexbox. 
      Every toolbar row uses a flexbox row layout. */
-  flex: 1 1 auto;
 }
 
 .icon{
@@ -15,9 +14,119 @@
 	height : 150px;
 }
 
-#title-row{
-	padding: 15px 35%;
-  	align-items: center;
-	font-size: 50px;
+#title{
+	flex: 1 1 auto;
+  	text-align: center;
 
 }
+
+.title-row{
+	
+
+}
+.drpdown-menu{
+ 	  margin: 0 auto;
+
+}
+
+
+
+
+/*Drop down menu classes*/
+.dropdown {
+    float: left;
+    overflow: hidden;
+  	text-align: center;
+  	padding: 0 50px;
+
+
+    
+
+}
+
+
+.mat-menu-panel{
+
+
+	max-width: none!important;
+	width: 500px!important;
+	background-color: white;
+
+
+}
+
+
+.mat-menu-item{
+
+	padding: 0 10px 0 0;
+}
+
+/*OVERRIDES ANGULAR COMPONENT*/
+
+.dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    background-color: inherit;
+    font: inherit;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ccc;
+}
+
+.column {
+    float: left;
+    padding-left: 20px;
+    width: 150px;
+    background-color: inherit;
+    align-content: center;
+}
+
+
+
+
+
+
+
+
+
+/*All below is deprecated*/
+
+
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: primary;
+    width: 50%;
+    left: 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content .header {
+    float: left;
+    padding: 16px;
+    background-color: #ccc;
+
+}
+
+.dropdown:hover .dropdown-content {
+    background: yellow;
+    display: block;
+
+
+}
+
+
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
