@@ -1,20 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit,ViewEncapsulation  } from '@angular/core';
 
 import { highlights} from '../static/carousel_highlights';
+import {
+  animate, state, style, transition, trigger
+} from '@angular/animations';
+
+import * as $ from 'jquery';
+
+
 
 @Component({
   selector: 'app-highlights-carousel',
   templateUrl: './highlights-carousel.component.html',
-  styleUrls: ['./highlights-carousel.component.css']
+  styleUrls: ['./highlights-carousel.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('slide', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 }))]),
+      transition(':leave', [
+        animate('300ms', style({ opacity:  0 }))])
+
+
+
+  	])
+
+  ]
 })
 export class HighlightsCarouselComponent implements OnInit {
 
- 
-  images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
-  highlights = highlights;  
-  constructor() { }
+	@Input() activePane = 'left';
+  	highlights = highlights;  
 
-  ngOnInit() {
-  }
+
+  	constructor() { }
+  	ngOnInit() {
+  	}
+
+	
+
 
 }

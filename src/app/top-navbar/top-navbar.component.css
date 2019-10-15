@@ -12,6 +12,8 @@
 .custom-toolbar{
 
 	height : 150px;
+    position: relative;    
+    z-index: 10;
 }
 
 #title{

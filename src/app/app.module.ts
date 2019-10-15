@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,8 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 
-import  { MatToolbarModule, MatMenuModule, MatIconModule} from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import  { MatGridListModule, MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule} from '@angular/material';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HighlightsCarouselComponent } from './highlights-carousel/highlights-carousel.component';
 
@@ -20,15 +20,18 @@ import { HighlightsCarouselComponent } from './highlights-carousel/highlights-ca
     AppComponent,
     ProductComponent,
     TopNavbarComponent,
-    HighlightsCarouselComponent,
+    HighlightsCarouselComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatGridListModule,
     MatMenuModule,
     MatIconModule,
+    MatCardModule,
     FlexLayoutModule,
     NgbModule
   ],

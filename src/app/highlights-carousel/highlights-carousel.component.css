@@ -14,3 +14,42 @@ ngb-carousel .picsum-img-wrapper>img {
   bottom: 0;
   right: 0;
 }
+
+
+ngb-carousel .carousel-caption {
+
+    padding-bottom: 20%;
+    color: black;
+
+}
+
+
+
+ngb-carousel .carousel-indicators {
+
+    padding-bottom: 10%;
+ 
+}
+
+a[class^="carousel-control"] {
+  background: #ffff00;
+}
+
+
+/*
+.carousel-item {
+  display: block !important;
+  z-index: 1;
+  position: absolute;
+  transform: translateX(100%);
+  opacity: 0;
+  transition:all  0.2s;
+  visibility: hidden;
+}
+
+.carousel-item.active {
+  position: relative;
+  transform: translateX(0);
+  visibility: visible ;
+  opacity: 1;
+}*/

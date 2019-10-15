@@ -1,0 +1,29 @@
+
+.custom-card {
+  width: 20%;
+  background-color: white;
+  text-align: center;
+  display: inline-block;
+  margin-right: 20px;
+
+
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+ 
+}
+
+
+.card-custom-header{
+  height: 75px;
+  text-align: center;
+
+}
+.card-image-preview{
+
+  border-radius: 50%;
+  width: 90%;
+	
+}

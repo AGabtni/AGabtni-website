@@ -1,0 +1,9 @@
+.grid {
+  margin-top: -50px;
+  text-align: center;
+  z-index: 9;
+}
+
+.grid-pad {
+  padding: 10px 0;
+}

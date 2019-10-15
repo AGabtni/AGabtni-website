@@ -1,1 +1,9 @@
-<p>product works!</p>
+
+	<mat-card *ngFor="let service of services" class="custom-card" [class.mat-elevation-z4]="true">
+		<mat-card-header class="card-custom-header">
+			<mat-card-title>{{service.title}}</mat-card-title>
+		</mat-card-header>
+		<img mat-card-image class="card-image-preview" [src]="service.url" alt="Service preview image">
+
+	</mat-card>
+
