@@ -1,8 +1,18 @@
+.custom-carouesl-container{
+
+  width: 100%;
+  height: 100%;  
+}
+ngb-carousel {
+    width: inherit;
+    height: inherit;
+}
+
 
 ngb-carousel .picsum-img-wrapper {
   position: relative;
-  width: 100%;
-  height: 200px!important;
+  width: inherit;
+  height: inherit;
   padding-top: 40%; /* Keep ratio for 900x500 images */
 }
 
@@ -15,28 +25,50 @@ ngb-carousel .picsum-img-wrapper>img {
   right: 0;
 }
 
-
 ngb-carousel .carousel-caption {
-
     padding-bottom: 20%;
     color: black;
+}
 
+.carousel-inner {
+    overflow: visible;
+}
+
+.carousel-item {
+    display: flex !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.2s ease-in-out, visibility 1.2s;
+    z-index: -1;
+    position: absolute;
+}
+
+.carousel-item.active{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.2s ease-in-out, visibility 1.2s;
+    z-index: 0;
+}
+
+.carousel-control-prev {
+     z-index: 1;
 }
 
 
-
-ngb-carousel .carousel-indicators {
-
-    padding-bottom: 10%;
- 
+.carousel-control-next {
+     z-index: 1;
 }
+
+.carousel-indicators{
+    z-index: 1;
+}
+
+/*
 
 a[class^="carousel-control"] {
   background: #ffff00;
 }
 
-
-/*
 .carousel-item {
   display: block !important;
   z-index: 1;

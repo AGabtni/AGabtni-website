@@ -1,18 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductComponent } from './product/product.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+/**
+  custom components
+*/
 
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
+import { HighlightsCarouselComponent } from './highlights-carousel/highlights-carousel.component';
+import { ProductComponent } from './product/product.component';
+
+
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import  { MatGridListModule, MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { HighlightsCarouselComponent } from './highlights-carousel/highlights-carousel.component';
+
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
+
 
 
 @NgModule({
@@ -33,7 +43,8 @@ import { HighlightsCarouselComponent } from './highlights-carousel/highlights-ca
     MatIconModule,
     MatCardModule,
     FlexLayoutModule,
-    NgbModule
+    NgbModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent, TopNavbarComponent]
