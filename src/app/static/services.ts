@@ -1,7 +1,7 @@
 export const services = [
 
   {
-    title: 'Game development and reskinning',
+    title: 'Game development',
     url: `https://picsum.photos/120/120?random&t=${Math.random()}`
   },
   {
@@ -9,7 +9,7 @@ export const services = [
     url: `https://picsum.photos/120/120?random&t=${Math.random()}`
   },
   {
-    title: 'App development and debugging',
+    title: 'App development',
     url: `https://picsum.photos/120/120?random&t=${Math.random()}`
   },
   

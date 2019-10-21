@@ -16,11 +16,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import  { MatGridListModule, MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule} from '@angular/material';
+import  { MatGridListModule, MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule, MatCardModule, MatListModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ProductHighlightComponent } from './product-highlight/product-highlight.component';
 
 
 
@@ -30,7 +31,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     AppComponent,
     ProductComponent,
     TopNavbarComponent,
-    HighlightsCarouselComponent
+    HighlightsCarouselComponent,
+    ProductHighlightComponent
     
   ],
   imports: [
@@ -38,10 +40,12 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatSidenavModule,
     MatGridListModule,
     MatMenuModule,
     MatIconModule,
     MatCardModule,
+    MatListModule,
     FlexLayoutModule,
     NgbModule,
     SlickCarouselModule

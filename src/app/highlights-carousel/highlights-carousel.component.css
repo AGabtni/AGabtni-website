@@ -1,40 +1,39 @@
-.custom-carouesl-container{
 
+ngb-carousel{
+  height: 100%;
   width: 100%;
-  height: 100%;  
-}
-ngb-carousel {
-    width: inherit;
-    height: inherit;
+
 }
 
 
 ngb-carousel .picsum-img-wrapper {
   position: relative;
-  width: inherit;
-  height: inherit;
-  padding-top: 40%; /* Keep ratio for 900x500 images */
+  width: 100%;
+  height: 100%;
 }
 
 ngb-carousel .picsum-img-wrapper>img {
   position: absolute;
-  width: 100%;
+  width: inherit;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
 }
 
-ngb-carousel .carousel-caption {
-    padding-bottom: 20%;
-    color: black;
+.carousel-caption{
+  bottom: unset;
+  text-align: center;
+  color : black;
 }
+
 
 .carousel-inner {
     overflow: visible;
 }
 
 .carousel-item {
+  text-align: center;
     display: flex !important;
     opacity: 0;
     visibility: hidden;
@@ -60,6 +59,7 @@ ngb-carousel .carousel-caption {
 }
 
 .carousel-indicators{
+    top: 25%;
     z-index: 1;
 }
 
