@@ -9,7 +9,7 @@ import { categories } from '../static/categories';
   templateUrl: './top-navbar.component.html',
   styleUrls: ['./top-navbar.component.css'],
   encapsulation: ViewEncapsulation.None,
-
+ 
 })
 export class TopNavbarComponent implements OnInit {
 

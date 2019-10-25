@@ -1,11 +1,19 @@
 .menu-spacer {
   flex: 1 1 auto;
 }
-mat-drawer-content mat-sidenav-content{
+mat-sidenav-container{
 
-    height: 50px;
-  
+
+    position: absolute!important;
+    visibility: hidden!important;
+    z-index: 10000!important;
+    height: 100%;
+
 }
+
+
+
+
 
 .icon{
 
