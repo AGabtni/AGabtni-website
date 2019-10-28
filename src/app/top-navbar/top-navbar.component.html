@@ -1,74 +1,57 @@
-<!--
-<mat-toolbar class="custom-toolbar" color = "primary" [ngClass]="{'mat-elevation-z5' : true, 'sticky' : isSticky}" >
-  	
-   <mat-toolbar-row class="title-row" >
-   		<span id="title" > {{title}}</span>
-   		<span class="spacer"></span>
-  	
-  		<a class="button" ><mat-icon aria-hidden="false" aria-label="Example heart icon">search</mat-icon></a>
-    	<a class="button"><mat-icon aria-hidden="false" aria-label="Example delete icon">shopping_cart</mat-icon></a>
-
-
-
-	</mat-toolbar-row>
-
-
-   <mat-toolbar-row  fxShow="true" fxHide.lt-md="true">
-   		<div class="drpdown-menu">
-
-			<div *ngFor="let cat of categories" class="dropdown">
-				<button mat-button [matMenuTriggerFor]="menu" class="dropbtn">{{cat.title}}</button>
-				<mat-menu #menu="matMenu" backdropClass="custom-dropdown-menu">
-					<div *ngFor="let catg of cat.nest" class="column">
-								<h5>Category {{cat.title}} {{catg.subcategory}} </h5>
-								<button mat-menu-item>Link 1</button>
-								<button mat-menu-item>Link 1</button>
-								<button mat-menu-item>Link 1</button>
-					</div>
-				</mat-menu>
-			</div>
-		</div>
-    </mat-toolbar-row>
-   
-</mat-toolbar>
--->
-
-  <mat-toolbar color="primary" [ngClass]="{'mat-elevation-z5' : true, 'sticky' : isSticky}">
+  <mat-toolbar color="primary" [ngClass]="{'mat-elevation-z6' : true}">
     <mat-toolbar-row>
-      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
-        <mat-icon>menu</mat-icon>
-      </button>
+     
+
       <span>Responsive Navigation</span>
+
       <span class="menu-spacer"></span>
-      <div fxShow="true" fxHide.lt-md>
+
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm class="toggle-button">
+        <mat-icon>
+          menu
+        </mat-icon>
+
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row fxShow="true" fxHide.lt-md style="text-align: center;">
+      
+
+      <div style="text-align: center;">
         <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-        <div *ngFor="let cat of categories" class="dropdown">
-				<button mat-button [matMenuTriggerFor]="menu" class="dropbtn">{{cat.title}}</button>
-				<mat-menu #menu="matMenu" backdropClass="custom-dropdown-menu">
-					<div *ngFor="let catg of cat.nest" class="column">
-								<h5>Category {{cat.title}} {{catg.subcategory}} </h5>
-								<button mat-menu-item>Link 1</button>
-								<button mat-menu-item>Link 1</button>
-								<button mat-menu-item>Link 1</button>
-					</div>
-				</mat-menu>
-			</div>
+        <div *ngFor="let cat of categories" class="category">
+				  <button mat-button class="dropbtn">{{cat.title}}</button>
+  				
+			  </div>
       </div>
+
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <mat-sidenav-container fxFlexFill >
-    <mat-sidenav #sidenav >
+  <!--Only on SMALL screens-->
+  <mat-sidenav-container fxShow="true" fxHide.gt-sm fxFlexFill  class="side-nav-container">
+    <mat-sidenav #sidenav [mode]="push">
+      <div style="height:200px;background-color: indigo;"></div>
+
       <mat-nav-list>
+
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-        <a href="#" mat-list-item>Menu Item 1</a>
-        <a href="#" mat-list-item>Menu Item 2</a>
-        <a href="#" mat-list-item>Menu Item 3</a>
-        <a href="#" mat-list-item>Menu Item 4</a>
-        <a href="#" mat-list-item>Menu Item 5</a>
-        <a href="#"mat-list-item>Menu Item 6</a>
+        <a *ngFor="let cat of categories" href="#" mat-list-item>{{cat.title}}</a>
       </mat-nav-list>
     </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-highlights-carousel >
+        
+        </app-highlights-carousel>
+     
+        <app-product>
+          
+        </app-product>
+
+        <app-product-highlight [containerIndex]="0"></app-product-highlight>
+
+    </mat-sidenav-content>
     
   </mat-sidenav-container>
+
 

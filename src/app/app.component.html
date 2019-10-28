@@ -1,25 +1,26 @@
 <app-top-navbar></app-top-navbar>
-<div layout="row" layout-align="center center">
 
-	<div >
+
+<!--Only on BIG screens-->
+<div fxShow="true" fxHide.lt-md>
+		
+	<app-highlights-carousel ></app-highlights-carousel>
+
+
 	
-		<app-highlights-carousel></app-highlights-carousel>
+	<app-product > </app-product>
 
-	</div>
-
-	<div class="grid grid-pad">
-
-
-		<app-product >
-		</app-product>
-	</div>
+		
+	<app-product-highlight [containerIndex]="0"></app-product-highlight>
 
 
 </div>
 
 
-
 	
+	<app-footer></app-footer>
+
+
 	
 
 <router-outlet></router-outlet>

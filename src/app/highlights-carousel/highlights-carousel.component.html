@@ -1,18 +1,17 @@
-  <ngb-carousel *ngIf="highlights" 
+  <ngb-carousel #carousel *ngIf="highlights" 
       [showNavigationArrows]="true" 
       [showNavigationIndicators]="true"
-      interval="5000"
       [keyboard]="true"
       [pauseOnHover]="true"
-      [wrap]="true"
-      [activeId]="'slideTwo'">
-        <ng-template ngbSlide *ngFor="let image of highlights" class="carousel-item" let-i="index">
-          <div @slide class="picsum-img-wrapper" >
-            <img [src]="image.url" alt="Random slide">
+      interval=2000 wrap="true"  (slide)=onSlide($event) [class.mat-elevation-z4]="true">
+        <ng-template ngbSlide *ngFor="let image of highlights, let i= index ">
+          <div class="picsum-img-wrapper"  [@simpleTranslation]="slideControl[i]">
+            <img [src]="image.url" alt="Random slide" >
+            <div class="carousel-caption">
+              <h3>{{image.caption}}</h3>
+              <p>This carousel hides navigation arrows and indicators.</p>
+            </div>
           </div>
-          <div class="carousel-caption">
-            <h3>{{image.caption}}</h3>
-            <p>This carousel hides navigation arrows and indicators.</p>
-          </div>
+          
         </ng-template>
     </ngb-carousel>

@@ -16,12 +16,20 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import  { MatGridListModule, MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule, MatCardModule, MatListModule} from '@angular/material';
+import  { MatGridListModule, 
+          MatToolbarModule, 
+          MatSidenavModule, 
+          MatMenuModule, 
+          MatIconModule, 
+          MatCardModule, 
+          MatListModule,
+          MatExpansionModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import  {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProductHighlightComponent } from './product-highlight/product-highlight.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -32,7 +40,8 @@ import { ProductHighlightComponent } from './product-highlight/product-highlight
     ProductComponent,
     TopNavbarComponent,
     HighlightsCarouselComponent,
-    ProductHighlightComponent
+    ProductHighlightComponent,
+    FooterComponent
     
   ],
   imports: [
@@ -46,12 +55,13 @@ import { ProductHighlightComponent } from './product-highlight/product-highlight
     MatIconModule,
     MatCardModule,
     MatListModule,
+    MatExpansionModule,
     FlexLayoutModule,
     NgbModule,
     SlickCarouselModule
   ],
   providers: [],
-  bootstrap: [AppComponent, TopNavbarComponent]
+  bootstrap: [AppComponent, TopNavbarComponent,FooterComponent]
 })
 
 

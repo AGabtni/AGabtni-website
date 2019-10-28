@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 
 @Component({
@@ -9,6 +9,8 @@ import { Component } from '@angular/core';
    
 
 })
+
+
 export class AppComponent {
 
 

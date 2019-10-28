@@ -1,11 +1,15 @@
-import { Input, Component, OnInit,ViewEncapsulation  } from '@angular/core';
+import { Input, Component, OnInit,ViewChildren, ViewEncapsulation, QueryList, AfterViewInit  } from '@angular/core';
 
 import { highlights} from '../static/carousel_highlights';
 import {
-  animate, state, style, transition, trigger
+  trigger,
+  state,
+  style,
+  animate,
+  transition
 } from '@angular/animations';
-
 import * as $ from 'jquery';
+import  { NgbSlide } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -15,24 +19,51 @@ import * as $ from 'jquery';
   styleUrls: ['./highlights-carousel.component.css'],
   encapsulation: ViewEncapsulation.None,
   animations: [
-    trigger('slide', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms', style({ opacity: 1 }))]),
-      transition(':leave', [
-        animate('300ms', style({ opacity:  0 }))])
+    trigger('simpleTranslation', [
+      state('outright', style({ transform: `translateX(100%)` })),
+      state('outleft', style({ transform: `translateX(-100%)` })),
+      transition('*=>inright',[
+        style({transform:`translateX(-100%)`}),
+        animate('260ms ease-in',style({ transform: `translateX(0)` }))
+      ]),
+      transition('*=>inleft',[
+        style({transform:`translateX(100%)`}),
+        animate('260ms ease-in',style({ transform: `translateX(0)` }))
+      ]),
+      transition('*=>outleft', [
+        animate('260ms ease-in', style({ transform: `translateX(-100%)` }))
+      ]),
+      transition('*=>outright', [
+        animate('260ms ease-in',style({ transform: `translateX(100%)` }))
+      ]),
+    ])
+  ]})
+export class HighlightsCarouselComponent implements AfterViewInit {
 
-
-
-  	])
-
-  ]
-})
-export class HighlightsCarouselComponent implements OnInit {
-
-	@Input() activePane = 'left';
   	highlights = highlights;  
+    @ViewChildren(NgbSlide) slides: QueryList<NgbSlide>
 
+
+    slideControl: any[] = []
+    
+
+    onSlide(event) {
+      this.slides.forEach((x, index) => {
+        if (x.id == event.current) {
+          this.slideControl[index] = 'in' + event.direction
+        }
+        if (x.id == event.prev) {
+          this.slideControl[index] = 'out' + event.direction
+        }
+      })
+    }
+    ngAfterViewInit() {
+      setTimeout(() => {
+        this.slides.forEach((x, index) => {
+          this.slideControl[index] = index ? 'outleft' : 'inleft'
+        })
+      })
+    }
 
   	constructor() { }
   	ngOnInit() {

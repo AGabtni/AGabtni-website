@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component,Input, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { categories } from '../static/categories';
 
 
@@ -17,12 +17,8 @@ export class TopNavbarComponent implements OnInit {
 
   categories = categories ;
 
-   isSticky: boolean = false;
-
-  @HostListener('window:scroll', ['$event'])
-  checkScroll() {
-    this.isSticky = window.pageYOffset >= 250;
-  }
+  @Input()
+  hasBackdrop: false;
 
   constructor() { 
 

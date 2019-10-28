@@ -1,22 +1,29 @@
+.flex {
+  display: flex;
+  
+}
+.card-deck-container{  
+	overflow-x: scroll;
+    padding: 20px ;
+ 	display: flex;
+  	margin-left: auto;
+ 	margin-right: auto;
+ 	align-items: center;
+}
+.card-deck-container::-webkit-scrollbar {    color: indigo;}
 
 .custom-card {
   
   text-align: center;
-
-
-
+  margin: 10px;
+  padding: 10px;
+  
 }
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
- 
-}
-
-
 .card-image-preview{
 
   border-radius: 50%;
   width: 90%;
 	
 }
+
+

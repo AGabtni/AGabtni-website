@@ -1,15 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnChanges, Input } from '@angular/core';
+import{ services } from '../static/services';
 
 @Component({
   selector: 'app-product-highlight',
   templateUrl: './product-highlight.component.html',
   styleUrls: ['./product-highlight.component.css']
 })
-export class ProductHighlightComponent implements OnInit {
+export class ProductHighlightComponent implements OnChanges {
 
-  constructor() { }
+	services = services;
+	returnedString: string;
 
-  ngOnInit() {
-  }
+
+	@Input() containerIndex : number;
+
+
+	constructor() { 
+			
+
+	}
+
+	ngOnInit(){
+					this.returnedString = services[Number(this.containerIndex)].description;
+
+
+	}
+	ngOnChanges() {
+
+			this.returnedString = services[Number(this.containerIndex)].description;
+
+			console.log(this.returnedString);
+
+
+	}
 
 }

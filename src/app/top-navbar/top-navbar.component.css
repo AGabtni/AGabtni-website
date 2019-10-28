@@ -1,83 +1,49 @@
 .menu-spacer {
   flex: 1 1 auto;
 }
-mat-sidenav-container{
+
+mat-sidenav{
+    width: 20vh!important;
+    z-index: 10!important;
+
+}
+mat-nav-list{
+    padding-top: 200px;
+}
 
 
-    position: absolute!important;
-    visibility: hidden!important;
-    z-index: 10000!important;
-    height: 100%;
+.example-menu{
 
+    flex : 0 1 auto;
+
+}
+
+.mat-toolbar{
+    position: fixed!important;
+    text-align: center!important;
+    z-index: 1000!important;
 }
 
 
 
+.toggle-button{
 
-
-.icon{
-
-	  padding: 0 14px;
+    background-color: inherit;
 
 }
-
-.custom-toolbar{
-
-	height : 150px;
-    position: relative;    
-    z-index: 10;
-}
-
-#title{
-	flex: 1 1 auto;
-  	text-align: center;
-
-}
-
-.title-row{
-	
-
-}
-.drpdown-menu{
- 	  margin: 0 auto;
-
-}
-
-
 
 
 /*Drop down menu classes*/
-.dropdown {
+.category {
     float: left;
     overflow: hidden;
   	text-align: center;
   	padding: 0 50px;
-
-
-    
-
 }
 
-
-.mat-menu-panel{
-
-
-	max-width: none!important;
-	width: 500px!important;
-	background-color: white;
-
-
-}
-
-
-.mat-menu-item{
-
-	padding: 0 10px 0 0;
-}
 
 /*OVERRIDES ANGULAR COMPONENT*/
-
-.dropdown .dropbtn {
+.category .dropbtn {
     font-size: 16px;    
     border: none;
     outline: none;
@@ -86,61 +52,16 @@ mat-sidenav-container{
     font: inherit;
 }
 
-.dropdown:hover .dropbtn {
+.category:hover .dropbtn {
     background-color: #ccc;
 }
 
-.column {
-    float: left;
-    padding-left: 20px;
-    width: 150px;
-    background-color: inherit;
-    align-content: center;
+
+.custom-toggler .navbar-toggler-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
 
 
-
-
-
-
-
-
-/*All below is deprecated*/
-
-
-
-.dropdown-content {
-    display: none;
-    position: fixed;
-    background-color: primary;
-    width: 50%;
-    left: 0;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content .header {
-    float: left;
-    padding: 16px;
-    background-color: #ccc;
-
-}
-
-.dropdown:hover .dropdown-content {
-    background: yellow;
-    display: block;
-
-
-}
-
-
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
 
 
