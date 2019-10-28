@@ -1,4 +1,4 @@
-import { Component, OnInit,HostBinding } from '@angular/core';
+import { Component, OnInit,HostBinding, ViewChild, ElementRef } from '@angular/core';
 import{ services } from '../static/services';
 import {
   trigger,
@@ -41,11 +41,14 @@ import {
   ]
 })
 export class ProductComponent implements OnInit {
-	
+	   
+
   	services = services;
   	states: Array<boolean> = [true,true,true];
 
-  
+
+     
+      
 
   	toggle(x){
 
@@ -53,9 +56,15 @@ export class ProductComponent implements OnInit {
 
   	}
   	
-  	constructor() { 
+  	constructor(private myElement: ElementRef) { 
   		
   	}
+
+    public scroll(index) {
+        
+              document.getElementById("myElem"+index).scrollIntoView({ behavior: 'smooth', block: 'start'});
+
+    }
 
   	ngOnInit() {
   	

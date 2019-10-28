@@ -21,7 +21,8 @@ export class ProductHighlightComponent implements OnChanges {
 	}
 
 	ngOnInit(){
-					this.returnedString = services[Number(this.containerIndex)].description;
+			
+			this.returnedString = services[Number(this.containerIndex)].description;
 
 
 	}
@@ -29,7 +30,6 @@ export class ProductHighlightComponent implements OnChanges {
 
 			this.returnedString = services[Number(this.containerIndex)].description;
 
-			console.log(this.returnedString);
 
 
 	}
