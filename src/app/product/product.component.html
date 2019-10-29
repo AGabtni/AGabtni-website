@@ -1,7 +1,7 @@
 <div class="flex">	
 	<div fxLayoutGap="60px"  class="card-deck-container">
 		<mat-card 
-		*ngFor="let service of services let i= index" 
+		*ngFor="let service of services; let i= index" 
 		 
 		[@openClose]="states[i] ? 'stable' : 'up'" 
 		(mouseover)=toggle(i) 
@@ -22,15 +22,9 @@
 
 </div>
 
-<div id="myElem0">
-	<app-product-highlight   [containerIndex]="0"></app-product-highlight>
+	<div #myElem *ngFor="let service of services; let i=index">
+		<app-product-highlight  [containerIndex]="i"></app-product-highlight>
+	
 
-</div>
-<div id="myElem1">
-	<app-product-highlight   [containerIndex]="1"></app-product-highlight>
-
-</div>
-<div id="myElem2">
-	<app-product-highlight   [containerIndex]="2"></app-product-highlight>
-
-</div>
+	</div>
+	

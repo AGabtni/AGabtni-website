@@ -1,9 +1,6 @@
 .highlight-container{
-	background: linear-gradient(287deg, #78f9d8, #2075f5, #2075f5);
 	display: flex;
-	padding: 200px;
-	margin: 10px;
-	margin-bottom: 100px;
-	border-radius: 25px;
-
+	align-items: center;
+	margin: auto;
 }
+

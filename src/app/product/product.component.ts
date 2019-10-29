@@ -1,4 +1,4 @@
-import { Component, OnInit,HostBinding, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,HostBinding, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import{ services } from '../static/services';
 import {
   trigger,
@@ -42,6 +42,8 @@ import {
 })
 export class ProductComponent implements OnInit {
 	   
+    @ViewChildren('myElem') productHighlights: QueryList<ElementRef>;
+
 
   	services = services;
   	states: Array<boolean> = [true,true,true];
@@ -50,24 +52,30 @@ export class ProductComponent implements OnInit {
      
       
 
-  	toggle(x){
-
-  		this.states[x] = !this.states[x];
-
-  	}
   	
-  	constructor(private myElement: ElementRef) { 
+  	
+  	constructor() { 
   		
   	}
 
+    ngOnInit() {
+    
+    }
+
+
     public scroll(index) {
+
         
-              document.getElementById("myElem"+index).scrollIntoView({ behavior: 'smooth', block: 'start'});
+      this.productHighlights.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start'});
+
+    }
+    
+    toggle(x){
+
+      this.states[x] = !this.states[x];
 
     }
 
-  	ngOnInit() {
   	
-  	}
 
 }

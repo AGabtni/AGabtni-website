@@ -1,5 +1,4 @@
   <mat-toolbar color="primary" [ngClass]="{'mat-elevation-z6' : true}">
-    <mat-toolbar-row>
      
 
       <span>Responsive Navigation</span>
@@ -12,8 +11,7 @@
         </mat-icon>
 
       </button>
-    </mat-toolbar-row>
-    <mat-toolbar-row fxShow="true" fxHide.lt-md style="text-align: center;">
+    <div fxShow="true" fxHide.lt-md style="text-align: center;">
       
 
       <div style="text-align: center;">
@@ -24,7 +22,7 @@
 			  </div>
       </div>
 
-    </mat-toolbar-row>
+    </div>
   </mat-toolbar>
 
   <!--Only on SMALL screens-->
