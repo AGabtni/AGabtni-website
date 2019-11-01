@@ -1,6 +1,5 @@
-import { Component,Input, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component,Input, OnInit, ViewEncapsulation,ViewChild, HostListener, ElementRef } from '@angular/core';
 import { categories } from '../static/categories';
-
 
 
 
@@ -12,10 +11,26 @@ import { categories } from '../static/categories';
  
 })
 export class TopNavbarComponent implements OnInit {
+  
+
+  @ViewChild('MobielOverlay' , {static: true}) overlay : ElementRef;
+  
 
   title = 'Website Title';
 
+
   categories = categories ;
+
+  openNav(){ 
+
+    this.overlay.nativeElement.style.width = "100%"
+  }
+
+  closeNav(){ 
+
+    this.overlay.nativeElement.style.width = "0%"
+  }
+
 
   @Input()
   hasBackdrop: false;
@@ -26,6 +41,8 @@ export class TopNavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this.overlay);
   }
 
 }
