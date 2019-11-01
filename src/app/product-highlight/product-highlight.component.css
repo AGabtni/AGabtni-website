@@ -1,6 +1,16 @@
 .highlight-container{
 	display: flex;
 	align-items: center;
-	margin: auto;
+	margin: 50px auto;
+
+}
+
+.animated {
+    visibility: visible !important;
+    background-color: blue;
+}
+.hide-on-init {
+    visibility: hidden;
+
 }
 

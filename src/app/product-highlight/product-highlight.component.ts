@@ -1,5 +1,6 @@
-import { Component, OnInit,OnChanges, Input, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit,OnChanges, Input, HostListener, ElementRef,ViewChild } from '@angular/core';
 import{ services } from '../static/services';
+
 
 import {
   trigger,
@@ -35,7 +36,10 @@ import * as AOS from 'aos';
 export class ProductHighlightComponent implements OnChanges {
 	
 	@Input() containerIndex : number;
-    
+	@ViewChild('myElem', {static: true}) titleWrapper : ElementRef;
+
+
+
 	services = services;
 	returnedString: string;
 
@@ -46,6 +50,12 @@ export class ProductHighlightComponent implements OnChanges {
 	
 
 
+
+	 public scroll() {
+
+      this.titleWrapper.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start'});
+
+    }
 
 
 	ngOnInit(){
@@ -58,7 +68,6 @@ export class ProductHighlightComponent implements OnChanges {
 	ngOnChanges() {
 
 			this.returnedString = services[Number(this.containerIndex)].description;
-
 
 
 	}

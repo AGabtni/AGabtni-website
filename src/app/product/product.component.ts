@@ -1,5 +1,7 @@
 import { Component, OnInit,HostBinding, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import{ services } from '../static/services';
+import {ProductHighlightComponent} from '../product-highlight/product-highlight.component'
+
 import {
   trigger,
   state,
@@ -42,8 +44,8 @@ import {
 })
 export class ProductComponent implements OnInit {
 	   
-    @ViewChildren('myElem') productHighlights: QueryList<ElementRef>;
-
+    @ViewChildren(ProductHighlightComponent) productHighlights: QueryList<ProductHighlightComponent>;
+ 
 
   	services = services;
   	states: Array<boolean> = [true,true,true];
@@ -62,11 +64,11 @@ export class ProductComponent implements OnInit {
     
     }
 
-
+    
     public scroll(index) {
 
         
-      this.productHighlights.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start'});
+      this.productHighlights.toArray()[index].scroll();
 
     }
     

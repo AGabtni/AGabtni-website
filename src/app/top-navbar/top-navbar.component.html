@@ -26,8 +26,8 @@
   </mat-toolbar>
 
   <!--Only on SMALL screens-->
-  <mat-sidenav-container fxShow="true" fxHide.gt-sm fxFlexFill  class="side-nav-container">
-    <mat-sidenav #sidenav [mode]="push">
+  <mat-sidenav-container fxShow="true" fxHide.gt-sm fxFlexFill  class="example-sidenav-container">
+    <mat-sidenav #sidenav [mode]="side">
       <div style="height:200px;background-color: indigo;"></div>
 
       <mat-nav-list>
@@ -41,14 +41,13 @@
         <app-highlights-carousel >
         
         </app-highlights-carousel>
-     
-        <app-product>
-          
-        </app-product>
-
+        
 
     </mat-sidenav-content>
     
+      
+       
+
   </mat-sidenav-container>
 
 

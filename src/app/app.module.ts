@@ -1,5 +1,6 @@
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 
 
 /**
@@ -58,7 +59,8 @@ import { FooterComponent } from './footer/footer.component';
     MatExpansionModule,
     FlexLayoutModule,
     NgbModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    AnimateOnScrollModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent, TopNavbarComponent,FooterComponent]
