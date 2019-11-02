@@ -30,7 +30,9 @@
 <div #MobielOverlay class="overlay">
   <a  [routerLink]="" class="closebtn" (click)="closeNav()">&times;</a>
   <div class="overlay-content">
-    <a *ngFor="let cat of categories" href="#" mat-list-item>{{cat.title}}</a>
+    <a routerLink=""  [@messageAnimation]="hidden? 'hidden' : 'visible'"  >Contact</a>
+
+    <a routerLink=""  *ngFor="let cat of categories" [@messageAnimation]="hidden? 'hidden' : 'visible'"   >{{cat.title}}</a>
   </div>
 </div>
 
