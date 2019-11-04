@@ -21,7 +21,7 @@
       <div style="text-align: center;">
         <!-- The following menu items will be hidden on both SM and XS screen sizes -->
         <div *ngFor="let cat of categories" class="category">
-				  <button mat-button class="dropbtn">{{cat.title}}</button>
+				  <button mat-button class="dropbtn" [routerLink]="[cat.url]">{{cat.title}}</button>
   				
 			  </div>
       </div>

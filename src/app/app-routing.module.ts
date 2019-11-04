@@ -6,8 +6,8 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
 	{ path : '',component : HomeComponent},
-	{ path : 'home',component : HomeComponent},
-	{ path : 'contact',component : ContactComponent},
+	{ path : 'home',component : HomeComponent, data: {animation: 'isRight'}},
+	{ path : 'contact',component : ContactComponent, data: {animation: 'isLeft'}},
 
 
 ];

@@ -35,6 +35,7 @@ import { ProductHighlightComponent } from './product-highlight/product-highlight
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 
 
@@ -48,7 +49,8 @@ import { HomeComponent } from './home/home.component';
     ProductHighlightComponent,
     FooterComponent,
     ContactComponent,
-    HomeComponent
+    HomeComponent,
+    ContactFormComponent
     
   ],
   imports: [
