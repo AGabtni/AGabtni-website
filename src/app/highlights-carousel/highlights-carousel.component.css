@@ -1,27 +1,26 @@
 
-ngb-carousel{
+  ngb-carousel{
 
 
-  align-items: center!important;  
-  z-index: 0!important;
+    align-items: center!important;  
 
 
-}
+  }
 
 
-ngb-carousel .picsum-img-wrapper {
-  position: relative;
-  height: 0;
-  padding-top: 55%; /* Keep ratio for 900x500 images */
-}
+  ngb-carousel .picsum-img-wrapper {
+    position: relative;
+    height: 0;
+    padding-top: 55%; /* Keep ratio for 900x500 images */
+  }
 
-ngb-carousel .picsum-img-wrapper>img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
+  ngb-carousel .picsum-img-wrapper>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
 
   
    .carousel-item

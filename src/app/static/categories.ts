@@ -1,7 +1,8 @@
 export const categories = [
 
   {
-    title: 'Product 1',
+    title: 'Services',
+    url: '/',
     nest: [
       {
         subcategory: 1
@@ -16,7 +17,8 @@ export const categories = [
     ]
   },
   {
-    title: 'Product 2',
+    title: 'Our Projects',
+    url: '/',
     nest: [
       {
         subcategory: 1
@@ -29,7 +31,8 @@ export const categories = [
     ]
   },
   {
-    title: 'Product 3',
+    title: 'Contact',
+    url: '/contact',
     nest: [
       {
         subcategory: 1

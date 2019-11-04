@@ -1,6 +1,7 @@
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 /**
@@ -15,6 +16,8 @@ import { ProductComponent } from './product/product.component';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import  { MatGridListModule, 
@@ -25,12 +28,13 @@ import  { MatGridListModule,
           MatCardModule, 
           MatListModule,
           MatExpansionModule} from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import  {NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import  { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProductHighlightComponent } from './product-highlight/product-highlight.component';
 import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -42,7 +46,9 @@ import { FooterComponent } from './footer/footer.component';
     TopNavbarComponent,
     HighlightsCarouselComponent,
     ProductHighlightComponent,
-    FooterComponent
+    FooterComponent,
+    ContactComponent,
+    HomeComponent
     
   ],
   imports: [
@@ -59,6 +65,7 @@ import { FooterComponent } from './footer/footer.component';
     MatExpansionModule,
     FlexLayoutModule,
     NgbModule,
+    ScrollingModule,
     SlickCarouselModule,
     AnimateOnScrollModule.forRoot()
   ],
@@ -68,6 +75,6 @@ import { FooterComponent } from './footer/footer.component';
 
 
 export class AppModule { 
-
+  
 
 }

@@ -1,18 +1,22 @@
-  <mat-toolbar color="primary" [ngClass]="{'mat-elevation-z6' : true}">
+  <mat-toolbar [@toggle]="isVisible? 'visible' : 'hidden'" [ngClass]="{'mat-elevation-z6' : true}">
      
-
-      <span>Responsive Navigation</span>
-
-      <span class="menu-spacer"></span>
-
+    <div style="display: flex; align-items: center;" [@titleFade]="isVisible? 'visible' : 'hidden'" >
+      
       <button mat-icon-button (click)="openNav()" fxShow="true" fxHide.gt-sm class="toggle-button">
         <mat-icon>
           menu
         </mat-icon>
+        <span class="menu-spacer"></span>
 
       </button>
+
+
+      <span>Responsive Navigation</span>
+
+      
     <div fxShow="true" fxHide.lt-md style="text-align: center;">
       
+      <span class="menu-spacer"></span>
 
       <div style="text-align: center;">
         <!-- The following menu items will be hidden on both SM and XS screen sizes -->
@@ -23,16 +27,19 @@
       </div>
 
     </div>
+
+
+  </div>
   </mat-toolbar>
 
 
-
+<!--MOBILE OVERLAY-->
 <div #MobielOverlay class="overlay">
   <a  [routerLink]="" class="closebtn" (click)="closeNav()">&times;</a>
   <div class="overlay-content">
-    <a routerLink=""  [@messageAnimation]="hidden? 'hidden' : 'visible'"  >Contact</a>
+    <a class="mat-h1" routerLink=""  [@messageAnimation]="hidden? 'hidden' : 'visible'"  >Contact</a>
 
-    <a routerLink=""  *ngFor="let cat of categories" [@messageAnimation]="hidden? 'hidden' : 'visible'"   >{{cat.title}}</a>
+    <a class="mat-h1"   *ngFor="let cat of categories" [@messageAnimation]="hidden? 'hidden' : 'visible'"  [routerLink]="[cat.url]" >{{cat.title}}</a>
   </div>
 </div>
 

@@ -19,11 +19,13 @@ import {
   	trigger('openClose', [
 
   		state('stable', style({
-  			bottom : '0px'
+  			bottom : '0px',
+        boxShadow: '0 3px 6px rgba(0,0,0,0.15)',
 
   		})),
   		state('up', style({
-  			bottom : '10px'
+  			bottom : '15px',
+        boxShadow: '0 10px 20px rgba(0,0,0,0.8)',
 
   		})),
 
