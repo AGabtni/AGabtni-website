@@ -79,6 +79,7 @@ enum Direction {
           opacity : 1.0,
 
 
+
         })
       ),state('hidden',
         style({
@@ -86,7 +87,7 @@ enum Direction {
           
         })
       ),
-      transition('* => *', animate('100ms ease-in'))
+      transition('* => *', animate('300ms ease-out'))
 
     ]),
     ]

@@ -19,7 +19,7 @@ import { slider, transformer, fader, stepper } from '../assets/animations';
 
 export class AppComponent{
    
-
+	
 	prepareRoute(outlet: RouterOutlet) {
 	  return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
 	}

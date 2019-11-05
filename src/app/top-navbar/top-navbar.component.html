@@ -1,9 +1,9 @@
   <mat-toolbar [@toggle]="isVisible? 'visible' : 'hidden'" [ngClass]="{'mat-elevation-z6' : true}">
      
-    <div style="display: flex; align-items: center;" [@titleFade]="isVisible? 'visible' : 'hidden'" >
+    <div style="display: flex; align-items: center;"  >
       
       <button mat-icon-button (click)="openNav()" fxShow="true" fxHide.gt-sm class="toggle-button">
-        <mat-icon>
+        <mat-icon [@titleFade]="isVisible? 'visible' : 'hidden'">
           menu
         </mat-icon>
         <span class="menu-spacer"></span>

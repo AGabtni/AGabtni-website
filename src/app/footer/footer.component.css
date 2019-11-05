@@ -1,6 +1,14 @@
 .custom-footer{
+	
 	background: indigo;
-	height: 100px;
+	height: 50px;
 	text-align: center;
 
+}
+
+
+.custom-footer span{
+
+
+	color: white;
 }

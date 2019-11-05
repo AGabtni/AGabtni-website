@@ -1,38 +1,41 @@
- <form  fxFill fxLayout.lt-sm="column" >
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Company (disabled)" disabled value="Google">
-  </mat-form-field>
+ <div  class="form">
+ <span style="font-weight: bold;" class="mat-h1">Contact Us</span>
 
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="First name">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="Long Last Name That Will Be Truncated">
-    </mat-form-field></td>
-  </tr></table>
+ <form>
+    <div 
+    		fxLayout = "column wrap"
+    		fxLayoutGap="10px"
+    		>
+	 	<div style="left: 0;">
+		  	<mat-form-field class="example-full-width">
+		      <input matInput placeholder="First name">
+		    </mat-form-field>
 
-  <p>
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Address 2"></textarea>
-    </mat-form-field>
-  </p>
+		    <mat-form-field class="example-full-width">
+		      <input matInput placeholder="Long Last Name That Will Be Truncated">
+		    </mat-form-field>
+		</div>
+		<div style="left: 0; right:0; "> 
+	    	<mat-form-field class="mat-h1 example-full-width">
+	      		<textarea matInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+	    	</mat-form-field>
 
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="City">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="State">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <input matInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-    </mat-form-field></td>
-  </tr></table>
+	    </div>
+	  
+	    <div>
+		  	<mat-form-field  class="example-full-width">
+		      	<input matInput placeholder="City">
+		    	</mat-form-field>
+		  	<mat-form-field class="example-full-width">
+		      	<input matInput placeholder="State">
+		    </mat-form-field>
+		    <mat-form-field class="example-full-width">
+		      	<input matInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+		     	<mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+		    </mat-form-field>
+		</div>
+
+    </div>	  
 </form>
 	
-
+</div>
