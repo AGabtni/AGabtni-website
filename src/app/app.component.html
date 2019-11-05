@@ -1,11 +1,13 @@
-<app-top-navbar></app-top-navbar>
+<div class=”main-container”>
+
+	<app-top-navbar></app-top-navbar>
 
 
 
-<!--<app-home></app-home>-->
-<div [@routeAnimations]="prepareRoute(outlet)" >
-	<router-outlet #outlet="outlet"></router-outlet>
-</div>
+	<!--<app-home></app-home>-->
+	<div [@routeAnimations]="prepareRoute(outlet)" >
+		<router-outlet #outlet="outlet"></router-outlet>
+	</div>
 
+</div>	
 <app-footer></app-footer>	
-

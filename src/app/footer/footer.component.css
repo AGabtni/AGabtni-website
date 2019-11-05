@@ -1,7 +1,6 @@
 .custom-footer{
-
-	display: block; 
-	height: 50px;
+	background: indigo;
+	height: 100px;
 	text-align: center;
 
 }

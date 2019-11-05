@@ -31,7 +31,7 @@ enum Direction {
   styleUrls: ['./top-navbar.component.css'],
   encapsulation: ViewEncapsulation.None,
   animations : [
-
+      //OVERLAY ANIMATION
       trigger('messageAnimation', [
 
       state('visible', 
@@ -51,11 +51,13 @@ enum Direction {
       transition('visible => hidden', animate('200ms ease-out'))
 
     ]),
+
+    //TOGGLE TOP BAR STATE
     trigger('toggle', [
       state(
         VisibilityState.Hidden,
         style({
-          height : '0px',
+          //height : '0px',
           background : 'rgba(63, 81, 181, 1)',
 
         })
@@ -63,13 +65,14 @@ enum Direction {
       state(
         VisibilityState.Visible,
         style({
-            height : '*',
+            //height : '*',
             background : 'rgba(63, 81, 181, 1)',
         })
       ),
       transition('* => *', animate('400ms ease-in'))
     ]),
-
+    
+    //TOP BAR CATEGORIES ANIMATION :
     trigger('titleFade',[
       state('visible',
           style({

@@ -9,7 +9,7 @@ import { slider, transformer, fader, stepper } from '../assets/animations';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations : [
-  	slider
+  	fader
 
   ],
    
