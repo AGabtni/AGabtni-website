@@ -10,3 +10,22 @@
 
 	padding-top: 50px;
 }
+
+.form-row{
+	text-align: center;
+	padding-right: 0;
+}
+
+.description-area{
+
+
+
+
+	width: 90%; margin : 0 0 20px 20px;
+}
+
+
+mat-form-field{
+
+	margin-right: 10px; 
+}

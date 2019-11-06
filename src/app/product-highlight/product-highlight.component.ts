@@ -2,14 +2,6 @@ import { Component, OnInit,OnChanges, Input, HostListener, ElementRef,ViewChild 
 import{ services } from '../static/services';
 
 
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
-
 import * as AOS from 'aos';
 
 
@@ -17,26 +9,12 @@ import * as AOS from 'aos';
   selector: 'app-product-highlight',
   templateUrl: './product-highlight.component.html',
   styleUrls: ['./product-highlight.component.css'],
-  animations : [
-  	trigger('scrollAnimation', [
-      state('show', style({
-        opacity: 1,
-        transform: "translateX(0)"
-      })),
-      state('hide',   style({
-        opacity: 0,
-        transform: "translateX(-100%)"
-      })),
-      transition('show => hide', animate('700ms ease-out')),
-      transition('hide => show', animate('700ms ease-in'))
-    ])
-
-  ]
+  animations : []
 })
 export class ProductHighlightComponent implements OnChanges {
 	
 	@Input() containerIndex : number;
-	@ViewChild('myElem', {static: true}) titleWrapper : ElementRef;
+	@ViewChild('highLight', {static: true}) titleWrapper : ElementRef;
 
 
 

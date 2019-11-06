@@ -1,52 +1,116 @@
  <div  class="form-container">
- <span style="font-weight: bold;" class="mat-h1">Contact Us</span>
+ <span data-aos="fade-down"
+ 		data-aos-delay="500"
+ 		data-aos-duration="1500"
+     style="font-weight: bold;" class="mat-h1">Contact Us</span>
 
  <form class="form">
-    	<div 
+    	<div class="form-row"
     		fxLayout = "column wrap"
     		fxLayoutGap="20px"
     		>
-	 	<div fxLayoutGap="30px">
-		  	<mat-form-field appearance="outline">
-		      <input matInput placeholder="First name*">
+	 	<div>
+
+	 		<!--FIRST NAME FIELD-->
+		  	<mat-form-field data-aos="fade-right"
+     						data-aos-easing="ease-in-back"
+    						data-aos-delay="400"
+     						data-aos-offset="300" 
+     						data-aos-duration = "1000"
+     						data-aos-once = "true"
+     						appearance="outline">
+		    	<mat-label>First name*</mat-label>
+		      	<input matInput>
 		    </mat-form-field>
 
-		    <mat-form-field appearance="outline">
-		      <input matInput placeholder="Last Name*">
+		    <!--LAST NAME FIELD-->
+		    <mat-form-field data-aos="fade-right"
+     						data-aos-easing="ease-in-back"
+     						data-aos-delay="550" 
+     						data-aos-duration = "1000"
+     						data-aos-once = "true"
+     						appearance="outline">
+		    	<mat-label>Last Name*</mat-label>
+		    	<input matInput>
 		    </mat-form-field>
 
 
-		    <mat-form-field appearance="outline" class="example-full-width">
-    			<input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
-    			<mat-hint>Errors appear instantly!</mat-hint>
+		    <!--EMAIL FIELD-->
+		    <mat-form-field data-aos="fade-right"
+     						data-aos-easing="ease-in-back"
+     						data-aos-delay="700" 
+     						data-aos-duration = "1000"
+     						data-aos-once = "true"
+     						appearance="outline">
+		    	<mat-label>Email</mat-label>
+
+    			<input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher">
     			<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Please enter a valid email address
     			</mat-error>
 			    <mat-error *ngIf="emailFormControl.hasError('required')">
 			      Email is <strong>required</strong>
 			    </mat-error>
-		  </mat-form-field>
+		  	</mat-form-field>
+
+
 		</div>
 		
 	  
-	    <div fxLayoutGap="30px">
-		  	<mat-form-field appearance="outline">
-		      	<input matInput placeholder="Phone number">
-		    	</mat-form-field>
+	    <div >
 
-		  	<mat-form-field appearance="outline">
-		      	<input matInput placeholder="Company">
+		  	<!--PHONE NUM FIELD-->
+		  	<mat-form-field data-aos="fade-left"
+     						data-aos-easing="ease-in-back"
+     						data-aos-duration = "1000"
+     						data-aos-delay="850" 
+     						data-aos-once = "true"
+     						appearance="outline">
+		  		<mat-label>Phone number</mat-label>
+		      	<input matInput>
 		    </mat-form-field>
 
-		    <mat-form-field appearance="outline">
-		    	<mat-label>Project type</mat-label>
-		      	<input matInput #postalCode maxlength="5" placeholder="" value="">
-		     	<mat-hint align="end">Select a type</mat-hint>
+
+		    <!--COMPANY NAME FIELD-->
+		  	<mat-form-field data-aos="fade-left"
+     						data-aos-easing="ease-in-back"
+     						data-aos-delay="1000"
+     						data-aos-duration = "1000"
+     						data-aos-once = "true"
+     						appearance="outline">
+		  		<mat-label>Company</mat-label>
+		      	<input matInput>
+		    </mat-form-field>
+
+		    <!--PROJECT TYPE SELECT -- DELAY IS DIFFERENT WITH THIS ONE-->
+		    <mat-form-field data-aos="fade-left"
+     						data-aos-easing="ease-in-back"
+     						data-aos-delay="100"
+     						data-aos-duration = "1000"
+     						data-aos-once = "true"
+     						appearance="outline">
+
+		    	<mat-label>Select your project type</mat-label>
+		      	<mat-select [formControl]="projectTypeControl" required>
+				    <mat-option>--</mat-option>
+				    <mat-option *ngFor="let type of projectTypes" [value]="type">
+				      {{type}}
+				    </mat-option>
+			  	</mat-select>
+			  	<mat-error *ngIf="projectTypeControl.hasError('required')">Please choose a project type</mat-error>
+
+
 		    </mat-form-field>
 		</div>
 
 		<div>
-			<mat-form-field>
-				<textarea matInput placeholder="Textarea"></textarea>
+			<!--DESCRIPTION FIELD-->
+			<mat-form-field data-aos="fade-up"
+							data-aos-delay="2000"
+     						data-aos-duration = "1000"
+     						data-aos-anchor-placement="top-bottom"
+     						appearance="outline" class="description-area">
+				<mat-label>Brief description of the project/issue</mat-label>
+				<textarea matInput matTextareaAutosize matAutosizeMinRows=15 matAutosizeMaxRows=20 ></textarea>
 			</mat-form-field>
 			
 		</div>

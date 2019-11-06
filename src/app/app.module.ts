@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+
+//ANGULAR MATERIAL IMPORTS
 import  { MatGridListModule, 
           MatToolbarModule, 
           MatSidenavModule, 
@@ -29,7 +31,10 @@ import  { MatGridListModule,
           MatIconModule, 
           MatCardModule, 
           MatListModule,
-          MatExpansionModule} from '@angular/material';
+          MatExpansionModule,
+          MatSelectModule} from '@angular/material';
+
+
 import  { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -68,6 +73,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     MatCardModule,
     MatListModule,
     MatExpansionModule,
+    MatSelectModule,
     FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     NgbModule,

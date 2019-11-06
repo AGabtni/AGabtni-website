@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import * as AOS from 'aos';
+
+
+
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -19,15 +23,22 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class ContactFormComponent implements OnInit {
 	
 	emailFormControl = new FormControl('', [
-    	Validators.required,
-    	Validators.email,
-  	]);
+    Validators.required,
+    Validators.email,
+  ]);
 
-  	matcher = new MyErrorStateMatcher();
+  projectTypeControl = new FormControl('', [Validators.required]);
+  projectTypes : string[] = [
+      "type1",
+      "type2",
+      "type3",
+  ];
+
+  matcher = new MyErrorStateMatcher();
   	
-  	constructor() { }
 
-  	ngOnInit() {
-  	}
+  ngOnInit() {
+    AOS.init();
+  }
 
 }
