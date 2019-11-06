@@ -1,7 +1,12 @@
-.form {
+.form-container {
 
 	display: table;
   	margin: auto;
   	padding: 50px;
 
+}
+
+.form{
+
+	padding-top: 50px;
 }

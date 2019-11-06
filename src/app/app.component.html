@@ -1,14 +1,14 @@
 
-		
-		<app-top-navbar></app-top-navbar>
+<app-top-navbar></app-top-navbar>
 
 
+<div style="flex :1; padding-top: 56px;" [@routeAnimations]="prepareRoute(outlet)" >
+	<div>
+		<router-outlet #outlet="outlet"></router-outlet>		
 
-		<!--<app-home></app-home>-->
-		<div  style="flex :1; padding-top: 56px;" [@routeAnimations]="prepareRoute(outlet)" >
-			<router-outlet #outlet="outlet"></router-outlet>
-			
 
-		</div>
+	</div>
+	
+</div>
 
 

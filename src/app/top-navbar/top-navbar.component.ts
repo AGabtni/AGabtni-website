@@ -57,7 +57,7 @@ enum Direction {
       state(
         VisibilityState.Hidden,
         style({
-          //height : '0px',
+          height : '0px',
           background : 'rgba(63, 81, 181, 1)',
 
         })
@@ -65,7 +65,7 @@ enum Direction {
       state(
         VisibilityState.Visible,
         style({
-            //height : '*',
+            height : '*',
             background : 'rgba(63, 81, 181, 1)',
         })
       ),
@@ -87,7 +87,7 @@ enum Direction {
           
         })
       ),
-      transition('* => *', animate('300ms ease-out'))
+      transition('* => *', animate('50ms ease-out'))
 
     ]),
     ]

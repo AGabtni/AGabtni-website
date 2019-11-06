@@ -2,6 +2,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 /**
@@ -68,13 +69,14 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     MatListModule,
     MatExpansionModule,
     FlexLayoutModule,
+    FormsModule, ReactiveFormsModule,
     NgbModule,
     ScrollingModule,
     SlickCarouselModule,
     AnimateOnScrollModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent, TopNavbarComponent,FooterComponent]
+  bootstrap: [AppComponent, TopNavbarComponent]
 })
 
 

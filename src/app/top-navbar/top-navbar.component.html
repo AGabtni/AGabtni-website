@@ -1,9 +1,10 @@
   <mat-toolbar [@toggle]="isVisible? 'visible' : 'hidden'" [ngClass]="{'mat-elevation-z6' : true}">
      
-    <div style="display: flex; align-items: center;"  >
+    <div  [@titleFade]="isVisible? 'visible' : 'hidden'" style="display: flex; align-items: center;"  >
       
       <button mat-icon-button (click)="openNav()" fxShow="true" fxHide.gt-sm class="toggle-button">
-        <mat-icon [@titleFade]="isVisible? 'visible' : 'hidden'">
+        
+        <mat-icon>
           menu
         </mat-icon>
         <span class="menu-spacer"></span>
@@ -14,22 +15,20 @@
       <span>Responsive Navigation</span>
 
       
-    <div fxShow="true" fxHide.lt-md style="text-align: center;">
-      
-      <span class="menu-spacer"></span>
+      <div fxShow="true" fxHide.lt-md style="text-align: center;">
+        
+        <span class="menu-spacer"></span>
 
-      <div style="text-align: center;">
-        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-        <div *ngFor="let cat of categories" class="category">
-				  <button mat-button class="dropbtn" [routerLink]="[cat.url]">{{cat.title}}</button>
-  				
-			  </div>
+        <div style="text-align: center;">
+          
+          <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+          <div *ngFor="let cat of categories" class="category">
+  				  <button mat-button class="dropbtn" [routerLink]="[cat.url]">{{cat.title}}</button>		
+  			  </div>
+
+        </div>
       </div>
-
     </div>
-
-
-  </div>
   </mat-toolbar>
 
 
@@ -37,9 +36,7 @@
 <div #MobielOverlay class="overlay">
   <a  [routerLink]="" class="closebtn" (click)="closeNav()">&times;</a>
   <div class="overlay-content">
-    <a class="mat-h1" routerLink=""  [@messageAnimation]="hidden? 'hidden' : 'visible'"  >Contact</a>
-
-    <a class="mat-h1"   *ngFor="let cat of categories" [@messageAnimation]="hidden? 'hidden' : 'visible'"  [routerLink]="[cat.url]" >{{cat.title}}</a>
+    <a class="mat-h1" *ngFor="let cat of categories" [@messageAnimation]="hidden? 'hidden' : 'visible'"  [routerLink]="[cat.url]" >{{cat.title}}</a>
   </div>
 </div>
 
