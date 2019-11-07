@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import * as AOS from 'aos';
 
@@ -24,9 +24,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class ContactFormComponent implements OnInit {
 
   @ViewChild ('formContainer',{static : true}) formContainer : ElementRef;
+  contactForm ;
+
+
   isOverForm = false;
-  isFormValidated = true;
-  states = {};
+  formState ;
   
   //NEED TO BE FILLED IN
   projectTypes : string[] = [
@@ -38,30 +40,27 @@ export class ContactFormComponent implements OnInit {
 
 	emailFormControl = new FormControl('', [ Validators.required , Validators.email]);
   projectTypeControl = new FormControl('', [Validators.required]);
+  nameControl = new FormControl('', [Validators.required]);
+
   matcher = new MyErrorStateMatcher();
 
 
   
-  constructor(public renderer: Renderer){
+  constructor(public renderer: Renderer, private formBuilder : FormBuilder){
 
-    this.states['state1'] = 'shakeend';
+    this.formState = 'shakeend';
+    this.contactForm = this.formBuilder.group({
+        'firstName' : this.nameControl,
+        'lastName' : '',
+        'email' : this.emailFormControl,
+        'phone' : '',
+        'companyName' : '',
+        'projectType' : this.projectTypeControl,
+        'description' : '',
+
+    });
+
   }
-
-  shakeMe(stateVar: string) {
-    if(!this.isFormValidated)
-        this.states[stateVar] = (this.states[stateVar] === 'shakestart' ? 'shakeend' : 'shakestart');
-    else
-      this.states[stateVar] = 'submittedForm';
-
-
-
-    console.log(this.states[stateVar]);
-  }
-
-  shakeEnd(stateVar: string, event) {
-    this.states[stateVar] = 'shakeend';
-  }
-
   ngOnInit() {
     AOS.init();
 
@@ -69,7 +68,29 @@ export class ContactFormComponent implements OnInit {
   }
 
 
+  onFormSubmit(clientInfo){
+    console.log(clientInfo);
+    
+    if(this.emailFormControl.status == 'VALID' &&  this.projectTypeControl.status == 'VALID' && this.projectTypeControl.status == 'VALID'){
+      this.formState = 'submittedForm';
+      this.contactForm.reset();
+    }else
+      this.formState= (this.formState === 'shakestart' ? 'shakeend' : 'shakestart');
 
+    
+
+
+  }
+
+
+  shakeEnd(event) {
+    this.formState = 'shakeend';
+  }
+
+ 
+
+
+  //For trigerring on hover form animation
   onFormMouseOver(){
     this.isOverForm = true;
 
