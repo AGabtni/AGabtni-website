@@ -32,7 +32,8 @@ import  { MatGridListModule,
           MatCardModule, 
           MatListModule,
           MatExpansionModule,
-          MatSelectModule} from '@angular/material';
+          MatSelectModule,
+          MatButtonModule} from '@angular/material';
 
 
 import  { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -74,6 +75,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     MatListModule,
     MatExpansionModule,
     MatSelectModule,
+    MatButtonModule,
     FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     NgbModule,

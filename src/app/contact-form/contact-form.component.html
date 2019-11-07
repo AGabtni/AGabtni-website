@@ -1,122 +1,128 @@
- <div  class="form-container">
- <span data-aos="fade-down"
- 		data-aos-delay="500"
- 		data-aos-duration="1500"
-     style="font-weight: bold;" class="mat-h1">Contact Us</span>
+<div #formContainer fxLayout  [@shakeit]="this.states['state1']" (@shakeit.done)="shakeEnd('state1', $event)">
+ <mat-card  
+ 			(mouseover)="onFormMouseOver()"
+ 			
+ 			class="form-container"
+ 			[@onEnter] = "isOverForm ? 'floating' : 'landed' ">
+			<span data-aos="fade-down"
+ 			data-aos-delay="500"
+ 			data-aos-duration="1500"
+     		style="font-weight: bold;" class="mat-h1">Contact Us</span>
 
- <form class="form">
-    	<div class="form-row"
-    		fxLayout = "column wrap"
-    		fxLayoutGap="20px"
-    		>
-	 	<div>
+	<form class="form form-row" fxLayout = "column wrap"
+	    		fxLayoutGap="20px">
+	    	<div>
 
-	 		<!--FIRST NAME FIELD-->
-		  	<mat-form-field data-aos="fade-right"
-     						data-aos-easing="ease-in-back"
-    						data-aos-delay="400"
-     						data-aos-offset="300" 
-     						data-aos-duration = "1000"
-     						data-aos-once = "true"
-     						appearance="outline">
-		    	<mat-label>First name*</mat-label>
-		      	<input matInput>
-		    </mat-form-field>
+		 		<!--FIRST NAME FIELD-->
+			  	<mat-form-field data-aos="fade-right"
+	     						data-aos-easing="ease-in-back"
+	    						data-aos-delay="400"
+	     						data-aos-offset="300" 
+	     						data-aos-duration = "1000"
+	     						data-aos-once = "true"
+	     						appearance="outline">
+			    	<mat-label>First name*</mat-label>
+			      	<input matInput>
+			    </mat-form-field>
 
-		    <!--LAST NAME FIELD-->
-		    <mat-form-field data-aos="fade-right"
-     						data-aos-easing="ease-in-back"
-     						data-aos-delay="550" 
-     						data-aos-duration = "1000"
-     						data-aos-once = "true"
-     						appearance="outline">
-		    	<mat-label>Last Name*</mat-label>
-		    	<input matInput>
-		    </mat-form-field>
-
-
-		    <!--EMAIL FIELD-->
-		    <mat-form-field data-aos="fade-right"
-     						data-aos-easing="ease-in-back"
-     						data-aos-delay="700" 
-     						data-aos-duration = "1000"
-     						data-aos-once = "true"
-     						appearance="outline">
-		    	<mat-label>Email</mat-label>
-
-    			<input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher">
-    			<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Please enter a valid email address
-    			</mat-error>
-			    <mat-error *ngIf="emailFormControl.hasError('required')">
-			      Email is <strong>required</strong>
-			    </mat-error>
-		  	</mat-form-field>
+			    <!--LAST NAME FIELD-->
+			    <mat-form-field data-aos="fade-right"
+	     						data-aos-easing="ease-in-back"
+	     						data-aos-delay="550" 
+	     						data-aos-duration = "1000"
+	     						data-aos-once = "true"
+	     						appearance="outline">
+			    	<mat-label>Last Name*</mat-label>
+			    	<input matInput>
+			    </mat-form-field>
 
 
-		</div>
-		
-	  
-	    <div >
+			    <!--EMAIL FIELD-->
+			    <mat-form-field data-aos="fade-right"
+	     						data-aos-easing="ease-in-back"
+	     						data-aos-delay="700" 
+	     						data-aos-duration = "1000"
+	     						data-aos-once = "true"
+	     						appearance="outline">
+			    	<mat-label>Email</mat-label>
 
-		  	<!--PHONE NUM FIELD-->
-		  	<mat-form-field data-aos="fade-left"
-     						data-aos-easing="ease-in-back"
-     						data-aos-duration = "1000"
-     						data-aos-delay="850" 
-     						data-aos-once = "true"
-     						appearance="outline">
-		  		<mat-label>Phone number</mat-label>
-		      	<input matInput>
-		    </mat-form-field>
-
-
-		    <!--COMPANY NAME FIELD-->
-		  	<mat-form-field data-aos="fade-left"
-     						data-aos-easing="ease-in-back"
-     						data-aos-delay="1000"
-     						data-aos-duration = "1000"
-     						data-aos-once = "true"
-     						appearance="outline">
-		  		<mat-label>Company</mat-label>
-		      	<input matInput>
-		    </mat-form-field>
-
-		    <!--PROJECT TYPE SELECT -- DELAY IS DIFFERENT WITH THIS ONE-->
-		    <mat-form-field data-aos="fade-left"
-     						data-aos-easing="ease-in-back"
-     						data-aos-delay="100"
-     						data-aos-duration = "1000"
-     						data-aos-once = "true"
-     						appearance="outline">
-
-		    	<mat-label>Select your project type</mat-label>
-		      	<mat-select [formControl]="projectTypeControl" required>
-				    <mat-option>--</mat-option>
-				    <mat-option *ngFor="let type of projectTypes" [value]="type">
-				      {{type}}
-				    </mat-option>
-			  	</mat-select>
-			  	<mat-error *ngIf="projectTypeControl.hasError('required')">Please choose a project type</mat-error>
+	    			<input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+	    			<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Please enter a valid email address
+	    			</mat-error>
+				    <mat-error *ngIf="emailFormControl.hasError('required')">
+				      Email is <strong>required</strong>
+				    </mat-error>
+			  	</mat-form-field>
 
 
-		    </mat-form-field>
-		</div>
-
-		<div>
-			<!--DESCRIPTION FIELD-->
-			<mat-form-field data-aos="fade-up"
-							data-aos-delay="2000"
-     						data-aos-duration = "1000"
-     						data-aos-anchor-placement="top-bottom"
-     						appearance="outline" class="description-area">
-				<mat-label>Brief description of the project/issue</mat-label>
-				<textarea matInput matTextareaAutosize matAutosizeMinRows=15 matAutosizeMaxRows=20 ></textarea>
-			</mat-form-field>
+			</div>
 			
-		</div>
+		  
+		    <div >
+
+			  	<!--PHONE NUM FIELD-->
+			  	<mat-form-field data-aos="fade-left"
+	     						data-aos-easing="ease-in-back"
+	     						data-aos-duration = "1000"
+	     						data-aos-delay="850" 
+	     						data-aos-once = "true"
+	     						appearance="outline">
+			  		<mat-label>Phone number</mat-label>
+			      	<input matInput>
+			    </mat-form-field>
 
 
-    </div>	  
-</form>
-	
+			    <!--COMPANY NAME FIELD-->
+			  	<mat-form-field data-aos="fade-left"
+	     						data-aos-easing="ease-in-back"
+	     						data-aos-delay="1000"
+	     						data-aos-duration = "1000"
+	     						data-aos-once = "true"
+	     						appearance="outline">
+			  		<mat-label>Company</mat-label>
+			      	<input matInput>
+			    </mat-form-field>
+
+			    <!--PROJECT TYPE SELECT -- DELAY IS DIFFERENT WITH THIS ONE-->
+			    <mat-form-field data-aos="fade-left"
+	     						data-aos-easing="ease-in-back"
+	     						data-aos-delay="1150"
+	     						data-aos-duration = "1000"
+	     						data-aos-once = "true"
+	     						appearance="outline">
+
+			    	<mat-label>Select your project type</mat-label>
+			      	<mat-select [formControl]="projectTypeControl" required>
+					    <mat-option>--</mat-option>
+					    <mat-option *ngFor="let type of projectTypes" [value]="type">
+					      {{type}}
+					    </mat-option>
+				  	</mat-select>
+				  	<mat-error *ngIf="projectTypeControl.hasError('required')">Please choose a project type</mat-error>
+
+
+			    </mat-form-field>
+			</div>
+
+			<div>
+				<!--DESCRIPTION FIELD-->
+				<mat-form-field data-aos="fade-up"
+								data-aos-delay="2000"
+	     						data-aos-duration = "1000"
+	     						data-aos-anchor-placement="top-bottom"
+	     						data-aos-once = "true"
+	     						appearance="outline" class="description-area">
+					<mat-label>Brief description of the project/issue</mat-label>
+					<textarea matInput matTextareaAutosize matAutosizeMinRows=15 matAutosizeMaxRows=20 ></textarea>
+				</mat-form-field>
+			</div>
+
+
+			<div fxLayout="row" fxLayoutAlign="center" style="height: 100px">
+				<button fxFlex="70%" class="submit-button" mat-raised-button color="accent" (click)="shakeMe('state1')" >Submit</button>
+
+			</div>
+	</form>
+
+</mat-card>
 </div>

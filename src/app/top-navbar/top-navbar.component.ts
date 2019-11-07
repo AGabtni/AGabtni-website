@@ -3,22 +3,11 @@ import { categories } from '../static/categories';
 import { fromEvent } from 'rxjs';
 import { throttleTime, map, pairwise, distinctUntilChanged, share, filter } from 'rxjs/operators';
 
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
-
-
+import { categorySlide, toggleBar, topCategoryFade } from '../../assets/animations'
 import { DOCUMENT } from '@angular/common';
 
 
-enum VisibilityState {
-  Visible = 'visible',
-  Hidden = 'hidden'
-}
+
 
 enum Direction {
   Up = 'Up',
@@ -31,65 +20,9 @@ enum Direction {
   styleUrls: ['./top-navbar.component.css'],
   encapsulation: ViewEncapsulation.None,
   animations : [
-      //OVERLAY ANIMATION
-      trigger('messageAnimation', [
-
-      state('visible', 
-        style({
-
-          opacity: 1.0,
-          transform: 'translateX(0%)',
-        }),
-      ),
-
-      state('hidden',   style({
-        opacity: 0,
-        transform: 'translateX(-100%)',
-      })),
-
-      transition('hidden => visible', animate('800ms 300ms ease')),
-      transition('visible => hidden', animate('200ms ease-out'))
-
-    ]),
-
-    //TOGGLE TOP BAR STATE
-    trigger('toggle', [
-      state(
-        VisibilityState.Hidden,
-        style({
-          height : '0px',
-          background : 'rgba(63, 81, 181, 1)',
-
-        })
-      ),
-      state(
-        VisibilityState.Visible,
-        style({
-            height : '*',
-            background : 'rgba(63, 81, 181, 1)',
-        })
-      ),
-      transition('* => *', animate('400ms ease-in'))
-    ]),
-    
-    //TOP BAR CATEGORIES ANIMATION :
-    trigger('titleFade',[
-      state('visible',
-          style({
-          opacity : 1.0,
-
-
-
-        })
-      ),state('hidden',
-        style({
-          opacity : 0,
-          
-        })
-      ),
-      transition('* => *', animate('50ms ease-out'))
-
-    ]),
+      categorySlide, 
+      toggleBar, 
+      topCategoryFade
     ]
  })
 

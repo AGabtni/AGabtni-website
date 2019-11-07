@@ -1,7 +1,7 @@
 import { Component, OnInit,HostBinding, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import{ services } from '../static/services';
 import {ProductHighlightComponent} from '../product-highlight/product-highlight.component'
-
+import {cardHover} from '../../assets/animations';
 import {
   trigger,
   state,
@@ -16,31 +16,8 @@ import {
   styleUrls: ['./product.component.css'],
 
   animations : [
-  	trigger('openClose', [
-
-  		state('stable', style({
-  			bottom : '0px',
-        boxShadow: '0 3px 6px rgba(0,0,0,0.15)',
-
-  		})),
-  		state('up', style({
-  			bottom : '15px',
-        boxShadow: '0 10px 20px rgba(0,0,0,0.8)',
-
-  		})),
-
-  		transition('stable => up',[
-  			animate('0.1s')
-  		]),
-
-  		transition('up => stable',[
-  			animate('0.1s')
-  		]),
-
   	
-
-
-  	]),
+    cardHover
 
   ]
 })

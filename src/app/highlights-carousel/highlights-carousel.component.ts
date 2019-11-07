@@ -1,16 +1,7 @@
 import { Input, Component, OnInit,ViewChildren, ViewEncapsulation, QueryList, AfterViewInit  } from '@angular/core';
-
 import { highlights} from '../static/carousel_highlights';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
-import * as $ from 'jquery';
 import  { NgbSlide } from '@ng-bootstrap/ng-bootstrap';
-
+import { carouselSlide } from '../../assets/animations';
 
 
 @Component({
@@ -19,25 +10,11 @@ import  { NgbSlide } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./highlights-carousel.component.css'],
   encapsulation: ViewEncapsulation.None,
   animations: [
-    trigger('simpleTranslation', [
-      state('outright', style({ transform: `translateX(100%)` })),
-      state('outleft', style({ transform: `translateX(-100%)` })),
-      transition('*=>inright',[
-        style({transform:`translateX(-100%)`}),
-        animate('260ms ease-in',style({ transform: `translateX(0)` }))
-      ]),
-      transition('*=>inleft',[
-        style({transform:`translateX(100%)`}),
-        animate('260ms ease-in',style({ transform: `translateX(0)` }))
-      ]),
-      transition('*=>outleft', [
-        animate('260ms ease-in', style({ transform: `translateX(-100%)` }))
-      ]),
-      transition('*=>outright', [
-        animate('260ms ease-in',style({ transform: `translateX(100%)` }))
-      ]),
-    ])
-  ]})
+    
+      carouselSlide
+  ]
+
+  })
 export class HighlightsCarouselComponent implements AfterViewInit {
 
   	highlights = highlights;  

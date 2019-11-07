@@ -8,7 +8,7 @@
 			<mat-card 
 			*ngFor="let service of services; let i= index" 
 			 
-			[@openClose]="states[i] ? 'stable' : 'up'" 
+			[@onHover]="states[i] ? 'stable' : 'up'" 
 			(mouseover)=toggle(i) 
 			(mouseout)=toggle(i) 
 			(click)="scroll(i)"  
