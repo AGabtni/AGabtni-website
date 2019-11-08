@@ -1,9 +1,11 @@
-<div #formContainer fxLayout  [@shakeit]="this.formState" (@shakeit.done)="shakeEnd($event)">
- <mat-card  
+<div fxLayout  style="height: 100%;width: 100%">
+ <mat-card #formContainer 
+ 			[@shakeit]="this.formState" (@shakeit.done)="shakeEnd($event)"
+ 			[@onEnter] = "isOverForm ? 'floating' : 'landed' "
  			(mouseover)="onFormMouseOver()"
  			
  			class="form-container"
- 			[@onEnter] = "isOverForm ? 'floating' : 'landed' ">
+ 			>
 			<span data-aos="fade-down"
  			data-aos-delay="500"
  			data-aos-duration="1500"
@@ -137,4 +139,16 @@
 	</form>
 
 </mat-card>
+
+<div fxFlexFill  style="position: absolute; padding: 20px">
+		<mat-card fxFlexFill [class.mat-elevation-z4]="true" style="margin: 0 auto;" fxLayout="column" fxLayoutAlign = "center" >
+			<div fxLayout="row" fxLayoutAlign = "center">
+				eflefe
+			</div>
+		</mat-card>
+	
 </div>
+
+
+</div>
+
