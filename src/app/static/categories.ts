@@ -2,7 +2,7 @@ export const categories = [
 
   {
     title: 'Services',
-    url: '/',
+    url: '/services',
     nest: [
       {
         subcategory: 1

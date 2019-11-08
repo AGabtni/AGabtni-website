@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, Reacti
 import {ErrorStateMatcher} from '@angular/material/core';
 import * as AOS from 'aos';
 
-import { formCard, shake, fadeAway } from '../../assets/animations';
+import { formCard, shake, fadeIn } from '../../assets/animations';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -19,16 +19,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.css'],
-  animations: [ formCard , shake, fadeAway ],
+  animations: [ formCard , shake, fadeIn ],
 })
 export class ContactFormComponent implements OnInit {
 
-  @ViewChild ('formContainer',{static : true}) formContainer : ElementRef;
+@ViewChild ('overlayContainer', {static : true}) overlayContainer : ElementRef;
   contactForm ;
 
 
   isOverForm = false;
   formState ;
+  overlayState ;
   
   //NEED TO BE FILLED IN
   projectTypes : string[] = [
@@ -49,6 +50,7 @@ export class ContactFormComponent implements OnInit {
   constructor(public renderer: Renderer, private formBuilder : FormBuilder){
 
     this.formState = 'shakeend';
+    this.overlayState = 'faded'
     this.contactForm = this.formBuilder.group({
         'firstName' : this.nameControl,
         'lastName' : '',
@@ -73,6 +75,8 @@ export class ContactFormComponent implements OnInit {
     
     if(this.emailFormControl.status == 'VALID' &&  this.projectTypeControl.status == 'VALID' && this.projectTypeControl.status == 'VALID'){
       this.formState = 'submittedForm';
+      this.overlayState = 'fadeend';
+      this.overlayContainer.nativeElement.scrollIntoView({ behaviour: 'smooth', block : 'center'});
       this.contactForm.reset();
     }else
       this.formState= (this.formState === 'shakestart' ? 'shakeend' : 'shakestart');
@@ -100,7 +104,7 @@ export class ContactFormComponent implements OnInit {
     this.isOverForm = false;
   }
 
-
+  //Scroll to overlay after submission sucessfull
 
 
 }

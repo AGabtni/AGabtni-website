@@ -1,0 +1,13 @@
+.top-container {
+
+	background-color: lightgreen;
+	padding: 70px;
+}
+
+.top-container p{
+	color: white;
+}
+
+.title{
+	font-weight: bold;
+}

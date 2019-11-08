@@ -44,6 +44,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { ServicesComponent } from './services/services.component';
 
 
 
@@ -58,7 +59,8 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     FooterComponent,
     ContactComponent,
     HomeComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    ServicesComponent
     
   ],
   imports: [

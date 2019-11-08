@@ -228,10 +228,25 @@ export const shake =
   ]);
 
 
-export const fadeAway = 
-  trigger('fadeForm',[
 
-    
+export const fadeIn = 
+  trigger('fadeFormIn',[
+
+    state('faded', style({
+        opacity : '0.0',
+        transform: 'scale(0.1)',
+
+    })),
+    state('fadeend',style({
+        opacity : '1.0',
+        transform: 'scale(1)',
+       
+
+    })),
+
+    transition ('faded=>fadeend',[animate ('600ms 1000ms ease-out')
+
+    ]),
 
 
 

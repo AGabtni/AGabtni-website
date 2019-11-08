@@ -2,7 +2,7 @@
 
 	display: table;
   	margin: 50px auto;
-  	
+  	z-index : 1;
 
 }
 
