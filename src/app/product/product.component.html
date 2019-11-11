@@ -14,8 +14,8 @@
 			(click)="scroll(i)"  
 			[class.mat-elevation-z4]="true" 
 			class="custom-card">
-				<mat-card-header class="card-custom-header">
-					<mat-card-title><h5>{{service.title}}</h5></mat-card-title>
+				<mat-card-header fxLayout="row" fxLayoutAlign="center" class="card-custom-header">
+					<mat-card-title><span class="mat-h2">{{service.title}}</span></mat-card-title>
 				</mat-card-header>
 				<img mat-card-image class="card-image-preview" [src]="service.url" alt="Service preview image">
 

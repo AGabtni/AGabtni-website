@@ -51,7 +51,6 @@ export class TopNavbarComponent implements AfterViewInit {
   closeNav(){ 
     this.hidden = true;
     this.document.body.style.overflow = "unset";
-
     this.overlay.nativeElement.style.width = "0%"
   }
 

@@ -19,7 +19,7 @@ export class ProductHighlightComponent implements OnChanges {
 
 
 	services = services;
-	returnedString: string;
+	serviceDescription: string;
 
 
 
@@ -38,14 +38,14 @@ export class ProductHighlightComponent implements OnChanges {
 
 	ngOnInit(){
 			
-		this.returnedString = services[Number(this.containerIndex)].description;
+		this.serviceDescription = services[Number(this.containerIndex)].description;
 		AOS.init();
 
 
 	}
 	ngOnChanges() {
 
-			this.returnedString = services[Number(this.containerIndex)].description;
+			this.serviceDescription = services[Number(this.containerIndex)].description;
 
 
 	}

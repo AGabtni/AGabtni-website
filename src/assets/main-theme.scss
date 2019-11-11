@@ -8,7 +8,10 @@
 
 $general-typography: mat-typography-config(
   $font-family: '"Ubuntu", sans-serif',
-  $body-2:        mat-typography-level(14px, 24px, 600)  
+  $body-2:        mat-typography-level(14px, 24px,600)  ,
+  $headline: mat-typography-level(50px, 60px,700) ,
+  $title : mat-typography-level(20px, 32px,700),
+  
 );
 
 $secondary-typography: mat-typography-config(

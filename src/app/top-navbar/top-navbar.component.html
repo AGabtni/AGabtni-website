@@ -1,6 +1,6 @@
   <mat-toolbar [@toggle]="isVisible? 'visible' : 'hidden'" [ngClass]="{'mat-elevation-z6' : true}">
      
-    <div  [@titleFade]="isVisible? 'visible' : 'hidden'" style="display: flex; align-items: center;"  >
+    <div  [@titleFade]="isVisible? 'visible' : 'hidden'" style="display: flex; align-items: center;" >
       
       <button mat-icon-button (click)="openNav()" fxShow="true" fxHide.gt-sm class="toggle-button">
         
@@ -12,7 +12,7 @@
       </button>
 
 
-      <span>Responsive Navigation</span>
+      <span class="mat-h2">Responsive Navigation</span>
 
       
       <div fxShow="true" fxHide.lt-md style="text-align: center;">
@@ -23,7 +23,7 @@
           
           <!-- The following menu items will be hidden on both SM and XS screen sizes -->
           <div *ngFor="let cat of categories" class="category">
-  				  <button mat-button class="dropbtn" [routerLink]="[cat.url]">{{cat.title}}</button>		
+  				  <button mat-button class="dropbtn mat-h4" [routerLink]="[cat.url]">{{cat.title}}</button>		
   			  </div>
 
         </div>

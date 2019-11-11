@@ -1,13 +1,44 @@
-.top-container {
 
-	background-color: lightgreen;
-	padding: 70px;
+
+
+.MainContainer {
+  perspective: 1px;
+  transform-style: preserve-3d;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: indigo;
+}
+.ParallaxContainer {
+  display: flex;
+  flex: 1 0 auto;
+  position: relative;
+  z-index: -1;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+  transform: translateZ(-1px) scale(2);
+  background-color: lightgreen;
+}
+.ContentContainer {
+  position: relative;
+  display: block;
+  background-color: white;
+  z-index: 1;
 }
 
-.top-container p{
-	color: white;
+.Content {
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.title{
-	font-weight: bold;
+.Content p{
+  padding: 75px; 
 }
+.Content span{
+  padding: 75px;
+  margin : 0 auto;
+}
+
+
+
