@@ -25,6 +25,7 @@
   display: block;
   background-color: white;
   z-index: 1;
+  padding-top: 50px;
 }
 
 .Content {
@@ -32,13 +33,7 @@
   padding: 20px;
 }
 
-.Content p{
-  padding: 75px; 
-}
-.Content span{
-  padding: 75px;
-  margin : 0 auto;
-}
+
 
 
 
