@@ -1,39 +1,42 @@
 
-
-
-.MainContainer {
-  perspective: 1px;
-  transform-style: preserve-3d;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background: indigo;
-}
-.ParallaxContainer {
-  display: flex;
-  flex: 1 0 auto;
-  position: relative;
-  z-index: -1;
-  height: 80vh;
-  justify-content: center;
-  align-items: center;
-  transform: translateZ(-1px) scale(2);
-  background-color: lightgreen;
-}
-.ContentContainer {
-  position: relative;
-  display: block;
-  background-color: white;
-  z-index: 1;
-  padding-top: 50px;
-}
-
 .Content {
   margin: 0 auto;
   padding: 20px;
 }
 
+mat-card{
+
+	min-width: 150px;
+	min-height: 350px;
+	margin: 10px;
+
+}
+
+.ParallaxContainer{
+    position: relative;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0px; 
+    left: 0px;
+    padding: 50px;
+
+
+    background-color: pink;
+    
+}
+
+.MainContainer{
+
+
+	padding-top: 50px;
+}
 
 
 
 
+.logo-1{
+	background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  	background-size: cover;
+}

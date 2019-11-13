@@ -1,45 +1,76 @@
 
-<div class="MainContainer">
-
-  <div class="ParallaxContainer">
-  	<div class="ParallaxLayer">
-  		<span class="mat-h1 title">Let us help you in your journey</span>
-		<p class="mat-h2">services works!</p>
-
-  	</div>
-    
-  </div>
-
-  <div fxLayout="column" class="ContentContainer">
-
-	<div fxLayout="row" fxLayoutAlign="center"  >
-  	  	<span class="mat-h2">Services</span>
-
-  	</div>
-  	<div fxLayout.gt-sm="row" >
-  			    
-	    <div class="Content" style="background-color: lightblue">
-	      <span class="mat-h3">Web development</span>
-	      <p>ʻO Lorem Ipsum kahi haʻahaʻa wale nō o ka paʻi a me keʻano o nāʻoihana. ʻO Lorem Ipsum ka 'ōlelo papahana maʻamau o kaʻoihana o ka makahiki 1500, i ka wā i lawe ai kekahi mea paʻi kiʻiʻole i keʻano o ka type a scrambled iā ia e hana i kahi puke kiko'ī. ʻAʻole i ola wale i kaʻelima mau kenekulia, akā,ʻo ka leleʻana hoʻi i nāʻano o ka lolouila, e hoʻololiʻoleʻia ana. Ua hoʻolahaʻia i nā makahiki 1960 me ka hoʻokuʻuʻana i nā pepa Letraset i loko o nā moʻolelo Lorem Ipsum, a me nā mea hou aku me ka polokalamu hoʻopuka pākī e like me Aldus PageMaker me nā papa o Lorem Ipsum.
-	      </p>
-	     
-	    </div>
-	    <div class="Content" style="background-color: lightgreen">
-	      <span class="mat-h3">Game development</span>
-	      <p>ʻO Lorem Ipsum kahi haʻahaʻa wale nō o ka paʻi a me keʻano o nāʻoihana. ʻO Lorem Ipsum ka 'ōlelo papahana maʻamau o kaʻoihana o ka makahiki 1500, i ka wā i lawe ai kekahi mea paʻi kiʻiʻole i keʻano o ka type a scrambled iā ia e hana i kahi puke kiko'ī. ʻAʻole i ola wale i kaʻelima mau kenekulia, akā,ʻo ka leleʻana hoʻi i nāʻano o ka lolouila, e hoʻololiʻoleʻia ana. Ua hoʻolahaʻia i nā makahiki 1960 me ka hoʻokuʻuʻana i nā pepa Letraset i loko o nā moʻolelo Lorem Ipsum, a me nā mea hou aku me ka polokalamu hoʻopuka pākī e like me Aldus PageMaker me nā papa o Lorem Ipsum.
-	      </p>
-	     
-	    </div>		
-  	</div>
-  	<div fxLayout="row" fxLayoutAlign="center"  style="padding: 50px">
-  	  	<span class="mat-h2">The technologies we use</span>
-
-  	</div>
-  	<div fxLayout.gt-sm="row">
+	<div fxLayout="column">
 
 
-  	</div>
-  	
-    
-  </div>
+
+	  <div appParallax [ratio]="-0.4" fxLayout="column" class="ParallaxContainer">
+	  		<span class="mat-h1 title" style="text-align: center;">Let us help you in your journey</span>
+			<p class="mat-h2">services works!</p>
+	    
+	  </div>
+
+	  <div fxLayout="column  wrap" class="MainContainer" style="background-color: white" [class.mat-elevation-z8]="true">
+	  	
+		<div fxLayout="row" fxLayoutAlign="center"  >
+	  	  	<span class="mat-h1">Services</span>
+
+	  	</div>
+	  	<div fxLayout.gt-sm="row" >
+	  			    
+		    <div class="Content" style="background-color: lightblue">
+		      <span class="mat-h3">Web development</span>
+		      <p>ʻO Lorem Ipsum kahi haʻahaʻa wale nō o ka paʻi a me keʻano o nāʻoihana. ʻO Lorem Ipsum ka 'ōlelo papahana maʻamau o kaʻoihana o ka makahiki 1500, i ka wā i lawe ai kekahi mea paʻi kiʻiʻole i keʻano o ka type a scrambled iā ia e hana i kahi puke kiko'ī. ʻAʻole i ola wale i kaʻelima mau kenekulia, akā,ʻo ka leleʻana hoʻi i nāʻano o ka lolouila, e hoʻololiʻoleʻia ana. Ua hoʻolahaʻia i nā makahiki 1960 me ka hoʻokuʻuʻana i nā pepa Letraset i loko o nā moʻolelo Lorem Ipsum, a me nā mea hou aku me ka polokalamu hoʻopuka pākī e like me Aldus PageMaker me nā papa o Lorem Ipsum.
+		      </p>
+		     
+		    </div>
+		    <div class="Content" style="background-color: lightgreen">
+		      <span class="mat-h3">Game development</span>
+		      <p>ʻO Lorem Ipsum kahi haʻahaʻa wale nō o ka paʻi a me keʻano o nāʻoihana. ʻO Lorem Ipsum ka 'ōlelo papahana maʻamau o kaʻoihana o ka makahiki 1500, i ka wā i lawe ai kekahi mea paʻi kiʻiʻole i keʻano o ka type a scrambled iā ia e hana i kahi puke kiko'ī. ʻAʻole i ola wale i kaʻelima mau kenekulia, akā,ʻo ka leleʻana hoʻi i nāʻano o ka lolouila, e hoʻololiʻoleʻia ana. Ua hoʻolahaʻia i nā makahiki 1960 me ka hoʻokuʻuʻana i nā pepa Letraset i loko o nā moʻolelo Lorem Ipsum, a me nā mea hou aku me ka polokalamu hoʻopuka pākī e like me Aldus PageMaker me nā papa o Lorem Ipsum.
+		      </p>
+		     
+		    </div>		
+	  	</div>
+	  	<div fxLayout="row" fxLayoutAlign="center"  style="padding: 50px">
+	  	  	<span class="mat-h1" style="text-align: center;">The technologies we use</span>
+
+	  	</div>
+
+	  	<div fxLayout="column" fxLayout.gt-sm="row" style="margin: 0 auto; padding: 20px 20px 0 20px">
+	  			<mat-card style="background-color: lightblue">
+		  			<mat-card-header>
+		  				<svg-icon src="../../assets/icons/web_responsive_512.svg" [svgStyle]="{ 'width.px':150 }" [stretch]="true"></svg-icon>
+		  			</mat-card-header>
+		  			fklenfklenfkenfelknflkenfkenf
+
+		  		</mat-card>
+		  		<mat-card style="background-color: lightgreen">
+		  			fklenfklenfkenfelknflkenfkenf
+		  		</mat-card>
+		  		<mat-card style="background-color: orange">
+		  			fklenfklenfkenfelknflkenfkenf
+		  		</mat-card>
+		</div>
+
+	  	<div fxLayout="column" fxLayout.gt-sm="row" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
+
+		  		<mat-card style="background-color: orange">
+		  			fklenfklenfkenfelknflkenfkenf
+		  		</mat-card>
+		  		<mat-card style="background-color: orange">
+		  			fklenfklenfkenfelknflkenfkenf
+		  		</mat-card>
+		  		<mat-card style="background-color: red">
+		  			fklenfklenfkenfelknflkenfkenf
+		  		</mat-card>
+		</div>
+
+
+	  	
+	    
+	  </div>
+
+	  <app-footer></app-footer>
 </div>
+
+
+

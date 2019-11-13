@@ -2,9 +2,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ParallaxDirective } from './directives/parallax.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 /**
   custom components
 */
@@ -38,7 +39,6 @@ import  { MatGridListModule,
 
 import  { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProductHighlightComponent } from './product-highlight/product-highlight.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
@@ -60,7 +60,9 @@ import { ServicesComponent } from './services/services.component';
     ContactComponent,
     HomeComponent,
     ContactFormComponent,
-    ServicesComponent
+    ServicesComponent,
+    ParallaxDirective,
+
     
   ],
   imports: [
@@ -82,7 +84,8 @@ import { ServicesComponent } from './services/services.component';
     FormsModule, ReactiveFormsModule,
     NgbModule,
     ScrollingModule,
-    SlickCarouselModule,
+    HttpClientModule, 
+    AngularSvgIconModule,
     AnimateOnScrollModule.forRoot()
   ],
   providers: [],
