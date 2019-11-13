@@ -30,38 +30,74 @@
 		     
 		    </div>		
 	  	</div>
-	  	<div fxLayout="row" fxLayoutAlign="center"  style="padding: 50px">
-	  	  	<span class="mat-h1" style="text-align: center;">The technologies we use</span>
+	  	<div fxLayout="column" fxLayoutAlign="center" class="Technologies-Container">
+		  	<div fxLayout="row" fxLayoutAlign="center"  style="padding: 50px">
+		  	  	<span class="mat-h1" style="text-align: center;">The technologies we use</span>
 
-	  	</div>
+		  	</div>
 
-	  	<div fxLayout="column" fxLayout.gt-sm="row" style="margin: 0 auto; padding: 20px 20px 0 20px">
-	  			<mat-card style="background-color: lightblue">
-		  			<mat-card-header>
-		  				<svg-icon src="../../assets/icons/web_responsive_512.svg" [svgStyle]="{ 'width.px':150 }" [stretch]="true"></svg-icon>
-		  			</mat-card-header>
-		  			fklenfklenfkenfelknflkenfkenf
+		  	<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 20px 20px 0 20px;">
+		  			<mat-card 
+		  				fxLayout="column"
+		  				(mouseover)="states[0] = true" 
+		  				(mouseout)="states[0]= false"
+		  				[@onHover]="states[0] ? 'up' : 'stable'"
+		  			>
+			  			
+			  			<mat-card-header fxLayout="column" class="logo">
+			  			
+			  					<svg-icon src="../../assets/icons/angular.svg" [svgStyle]="{ 'width.px':100 }" [stretch]="true"></svg-icon>
+			  				
+			  				
+			  			</mat-card-header>
+			  			
 
-		  		</mat-card>
-		  		<mat-card style="background-color: lightgreen">
-		  			fklenfklenfkenfelknflkenfkenf
-		  		</mat-card>
-		  		<mat-card style="background-color: orange">
-		  			fklenfklenfkenfelknflkenfkenf
-		  		</mat-card>
-		</div>
+			  		</mat-card>
 
-	  	<div fxLayout="column" fxLayout.gt-sm="row" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
 
-		  		<mat-card style="background-color: orange">
-		  			fklenfklenfkenfelknflkenfkenf
-		  		</mat-card>
-		  		<mat-card style="background-color: orange">
-		  			fklenfklenfkenfelknflkenfkenf
-		  		</mat-card>
-		  		<mat-card style="background-color: red">
-		  			fklenfklenfkenfelknflkenfkenf
-		  		</mat-card>
+			  		<mat-card  
+			  			fxLayout="column" 
+		  				(mouseover)="states[1] = true" 
+		  				(mouseout)="states[1]= false"
+		  				[@onHover]="states[1] ? 'up' : 'stable'"
+
+			  		>
+			  			<mat-card-header fxLayout="column" class="logo">
+			  			</mat-card-header>
+			  		</mat-card>
+
+			  		<mat-card  fxLayout="column" 
+			  			(mouseover)="states[2] = true" 
+		  				(mouseout)="states[2]= false"
+		  				[@onHover]="states[2] ? 'up' : 'stable'"
+			  		>
+			  			<mat-card-header fxLayout="column" class="logo">
+			  			</mat-card-header>
+			  			
+			  		</mat-card>
+			</div>
+
+		  	<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
+
+			  		<mat-card  fxLayout="column" >
+			  			<mat-card-header fxLayout="column" class="logo">
+			  			</mat-card-header>
+			  			
+			  		</mat-card>
+
+
+			  		<mat-card  fxLayout="column" >
+			  			<mat-card-header fxLayout="column" class="logo">
+			  			</mat-card-header>
+			  		</mat-card>
+
+
+			  		<mat-card  fxLayout="column" >
+			  			<mat-card-header fxLayout="column" class="logo">
+			  			</mat-card-header>
+			  			
+			  		</mat-card>
+			</div>
 		</div>
 
 
