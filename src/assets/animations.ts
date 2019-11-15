@@ -166,6 +166,50 @@ export const cardHover =
       ]),
     ]);
 
+export const technologiesCardHover = 
+    trigger('onHover', [
+
+      state('stable', style({
+        bottom : '0px',
+        boxShadow: '0 4px 7px rgba(0,0,0,0.3)',
+        backgroundColor: 'midnightblue',
+
+      })),
+      state('up', style({
+        bottom : '15px',
+        boxShadow: '0 10px 20px rgba(0,0,0,0.8)',
+        backgroundColor: 'rgba(255,255,255,0.5)'
+
+      })),
+      state('logoNormal', style({
+
+       transform: 'scale(1)',
+
+      })),
+      state('logoBlur', style({
+
+        transform: 'scale(1.25)',
+
+      })),
+
+
+      transition('stable => up',[
+        animate('0.4s')
+      ]),
+
+      transition('up => stable',[
+        animate('0.25s')
+      ]),
+
+
+      transition('logoNormal <=> logoBlur',[
+        animate('100ms ease-in-out')
+      ]),
+    ]);
+
+
+
+
 //CONTACT FORM ANIMATIONS
 
 //ON HOVER OVER CARD

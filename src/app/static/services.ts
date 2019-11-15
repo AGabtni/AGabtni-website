@@ -19,4 +19,52 @@ export const services = [
     An per vero efficiantur. Ad pri quot ipsum ludus, nam case erant invidunt ne, ne mundi dolor eam. Odio omnis fuisset sit ut. Novum blandit at vis. Delenit labores per et, sea at commodo scribentur, eu ius populo oporteat. An duo utamur tritani euripidis.`
   },
   
+] ;
+
+
+export const technologies = [
+  { 
+    name : 'Angular',
+    source: '../../assets/icons/Angular.svg',
+    description : '',
+    logo_width : '100',
+    
+  },
+  {
+    name : 'HTML_CSS_Javascript',
+    source: '../../assets/icons/html_css_js.svg',
+    description : '',
+    logo_width : '125',
+    
+  },
+  
+  {
+    name : 'NodeJS',
+    source: '../../assets/icons/Nodejs.svg',
+    description : '',
+    logo_width : '175',
+    
+  },
+  {
+    name : 'Unity3D',
+    source: '../../assets/icons/Unity_Technologies_logo.svg',
+    description : '',
+    logo_width : '125',
+    
+  },
+  {
+    name : 'Godot',
+    source: '',
+    description : '',
+    logo_width : '100',
+    
+  },
+  {
+    name : 'CMS',
+    source: '',
+    description : '',
+    logo_width : '100',
+    
+  },
+
 ];

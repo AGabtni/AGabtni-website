@@ -1,20 +1,20 @@
-import { Component, OnInit,OnDestroy, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import {cardHover} from '../../assets/animations';
+import { Component, OnInit,OnDestroy, Inject, SimpleChanges } from '@angular/core';
+import { technologiesCardHover } from '../../assets/animations';
+import{ technologies } from '../static/services';
 
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css'],
-  animations: [cardHover]
+  animations: [technologiesCardHover]
 })
 export class ServicesComponent implements OnInit, OnDestroy {
  
-
+  technologies = technologies
   states: Array<boolean> = [false,false,false,false,false,false];
 
-  constructor(@Inject(DOCUMENT) private document: any) { }
+  constructor() { }
 
   ngOnInit() {
   	
@@ -22,6 +22,11 @@ export class ServicesComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(){
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+
+    console.log(this.states);
   }
 
 

@@ -37,65 +37,44 @@
 		  	</div>
 
 		  	<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 20px 20px 0 20px;">
-		  			<mat-card 
+		  			
+			  		<mat-card 
+						*ngFor="let technology of technologies.slice(0,3); let i=index "
 		  				fxLayout="column"
-		  				(mouseover)="states[0] = true" 
-		  				(mouseout)="states[0]= false"
-		  				[@onHover]="states[0] ? 'up' : 'stable'"
+		  				(mouseover)="states[i] = true" 
+		  				(mouseout)="states[i]= false"
+		  				[@onHover]="states[i] ? 'up' : 'stable'"
+
 		  			>
 			  			
-			  			<mat-card-header fxLayout="column" class="logo">
-			  			
-			  					<svg-icon src="../../assets/icons/angular.svg" [svgStyle]="{ 'width.px':100 }" [stretch]="true"></svg-icon>
-			  				
-			  				
+			  			<mat-card-header  fxLayout="column" class="logo">
+			  					<svg-icon 
+			  							style="display: inline-block"
+			  							[@onHover]="states[i] ? 'logoBlur' : 'logoNormal'" 
+			  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
+			  					
 			  			</mat-card-header>
 			  			
 
-			  		</mat-card>
-
-
-			  		<mat-card  
-			  			fxLayout="column" 
-		  				(mouseover)="states[1] = true" 
-		  				(mouseout)="states[1]= false"
-		  				[@onHover]="states[1] ? 'up' : 'stable'"
-
-			  		>
-			  			<mat-card-header fxLayout="column" class="logo">
-			  			</mat-card-header>
-			  		</mat-card>
-
-			  		<mat-card  fxLayout="column" 
-			  			(mouseover)="states[2] = true" 
-		  				(mouseout)="states[2]= false"
-		  				[@onHover]="states[2] ? 'up' : 'stable'"
-			  		>
-			  			<mat-card-header fxLayout="column" class="logo">
-			  			</mat-card-header>
-			  			
 			  		</mat-card>
 			</div>
 
 		  	<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
 
-			  		<mat-card  fxLayout="column" >
+			  		<mat-card 
+						*ngFor="let technology of technologies.slice(3, technologies.length); let k=index "
+		  				fxLayout="column"
+		  				(mouseover)="states[k+3] = true" 
+		  				(mouseout)="states[k+3]= false"
+		  				[@onHover]="states[k+3] ? 'up' : 'stable'">
+			  			
 			  			<mat-card-header fxLayout="column" class="logo">
+			  					<svg-icon  src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
+			  				
+			  				
 			  			</mat-card-header>
 			  			
-			  		</mat-card>
 
-
-			  		<mat-card  fxLayout="column" >
-			  			<mat-card-header fxLayout="column" class="logo">
-			  			</mat-card-header>
-			  		</mat-card>
-
-
-			  		<mat-card  fxLayout="column" >
-			  			<mat-card-header fxLayout="column" class="logo">
-			  			</mat-card-header>
-			  			
 			  		</mat-card>
 			</div>
 		</div>
