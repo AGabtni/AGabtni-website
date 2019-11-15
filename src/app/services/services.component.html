@@ -15,7 +15,7 @@
 	  	  	<span class="mat-h1">Services</span>
 
 	  	</div>
-	  	<div fxLayout.gt-sm="row" >
+	  	<div fxLayout.gt-xs="row" >
 	  			    
 		    <div class="Content" style="background-color: lightblue">
 		      <span class="mat-h3">Web development</span>
@@ -36,7 +36,7 @@
 
 		  	</div>
 
-		  	<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 20px 20px 0 20px;">
+		  	<div fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="center" style="margin: 0 auto; padding: 20px 20px 0 20px;">
 		  			
 			  		<mat-card 
 						*ngFor="let technology of technologies.slice(0,3); let i=index "
@@ -50,8 +50,8 @@
 			  			<mat-card-header  fxLayout="column" class="logo">
 			  					<svg-icon 
 			  							style="display: inline-block"
-			  							[@onHover]="states[i] ? 'logoBlur' : 'logoNormal'" 
-			  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
+			  							
+			  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }"  ></svg-icon>
 			  					
 			  			</mat-card-header>
 			  			
@@ -59,7 +59,7 @@
 			  		</mat-card>
 			</div>
 
-		  	<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
+		  	<div fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="center" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
 
 			  		<mat-card 
 						*ngFor="let technology of technologies.slice(3, technologies.length); let k=index "

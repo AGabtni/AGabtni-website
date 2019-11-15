@@ -188,7 +188,7 @@ export const technologiesCardHover =
       })),
       state('logoBlur', style({
 
-        transform: 'scale(1.25)',
+        transform: 'scale(1)',
 
       })),
 

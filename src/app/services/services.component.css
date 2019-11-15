@@ -59,7 +59,7 @@ mat-card-header{
 }
 
 
-svg-icon:hover{
+mat-card:hover{
 	webkit-filter: blur(4px); /* Chrome, Safari, Opera */
     filter: blur(4px);
 }
