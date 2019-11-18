@@ -1,22 +1,14 @@
+import { NgModule } from '@angular/core';
+import  { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParallaxDirective } from './directives/parallax.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-/**
-  custom components
-*/
-
-import { TopNavbarComponent } from './top-navbar/top-navbar.component';
-import { HighlightsCarouselComponent } from './highlights-carousel/highlights-carousel.component';
-import { ProductComponent } from './product/product.component';
-
-
-
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -34,11 +26,19 @@ import  { MatGridListModule,
           MatListModule,
           MatExpansionModule,
           MatSelectModule,
-          MatButtonModule} from '@angular/material';
+          MatButtonModule,
+          MatBottomSheetModule} from '@angular/material';
 
 
-import  { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
+/**
+  custom components
+*/
+
+import { TopNavbarComponent } from './top-navbar/top-navbar.component';
+import { HighlightsCarouselComponent } from './highlights-carousel/highlights-carousel.component';
+import { ProductComponent } from './product/product.component';
 import { ProductHighlightComponent } from './product-highlight/product-highlight.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
@@ -68,10 +68,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     HomeComponent,
     ContactFormComponent,
     ServicesComponent,
-    ParallaxDirective,
-
-    
+    ParallaxDirective,  
   ],
+  entryComponents: [ContactFormComponent],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -87,6 +87,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatExpansionModule,
     MatSelectModule,
     MatButtonModule,
+    MatBottomSheetModule,
     FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     NgbModule,

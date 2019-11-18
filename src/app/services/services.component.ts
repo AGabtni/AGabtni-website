@@ -1,12 +1,16 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, Inject, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
-import { technologiesCardHover, floatingContainer } from '../../assets/animations';
-
-
-import{ technologies } from '../static/services';
 import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
   SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 import { MatIconRegistry } from "@angular/material/icon";
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import { DomSanitizer } from "@angular/platform-browser";
+
+
+
+import { technologiesCardHover, floatingContainer } from '../../assets/animations';
+import{ technologies } from '../static/services';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
+
 
 @Component({
   selector: 'app-services',
@@ -15,19 +19,15 @@ import { DomSanitizer } from "@angular/platform-browser";
   animations: [technologiesCardHover,floatingContainer]
 })
 export class ServicesComponent implements AfterViewInit, OnDestroy {
- 
+  @ViewChild('swiperContainer',{static:false}) public swiper : any;
   technologies = technologies
+
   states: Array<boolean> = [false,false,false,false,false,false];
   swiperStates: Array<boolean> = [false,false,false,false,false,false];
   contactFormState = 'active';
 
-  @ViewChild(SwiperComponent, { static: false }) componentRef?: SwiperComponent;
-  @ViewChild(SwiperDirective, { static: false }) directiveRef?: SwiperDirective;
-  @ViewChild('swiperContainer',{static:false}) public swiper : any;
-  public show: boolean = true;
-  public type: string = 'component';
-  public currentSlideIndex = 0;
-
+  currentSlideIndex = 0;
+  mobile = false;
 
   public config: SwiperConfigInterface = {
     a11y: true,
@@ -52,8 +52,6 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   };
 
-
-
   private scrollbar: SwiperScrollbarInterface = {
     el: '.swiper-scrollbar',
     hide: false,
@@ -66,7 +64,9 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
     hideOnClick: false
   };
 
-  constructor(private matIconRegistry: MatIconRegistry,private domSanitizer: DomSanitizer){
+
+  //Registering local SVGs
+  constructor(private matIconRegistry: MatIconRegistry,private domSanitizer: DomSanitizer,private _bottomSheet: MatBottomSheet){
 
     for(let technology of technologies){
       this.matIconRegistry.addSvgIcon(
@@ -82,7 +82,13 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.swiperStates[0]=true;
-    
+    if(window.screen.width <= 480){
+      this.mobile = true;
+
+    }
+
+
+    console.log(this.mobile);
   }
 
   ngAfterViewInit() {
@@ -92,6 +98,15 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
   }
 
 
+  ngOnDestroy(){
+
+
+  }
+
+
+
+
+  //Loop animation
   onEnd(event) {
     this.contactFormState = 'active';
     if (event.toState === 'active') {
@@ -106,15 +121,14 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   }
 
+  //On swiper cards click
   onCardClick(index){
-    console.log(this.swiper.directiveRef.instance.slideTo(index));
+    this.swiper.directiveRef.instance.slideTo(index)
 
   }
 
 
 
-  ngOnDestroy(){
-  }
   
   //Swiper slide change
   public onIndexChange(index: number): void {
@@ -129,11 +143,20 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
     
     this.currentSlideIndex = index;
   }
+
+
   //Swiper event
   public onSwiperEvent(event: string): void {
-    console.log('Swiper event: ', event);
+    
   }
 
+
+
+  //Open contact form bottom sheet :
+  openContactSheet() : void {
+    this._bottomSheet.open(ContactFormComponent);
+
+  }
   
 
   

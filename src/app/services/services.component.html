@@ -1,11 +1,11 @@
-<div fxLayout="column" fxFlexFill style="background-color: white" >
+<div fxLayout="column" fxFlexFill style="background-color:rgba(0,179,179,1)" >
 
 	<div fxFlexFill appParallax [ratio]="-0.6" fxLayout="column" class="ParallaxContainer">
 	  	<span class="mat-h1 title" style="text-align: center;">Let us help you in your journey</span>
 		<p class="mat-h2">services works!</p>
 	    
 	</div>
-	<div fxFlexFill appParallax [ratio]="-0.4" fxLayout="column" class="ParallaxContainer2">
+	<div fxFlexFill appParallax [ratio]="-0.3" fxLayout="column" class="ParallaxContainer2">
 
 	  	<!--SERVICES  DESCRIPTION SECTION-->
 		<div fxLayout="column" fxLayoutAlign="center"  >
@@ -72,14 +72,7 @@
 			          	</div>
 			        </swiper>
 
-			        <div *ngIf="type == 'directive' && show" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
-
-	          			<div class="swiper-scrollbar" [hidden]="config.scrollbar === false"></div>
-	          			<div class="swiper-pagination" [hidden]="config.pagination === false"></div>
-
-	          			<div class="swiper-button-prev" [hidden]="config.navigation === false"></div>
-	          			<div class="swiper-button-next" [hidden]="config.navigation === false"></div>
-	        		</div>
+			       
 	      		</div>
 	      	</div>	
 	      		<!--Technologies grid ONLY ON LARGE VIEWPORT-->
@@ -129,19 +122,33 @@
 
 		<!--CONTACT HIGHLIGHT-->
 
-		<div (mouseenter)="onMouseOver()" fxLayout="column" fxLayoutAlign="center" class="contact-container">
+		<div (mouseenter)="onMouseOver()" fxLayout="column" class="contact-container">
 
-			<div   fxLayout="row wrap" fxLayoutAlign="center"  class="contact-form" >
-				<div fxLayout="column"  fxLayoutAlign="start" >
+			<div   fxLayout="row wrap"   class="contact-form" >
+				<div fxLayout="column"  fxLayoutAlign="start start" >
 					<span fxLayout class="mat-h1" style ="">Contact us</span>
 					<p fxLayout="row" class="mat-h2">frkjnfrjknfkjrn
 					frkjnfrjknfkjrn frkjnfrjknfkjrn  frkjnfrjknfkjrn</p>
 
 				</div>
-				<div fxFlexFill  fxLayout="column"  fxLayoutAlign="end end">
+				<div fxFlexFill  fxLayout="column wrap"  fxLayoutAlign="end end">
+					<a *ngIf="!mobile" routerLink="/contact">
+						<button mat-stroked-button
+								class="contact-button"
+								[@floater]="contactFormState" (@floater.done)="onEnd($event)"
+								>
+							<span class="">Get a quote</span>
+						</button>
+					</a>
+
 					
-					<span class="mat-h1"
-							[@floater]="contactFormState" (@floater.done)="onEnd($event)">Button</span>
+					<button *ngIf="mobile" mat-stroked-button
+							class="contact-button"
+							[@floater]="contactFormState" (@floater.done)="onEnd($event)"
+							(click)="openContactSheet()">
+						<span class="">Get a quote</span>
+					</button>
+
 				</div>
 			</div>
 		</div>

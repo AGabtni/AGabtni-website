@@ -25,7 +25,7 @@ export const services = [
 export const technologies = [
   { 
     name : 'Angular',
-    source: '../../assets/icons/Angular.svg',
+    source: '../../assets/icons/angular.svg',
     description : '',
     logo_width : '100',
     

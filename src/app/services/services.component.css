@@ -21,17 +21,18 @@
 
 .ParallaxContainer2{
     position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     top: 0px; 
     left: 0px;
-    padding: 100px 50px 200px 50px;
-    height: 50vh;
+    padding: 50px 50px 100px 50px;
+    margin-bottom: 400px; 
+    height: 100vh;
 
-	background-color: rgba(255,255,255,1); 
-	z-index: 1;
-
+	  background-color: rgba(0,179,179,1);
+	 
 }
 
 
@@ -92,12 +93,35 @@ svg-icon:hover{
    min-height: 150px;
    min-width: 300px;
    margin: -5px 0px 0px 0px;
-
+   border-radius: 10px;
    background-color: rgba(230,150,50,1);
    box-shadow: -10px 15px 25px #888888;
    padding: 10px;
 
 }
+
+.contact-button {
+
+  min-width: 150px;
+  min-height: 75px;
+  margin: 20px;
+  background-color: white;
+
+
+}
+
+.contact-button:hover{
+
+  background-color: rgba(230,150,50,0.7);
+  border-width: 5px;
+  border-color: rgba(230,150,50,0);
+  -webkit-transition: background-color 200ms ease-out, border-width  500ms ease-out;
+  -moz-transition: background-color 200ms ease-out , border-width  500ms ease-out;
+  -o-transition: background-color 200ms ease-out , border-width  500ms ease-out;
+  transition: background-color 200ms ease-out , border-width  500ms ease-out;
+}
+
+
 /**
 	SWIPER CLASSESS
 */
