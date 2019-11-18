@@ -32,7 +32,7 @@ export const technologies = [
   },
   {
     name : 'HTML_CSS_Javascript',
-    source: '../../assets/icons/html_css_js.svg',
+    source: '../../assets/icons/HTML_CSS_JS_new.svg',
     description : '',
     logo_width : '125',
     
@@ -40,7 +40,7 @@ export const technologies = [
   
   {
     name : 'NodeJS',
-    source: '../../assets/icons/Nodejs.svg',
+    source: '../../assets/icons/Nodejs2.svg',
     description : '',
     logo_width : '175',
     

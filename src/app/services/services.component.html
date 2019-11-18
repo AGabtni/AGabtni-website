@@ -1,21 +1,18 @@
+<div fxLayout="column" fxFlexFill style="background-color: white" >
 
-	<div fxLayout="column">
-
-
-
-	  <div appParallax [ratio]="-0.4" fxLayout="column" class="ParallaxContainer">
-	  		<span class="mat-h1 title" style="text-align: center;">Let us help you in your journey</span>
-			<p class="mat-h2">services works!</p>
+	<div fxFlexFill appParallax [ratio]="-0.6" fxLayout="column" class="ParallaxContainer">
+	  	<span class="mat-h1 title" style="text-align: center;">Let us help you in your journey</span>
+		<p class="mat-h2">services works!</p>
 	    
-	  </div>
+	</div>
+	<div fxFlexFill appParallax [ratio]="-0.4" fxLayout="column" class="ParallaxContainer2">
 
-	  <div fxLayout="column  wrap" class="MainContainer" style="background-color: white" [class.mat-elevation-z8]="true">
-	  	
-		<div fxLayout="row" fxLayoutAlign="center"  >
+	  	<!--SERVICES  DESCRIPTION SECTION-->
+		<div fxLayout="column" fxLayoutAlign="center"  >
 	  	  	<span class="mat-h1">Services</span>
 
 	  	</div>
-	  	<div fxLayout.gt-xs="row" >
+	  	<div fxLayout.gt-sm="row" >
 	  			    
 		    <div class="Content" style="background-color: lightblue">
 		      <span class="mat-h3">Web development</span>
@@ -30,62 +27,133 @@
 		     
 		    </div>		
 	  	</div>
-	  	<div fxLayout="column" fxLayoutAlign="center" class="Technologies-Container">
+
+
+	</div>
+	<div fxLayout="column  wrap" class="MainContainer" style="background-color: white" [class.mat-elevation-z8]="true">
+
+
+	  	<!--TECHNOLOGIES SECTION-->
+	  	<div fxLayout="column" fxLayoutAlign="center" class="technologies-container">
 		  	<div fxLayout="row" fxLayoutAlign="center"  style="padding: 50px">
 		  	  	<span class="mat-h1" style="text-align: center;">The technologies we use</span>
 
 		  	</div>
+			  	<!--Technologies swiper ONLY ON MOBILE-->
+			<div fxFlexFill fxShow.gt-md="false" fxShow="true"	>
+	  	
+			  	<div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+			        <swiper class="swiper-container" 
+			        		fxFlex="auto"
 
-		  	<div fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="center" style="margin: 0 auto; padding: 20px 20px 0 20px;">
-		  			
-			  		<mat-card 
-						*ngFor="let technology of technologies.slice(0,3); let i=index "
-		  				fxLayout="column"
-		  				(mouseover)="states[i] = true" 
-		  				(mouseout)="states[i]= false"
-		  				[@onHover]="states[i] ? 'up' : 'stable'"
+			        		[disabled]="false" 
+			        		[index]="0"
+			        		[config]="config"  
+			        		(indexChange)="onIndexChange($event)" 
+			        		(swiperTransitionStart)="onSwiperEvent('transitionStart')" 
+			        		(swiperTransitionEnd)="onSwiperEvent('transitionEnd')"
+			        		#swiperContainer >
+			          	<div   *ngFor="let technology of technologies; let i=index" class="swiper-slide" >
+			            	<div fxFlexFill fxLayout="column" >
+			              		<mat-card 	 fxFlexFill 
+			              					[@onHover]="swiperStates[i] ? 'transitionStart' : 'transitionEnd'" 
+			              					(click)="onCardClick(i)"
+			              					fxLayoutAlign="center start" 
+			              					class="swiper-mat-card"
+			              					>
+			              			<mat-card-header  fxLayout="column" fxLayoutAlign="center">
+					  					<svg-icon 
+					  						
+				  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
+				  					</mat-card-header>
+			              			
+			              		</mat-card>
+			            	</div>
+			          	</div>
+			        </swiper>
 
-		  			>
+			        <div *ngIf="type == 'directive' && show" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+
+	          			<div class="swiper-scrollbar" [hidden]="config.scrollbar === false"></div>
+	          			<div class="swiper-pagination" [hidden]="config.pagination === false"></div>
+
+	          			<div class="swiper-button-prev" [hidden]="config.navigation === false"></div>
+	          			<div class="swiper-button-next" [hidden]="config.navigation === false"></div>
+	        		</div>
+	      		</div>
+	      	</div>	
+	      		<!--Technologies grid ONLY ON LARGE VIEWPORT-->
+	      	<div fxShow.gt-md="true" fxShow="false">
+			  	<div  fxLayout="row"  fxLayoutAlign="center" style="margin: 0 auto; padding: 20px 20px 0 20px;">
 			  			
-			  			<mat-card-header  fxLayout="column" class="logo">
-			  					<svg-icon 
-			  							style="display: inline-block"
-			  							
-			  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }"  ></svg-icon>
-			  					
-			  			</mat-card-header>
-			  			
+				  		<mat-card 
+							*ngFor="let technology of technologies.slice(0,3); let i=index "
+			  				fxLayout="column"
+			  				(mouseover)="states[i] = true" 
+			  				(mouseout)="states[i]= false"
+			  				[@onHover]="states[i] ? 'up' : 'stable'" 
+			  				class="non-mobile-card">
+				  			
+				  			<mat-card-header  fxLayout="column" class="logo">
+				  					<svg-icon 
+				  							style="display: inline-block"
+				  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
+				  					
+				  			</mat-card-header>
+				  			
 
-			  		</mat-card>
+				  		</mat-card>
+				</div>
+
+			  	<div fxLayout="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
+
+				  		<mat-card 
+							*ngFor="let technology of technologies.slice(3, technologies.length); let k=index "
+			  				fxLayout="column"
+			  				(mouseover)="states[k+3] = true" 
+			  				(mouseout)="states[k+3]= false"
+			  				[@onHover]="states[k+3] ? 'up' : 'stable'"
+			  				class="non-mobile-card">
+				  			
+				  			<mat-card-header fxLayout="column" class="logo">
+				  					<svg-icon  src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
+				  				
+				  				
+				  			</mat-card-header>
+				  			
+
+				  		</mat-card>
+				</div>
 			</div>
+		</div>
 
-		  	<div fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="center" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
+		<!--CONTACT HIGHLIGHT-->
 
-			  		<mat-card 
-						*ngFor="let technology of technologies.slice(3, technologies.length); let k=index "
-		  				fxLayout="column"
-		  				(mouseover)="states[k+3] = true" 
-		  				(mouseout)="states[k+3]= false"
-		  				[@onHover]="states[k+3] ? 'up' : 'stable'">
-			  			
-			  			<mat-card-header fxLayout="column" class="logo">
-			  					<svg-icon  src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
-			  				
-			  				
-			  			</mat-card-header>
-			  			
+		<div (mouseenter)="onMouseOver()" fxLayout="column" fxLayoutAlign="center" class="contact-container">
 
-			  		</mat-card>
+			<div   fxLayout="row wrap" fxLayoutAlign="center"  class="contact-form" >
+				<div fxLayout="column"  fxLayoutAlign="start" >
+					<span fxLayout class="mat-h1" style ="">Contact us</span>
+					<p fxLayout="row" class="mat-h2">frkjnfrjknfkjrn
+					frkjnfrjknfkjrn frkjnfrjknfkjrn  frkjnfrjknfkjrn</p>
+
+				</div>
+				<div fxFlexFill  fxLayout="column"  fxLayoutAlign="end end">
+					
+					<span class="mat-h1"
+							[@floater]="contactFormState" (@floater.done)="onEnd($event)">Button</span>
+				</div>
 			</div>
 		</div>
 
 
+
 	  	
 	    
-	  </div>
+	</div>
 
-	  <app-footer></app-footer>
+	
 </div>
-
+<app-footer></app-footer>
 
 

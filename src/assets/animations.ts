@@ -181,14 +181,14 @@ export const technologiesCardHover =
         backgroundColor: 'rgba(255,255,255,0.5)'
 
       })),
-      state('logoNormal', style({
-
-       transform: 'scale(1)',
+      state('transitionStart', style({
+        boxShadow: '0 10px 20px rgba(0,0,0,0.8)',
+        opacity :'1',        
 
       })),
-      state('logoBlur', style({
-
-        transform: 'scale(1)',
+      state('transitionEnd', style({
+        
+        opacity : '0.5',
 
       })),
 
@@ -202,13 +202,45 @@ export const technologiesCardHover =
       ]),
 
 
-      transition('logoNormal <=> logoBlur',[
-        animate('100ms ease-in-out')
+      transition('transitionEnd <=> transitionStart',[
+        animate('500ms ease-in-out')
       ]),
     ]);
 
+//LOOP ANIMATION :
+export const floatingContainer = 
+        trigger('floater',[
+          state('inactive',style({
+                boxShadow: '0px 0px 0px 0px rgba(0,0,0,0.3)',
+                transform: 'scale(1) translate3d(0, 12px,0px)', 
+                offset: 0.1
+              
+          })),
+          state('active',style({
+                boxShadow: '0px 5px 20px 0px rgba(0,0,0,0.8)',
+                transform: 'scale(1.05) translate3d(0, 0px, 0)', 
+                offset: 0.2
+
+          })),
+
+          state('end',style({
 
 
+          })),
+
+
+          transition('inactive => active', [
+            animate('1000ms')
+           ]),
+
+          transition('active => inactive', [
+            animate('1000ms')
+           ]),
+
+           transition('*=>end',[
+            animate('0ms')
+           ]),
+        ]);
 
 //CONTACT FORM ANIMATIONS
 

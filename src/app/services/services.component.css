@@ -8,42 +8,53 @@
 
 .ParallaxContainer{
     position: relative;
-    z-index: -1;
     display: flex;
     align-items: center;
     justify-content: center;
     top: 0px; 
     left: 0px;
-    padding: 50px;
-    height: 50vh;
-
-
+    padding: 100px 0px 100px 0px;
+    z-index: 0;
     background-color: pink;
     
 }
+
+.ParallaxContainer2{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0px; 
+    left: 0px;
+    padding: 100px 50px 200px 50px;
+    height: 50vh;
+
+	background-color: rgba(255,255,255,1); 
+	z-index: 1;
+
+}
+
 
 .MainContainer{
 
 
 	padding-top: 50px;
+	z-index: 999;
 }
 
 
 
-mat-card{
+.non-mobile-card{
 
 	min-width: 250px;
+	min-height: 300px;
 	max-width: 300px;
-	min-height: 350px;
 	margin: 10px;
 	align-items: center;
 
 }
 
-mat-card-header{
 
-
-}
 
 
 .logo{
@@ -59,12 +70,67 @@ mat-card-header{
 }
 
 
-mat-card:hover{
+svg-icon:hover{
 	webkit-filter: blur(4px); /* Chrome, Safari, Opera */
     filter: blur(4px);
 }
-.Technologies-Container{
-	background-color: rgba(0,179,179,0.7);
+.technologies-container{
+	padding-bottom: 100px;
 
 
+
+}
+
+.contact-container{
+
+	background-color: rgba(255,255,51,0.7);
+
+	padding: 0px 50px 50px 50px;
+}	
+
+.contact-form{
+   min-height: 150px;
+   min-width: 300px;
+   margin: -5px 0px 0px 0px;
+
+   background-color: rgba(230,150,50,1);
+   box-shadow: -10px 15px 25px #888888;
+   padding: 10px;
+
+}
+/**
+	SWIPER CLASSESS
+*/
+.content-container {
+  position: relative;
+
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 5px;
+  border-color: rgb(1,1,1);
+  overflow: auto;
+  height: 200px;
+  min-height: 0;
+  background-color: rgba(1,1,1,0.8);
+  margin: 10px;
+
+}
+
+.swiper-container {
+	padding: 10px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.swiper-slide {
+  color: #aaa;
+}
+
+.swiper-slide-active {
+  color: #fff;
+ 
 }
