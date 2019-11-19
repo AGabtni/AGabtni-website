@@ -1,0 +1,110 @@
+<mat-nav-list
+				[@shakeit]="this.formState" (@shakeit.done)="shakeEnd($event)"
+ 			>	
+ 	
+	<form 	class="form form-row" 
+			fxLayout = "column wrap"
+	    	fxLayoutGap="20px"
+	    	[formGroup] = "contactForm"
+	    	(ngSubmit)="onFormSubmit(contactForm.value)">
+	    	<span 	data-aos="fade-down"
+					data-aos-delay="0"
+					data-aos-duration="1500"
+	    			class="mat-h1">
+	    			Contact Us
+	    	</span>
+     		
+     		<div 	data-aos="fade-up"
+					data-aos-delay="0"
+					data-aos-duration="1500">
+		    	<div >
+
+			 		<!--FIRST NAME FIELD-->
+				  	<mat-form-field 
+		     						appearance="outline">
+				    	<mat-label>First name*</mat-label>
+				      	<input matInput formControlName="firstName">
+				    </mat-form-field>
+
+				    <!--LAST NAME FIELD-->
+				    <mat-form-field 
+		     						appearance="outline">
+				    	<mat-label>Last Name*</mat-label>
+				    	<input matInput
+				    	formControlName="lastName">
+				    </mat-form-field>
+
+
+				    <!--EMAIL FIELD-->
+				    <mat-form-field 
+		     						appearance="outline">
+				    	<mat-label>Email</mat-label>
+
+		    			<input matInput 
+		    			[errorStateMatcher]="matcher"
+		    			formControlName="email">
+		    			<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Please enter a valid email address
+		    			</mat-error>
+					    <mat-error *ngIf="emailFormControl.hasError('required')">
+					      Email is <strong>required</strong>
+					    </mat-error>
+				  	</mat-form-field>
+
+
+				</div>
+				
+			  
+			    <div >
+
+				  	<!--PHONE NUM FIELD-->
+				  	<mat-form-field appearance="outline">
+				  		<mat-label>Phone number</mat-label>
+				      	<input matInput
+				      	formControlName="phone">
+				    </mat-form-field>
+
+
+				    <!--COMPANY NAME FIELD-->
+				  	<mat-form-field appearance="outline">
+				  		<mat-label>Company</mat-label>
+				      	<input matInput
+				      	formControlName="companyName">
+				    </mat-form-field>
+
+				    <!--PROJECT TYPE SELECT -- DELAY IS DIFFERENT WITH THIS ONE-->
+				    <mat-form-field appearance="outline">
+
+				    	<mat-label>Select your project type</mat-label>
+				      	<mat-select
+				      		ngDefaultControl
+				      		[formControl]="projectTypeControl" required
+				      		formControlName="projectType" >
+						    <mat-option>--</mat-option>
+						    <mat-option *ngFor="let type of projectTypes" [value]="type">
+						      {{type}}
+						    </mat-option>
+					  	</mat-select>
+					  	<mat-error *ngIf="projectTypeControl.hasError('required')">Please choose a project type</mat-error>
+
+
+				    </mat-form-field>
+				</div>
+				
+
+				<div >
+					<!--DESCRIPTION FIELD-->
+					<mat-form-field appearance="outline" class="description-area">
+						<mat-label>Brief description of the project/issue</mat-label>
+						<textarea matInput matTextareaAutosize matAutosizeMinRows=15 matAutosizeMaxRows=20
+						formControlName="description" ></textarea>
+					</mat-form-field>
+				</div>
+			</div>
+
+			<div fxLayout="row" fxLayoutAlign="center" style="height: 100px">
+				<button type="submit" fxFlex="70%" class="submit-button" mat-raised-button color="accent">Submit</button>
+
+			</div>
+	</form>
+
+</mat-nav-list>

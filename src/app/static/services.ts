@@ -27,36 +27,36 @@ export const technologies = [
     name : 'Angular',
     source: '../../assets/icons/angular.svg',
     description : '',
-    logo_width : '100',
+    logo_width : '70',
     
   },
   {
     name : 'HTML_CSS_Javascript',
-    source: '../../assets/icons/HTML_CSS_JS_new.svg',
+    source: '../../assets/icons/html_css_js.svg',
     description : '',
-    logo_width : '125',
+    logo_width : '100',
     
   },
   
   {
     name : 'NodeJS',
-    source: '../../assets/icons/Nodejs2.svg',
+    source: '../../assets/icons/nodejs-black.svg',
     description : '',
-    logo_width : '175',
+    logo_width : '100',
     
   },
   {
     name : 'Unity3D',
-    source: '../../assets/icons/Unity_Technologies_logo.svg',
+    source: '../../assets/icons/unity-technologies.svg',
     description : '',
-    logo_width : '125',
+    logo_width : '100',
     
   },
   {
     name : 'Godot',
-    source: '',
+    source: '../../assets/icons/godot.svg',
     description : '',
-    logo_width : '100',
+    logo_width : '70',
     
   },
   {

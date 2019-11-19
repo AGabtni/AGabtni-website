@@ -1,4 +1,4 @@
-<mat-nav-list fxLayout  style="height: 100%;width: 100%">
+<div fxLayout  style="height: 100%;width: 100%">
  <mat-card 
  			[@shakeit]="this.formState" (@shakeit.done)="shakeEnd($event)"
  			[@onEnter] = "isOverForm ? 'floating' : 'landed' "
@@ -151,5 +151,5 @@
 </div>
 
 
-</mat-nav-list>
+</div>
 

@@ -2,14 +2,14 @@ import { Component, OnInit, AfterViewInit, OnDestroy, Inject, SimpleChanges, Vie
 import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
   SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 import { MatIconRegistry } from "@angular/material/icon";
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import { DomSanitizer } from "@angular/platform-browser";
 
 
 
 import { technologiesCardHover, floatingContainer } from '../../assets/animations';
 import{ technologies } from '../static/services';
-import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { ContactFormMobileComponent } from '../contact-form-mobile/contact-form-mobile.component';
 
 
 @Component({
@@ -154,7 +154,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   //Open contact form bottom sheet :
   openContactSheet() : void {
-    this._bottomSheet.open(ContactFormComponent);
+    this._bottomSheet.open(ContactFormMobileComponent);
 
   }
   

@@ -27,6 +27,7 @@ import  { MatGridListModule,
           MatExpansionModule,
           MatSelectModule,
           MatButtonModule,
+          MatSnackBarModule,
           MatBottomSheetModule} from '@angular/material';
 
 
@@ -50,6 +51,7 @@ import { ServicesComponent } from './services/services.component';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { ContactFormMobileComponent, SnackBarComponent } from './contact-form-mobile/contact-form-mobile.component';
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
@@ -68,9 +70,11 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     HomeComponent,
     ContactFormComponent,
     ServicesComponent,
-    ParallaxDirective,  
+    ParallaxDirective,
+    ContactFormMobileComponent,  
+    SnackBarComponent,
   ],
-  entryComponents: [ContactFormComponent],
+  entryComponents: [ContactFormMobileComponent,SnackBarComponent],
 
   imports: [
     BrowserModule,
@@ -88,6 +92,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatSelectModule,
     MatButtonModule,
     MatBottomSheetModule,
+    MatSnackBarModule,
     FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     NgbModule,
