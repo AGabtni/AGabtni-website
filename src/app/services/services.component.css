@@ -39,12 +39,13 @@
 
 .MainContainer{
 
-
+  margin-top: 50px;
 	padding-top: 50px;
 	z-index: 999;
       box-shadow: 0px -4px 10px;
 
 }
+
 
 
 
@@ -58,7 +59,16 @@
 
 }
 
+.custom-card-content{
 
+  text-align: center;
+
+}
+
+.custom-card-header{
+
+  min-height: 55px;
+}
 
 
 .logo{
@@ -74,10 +84,6 @@
 }
 
 
-svg-icon:hover{
-	webkit-filter: blur(4px); /* Chrome, Safari, Opera */
-    filter: blur(4px);
-}
 .technologies-container{
 	padding-bottom: 100px;
 

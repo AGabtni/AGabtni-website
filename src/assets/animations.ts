@@ -143,6 +143,8 @@ export const stepper =
 
 
 //CARD ANIMATIONS
+
+//Landing page cards
 export const cardHover = 
     trigger('onHover', [
 
@@ -166,46 +168,118 @@ export const cardHover =
       ]),
     ]);
 
+
+
+//Services page cards :
+
+
+export const contentFadeIn = 
+    trigger('onSlide',[
+      state('transitionStart',style({
+
+          opacity : '1.0',
+          
+      })),
+      state('transitionEnd',style({
+
+          opacity : '0',
+      })),
+
+      transition('transitionEnd <=> transitionStart',[
+        animate('200ms ease-in-out')
+      ]),
+
+
+    ]);
+export const logoFadeIn = 
+    trigger('onSwipe',[
+      state('transitionStart',style({
+          transform : 'scale(1) translate3d(0, 0px,0)',
+          filter: 'blur(0px)',
+
+          
+
+      })),
+      state('transitionEnd',style({
+          transform : 'scale(1.25)  translate3d(0, 20px,0px)',
+          filter: 'blur(4px)',
+          
+      })),
+
+      transition('transitionEnd <=> transitionStart',[
+        animate('300ms  ease-in-out')
+      ]),
+
+
+    ]);
+
+
+
 export const technologiesCardHover = 
     trigger('onHover', [
+
+
+      //Large viewports cards states :
 
       state('stable', style({
         bottom : '0px',
         boxShadow: '0 4px 7px rgba(0,0,0,0.3)',
-        backgroundColor: 'midnightblue',
+        opacity : '0.5',
+        
 
       })),
       state('up', style({
         bottom : '15px',
         boxShadow: '0 10px 20px rgba(0,0,0,0.8)',
-        backgroundColor: 'rgba(255,255,255,0.5)'
-
+        opacity : '1',
       })),
+
+      //Mobile cards states :
+
       state('transitionStart', style({
         boxShadow: '0 10px 20px rgba(0,0,0,0.8)',
+        transform : 'scale(1)',
         opacity :'1',        
 
       })),
       state('transitionEnd', style({
-        
+        transform : 'scale(0.9)',
         opacity : '0.5',
 
       })),
 
 
       transition('stable => up',[
-        animate('0.4s')
+         query('@onSwipe', animateChild()),
+        query('@onSlide', animateChild()),
+        animate('400ms ease-in-out')
       ]),
 
       transition('up => stable',[
-        animate('0.25s')
+        query('@onSlide', animateChild()),
+        query('@onSwipe', animateChild()),
+        animate('450ms ease-in-out')
       ]),
 
 
-      transition('transitionEnd <=> transitionStart',[
-        animate('500ms ease-in-out')
+      transition('transitionStart => transitionEnd',[
+        query('@onSlide', animateChild()),
+        query('@onSwipe', animateChild()),
+        
+        animate('450ms ease-in-out')
       ]),
+
+      transition('transitionEnd => transitionStart',[
+        query('@onSwipe', animateChild()),
+        query('@onSlide', animateChild()),
+        
+        animate('400ms ease-in-out')
+      ]),
+
+      
     ]);
+
+
 
 //LOOP ANIMATION :
 export const floatingContainer = 

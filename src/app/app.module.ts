@@ -28,6 +28,7 @@ import  { MatGridListModule,
           MatSelectModule,
           MatButtonModule,
           MatSnackBarModule,
+
           MatBottomSheetModule} from '@angular/material';
 
 
@@ -37,7 +38,7 @@ import  { MatGridListModule,
   custom components
 */
 
-import { TopNavbarComponent } from './top-navbar/top-navbar.component';
+import { TopNavbarComponent , WindowRef } from './top-navbar/top-navbar.component';
 import { HighlightsCarouselComponent } from './highlights-carousel/highlights-carousel.component';
 import { ProductComponent } from './product/product.component';
 import { ProductHighlightComponent } from './product-highlight/product-highlight.component';
@@ -104,8 +105,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   ],
   providers: [{
       provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }],
+      useValue: DEFAULT_SWIPER_CONFIG,
+
+
+    }, WindowRef ],
   bootstrap: [AppComponent, TopNavbarComponent]
 })
 

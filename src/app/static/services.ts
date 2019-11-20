@@ -31,7 +31,7 @@ export const technologies = [
     
   },
   {
-    name : 'HTML_CSS_Javascript',
+    name : 'HTML, CSS and Javascript',
     source: '../../assets/icons/html_css_js.svg',
     description : '',
     logo_width : '100',

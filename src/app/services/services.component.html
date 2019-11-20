@@ -54,18 +54,25 @@
 			        		(swiperTransitionEnd)="onSwiperEvent('transitionEnd')"
 			        		#swiperContainer >
 			          	<div   *ngFor="let technology of technologies; let i=index" class="swiper-slide" >
-			            	<div fxFlexFill fxLayout="column" >
-			              		<mat-card 	 fxFlexFill 
-			              					[@onHover]="swiperStates[i] ? 'transitionStart' : 'transitionEnd'" 
+			            	<div  fxFlexFill fxLayout="row"  fxLayoutAlign="center">
+			              		<mat-card 	[@onHover]="swiperStates[i]? 'transitionStart' : 'transitionEnd'" 
+			              					fxFlexFill 
 			              					(click)="onCardClick(i)"
-			              					fxLayoutAlign="center start" 
-			              					class="swiper-mat-card"
-			              					>
-			              			<mat-card-header  fxLayout="column" fxLayoutAlign="center">
+			              					class="swiper-mat-card">
+			              			<mat-card-header [@onSwipe]="swiperStates[i]? 'transitionStart' : 'transitionEnd'" fxLayout="column" fxLayoutAlign="start center" class="custom-card-header">
 					  					<svg-icon 
 					  						
 				  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
 				  					</mat-card-header>
+
+
+				  					<mat-card-content	fxLayout="row" fxLayoutAlign="center" 
+				  										[@onSlide]="swiperStates[i] ? 'transitionStart' : 'transitionEnd'"
+				  										class="custom-card-content">
+						  				<span class="mat-h2">{{technology.name}}</span>
+						  					
+						  			</mat-card-content>
+
 			              			
 			              		</mat-card>
 			            	</div>
@@ -87,12 +94,23 @@
 			  				[@onHover]="states[i] ? 'up' : 'stable'" 
 			  				class="non-mobile-card">
 				  			
-				  			<mat-card-header  fxLayout="column" class="logo">
+				  			<mat-card-header	fxLayout="column"
+				  								[@onSwipe]="!states[i] ? 'transitionStart' : 'transitionEnd'"
+				  								class="logo"
+				  								>
 				  					<svg-icon 
-				  							style="display: inline-block"
-				  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
-				  					
+				  							
+				  							src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" [stretch]="true" ></svg-icon>
+
+
 				  			</mat-card-header>
+				  			<mat-card-content 
+				  								
+				  								style="margin-top: 50px; font-weight: 1500">
+				  				<span [@onSlide]="!states[i] ? 'transitionStart' : 'transitionEnd'" class="mat-h2">{{technology.name}}</span>
+				  					
+				  			</mat-card-content>
+
 				  			
 
 				  		</mat-card>
@@ -108,11 +126,19 @@
 			  				[@onHover]="states[k+3] ? 'up' : 'stable'"
 			  				class="non-mobile-card">
 				  			
-				  			<mat-card-header fxLayout="column" class="logo">
+				  			<mat-card-header 	fxLayout="column" 
+				  								[@onSwipe]="states[k+3] ? 'transitionStart' : 'transitionEnd'"
+				  								class="logo">
 				  					<svg-icon  src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
 				  				
 				  				
 				  			</mat-card-header>
+
+				  			<mat-card-content style="margin-top: 50px; font-weight: 1500">
+				  				<span [@onSlide]="!states[k+3] ? 'transitionStart' : 'transitionEnd'" class="mat-h2">{{technology.name}}</span>
+				  					
+				  			</mat-card-content>
+
 				  			
 
 				  		</mat-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit,ViewEncapsulation,ViewChild,HostBinding ,Inject, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit,ViewEncapsulation,ViewChild,HostBinding, HostListener ,Inject, ElementRef } from '@angular/core';
 import { categories } from '../static/categories';
 import { fromEvent } from 'rxjs';
 import { throttleTime, map, pairwise, distinctUntilChanged, share, filter } from 'rxjs/operators';
@@ -9,11 +9,19 @@ import { DOCUMENT } from '@angular/common';
 
 
 
-enum Direction {
-  Up = 'Up',
-  Down = 'Down'
+import { Injectable } from '@angular/core';
+
+function _window() : any {
+   // return the global native browser window object
+   return window;
 }
 
+@Injectable()
+export class WindowRef {
+   get nativeWindow() : any {
+      return _window();
+   }
+}
 @Component({
   selector: 'app-top-navbar',
   templateUrl: './top-navbar.component.html',
@@ -29,10 +37,17 @@ enum Direction {
 
 
 export class TopNavbarComponent implements AfterViewInit {
-  
+    
+
+
+
+  //Continue here did not find a referenece to calculate position to trigger top bar animation
 
   @ViewChild('MobielOverlay' , {static: true}) overlay : ElementRef;
+  @ViewChild('Carousel' , {static: true}) toolbar : any;
 
+
+    
   private isVisible = true;
 
   title = 'Website Title';
@@ -40,6 +55,17 @@ export class TopNavbarComponent implements AfterViewInit {
   categories = categories ;
 
 
+  //Listener for window scroll event
+  @HostListener("window:scroll"
+  , [])
+    onWindowScroll() {
+         console.log(this.winRef.nativeWindow.pageYOffset);
+
+         console.log(this.document.documentElement.scrollTop);
+          console.log(this.toolbar);
+
+         
+    }
 
 
   openNav(){ 
@@ -56,28 +82,11 @@ export class TopNavbarComponent implements AfterViewInit {
 
 
 
-  constructor(@Inject(DOCUMENT) private document: any) { 
+  constructor(@Inject(DOCUMENT) private document: any, private winRef: WindowRef) { 
   }
 
   ngAfterViewInit() {
-    const scroll$ = fromEvent(window, 'scroll').pipe(
-      throttleTime(10),
-      map(() => window.pageYOffset),
-      pairwise(),
-      map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
-      distinctUntilChanged(),
-      share()
-    );
 
-    const scrollUp$ = scroll$.pipe(
-      filter(direction => direction === Direction.Up)
-    );
 
-    const scrollDown = scroll$.pipe(
-      filter(direction => direction === Direction.Down)
-    );
-
-    scrollUp$.subscribe(() => (this.isVisible = true));
-    scrollDown.subscribe(() => (this.isVisible = false));
   }
 }

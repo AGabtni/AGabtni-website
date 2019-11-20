@@ -7,7 +7,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 
 
 
-import { technologiesCardHover, floatingContainer } from '../../assets/animations';
+import { technologiesCardHover, floatingContainer, contentFadeIn, logoFadeIn } from '../../assets/animations';
 import{ technologies } from '../static/services';
 import { ContactFormMobileComponent } from '../contact-form-mobile/contact-form-mobile.component';
 
@@ -16,7 +16,7 @@ import { ContactFormMobileComponent } from '../contact-form-mobile/contact-form-
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css'],
-  animations: [technologiesCardHover,floatingContainer]
+  animations: [technologiesCardHover, floatingContainer, contentFadeIn, logoFadeIn]
 })
 export class ServicesComponent implements AfterViewInit, OnDestroy {
   @ViewChild('swiperContainer',{static:false}) public swiper : any;
@@ -24,6 +24,10 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   states: Array<boolean> = [false,false,false,false,false,false];
   swiperStates: Array<boolean> = [false,false,false,false,false,false];
+  
+  
+
+  
   contactFormState = 'active';
 
   currentSlideIndex = 0;
