@@ -224,6 +224,7 @@ export const technologiesCardHover =
       state('stable', style({
         bottom : '0px',
         boxShadow: '0 4px 7px rgba(0,0,0,0.3)',
+
         opacity : '0.5',
         
 
@@ -231,6 +232,7 @@ export const technologiesCardHover =
       state('up', style({
         bottom : '15px',
         boxShadow: '0 10px 20px rgba(0,0,0,0.8)',
+        backgroundColor : 'midnightBlue',
         opacity : '1',
       })),
 
@@ -460,34 +462,52 @@ export const toggleBar =
         state(
           VisibilityState.Hidden,
           style({
-            height : '0px',
-            background : 'rgba(63, 81, 181, 1)',
+            background : 'rgba(63,81,181, 0)',
+            transform: 'translate(0, -100%)',
+            filter: 'blur(4px)',
+
 
           })
         ),
         state(
           VisibilityState.Visible,
           style({
-              height : '*',
               background : 'rgba(63, 81, 181, 1)',
+              transform: 'translate(0, 0)',
+              filter: 'blur(0px)',
+
+
           })
         ),
-        transition('* => *', animate('400ms ease-in'))
+        transition('visible => hidden', [
+             query('@titleFade', animateChild()),
+              animate('400ms ease-in-out'),
+                       
+
+        ]),
+
+
+        transition('hidden => visible', [
+            query('@titleFade', animateChild()),
+            animate('400ms  ease-in-out'),
+            
+        ])
+
   ]);
     
-//3. TOP BAR CATEGORIES ANIMATION (NOT WORKING SMOOTHLY):
+//3. TOP BAR CATEGORIES ANIMATION:
 export const topCategoryFade =
   trigger('titleFade',[
     state('visible',
         style({
-        opacity : 1.0,
+        //opacity : 1.0,
       })
     ),state('hidden',
       style({
-        opacity : 0,
+        //opacity : 0,
         
       })
     ),
-    transition('* => *', animate('50ms ease-out'))
+    transition('* => *', animate('200ms  ease-in-out'))
 
   ]);

@@ -1,15 +1,24 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
-import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
-  SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
+import {  Component, 
+          OnInit, 
+          AfterViewInit, 
+          OnDestroy, 
+          Inject, 
+          SimpleChanges, 
+          ViewChild, 
+          ElementRef,
+          HostListener 
+        } from '@angular/core';
+import { SwiperComponent, SwiperDirective, SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 import { MatIconRegistry } from "@angular/material/icon";
-import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { DomSanitizer } from "@angular/platform-browser";
-
-
-
 import { technologiesCardHover, floatingContainer, contentFadeIn, logoFadeIn } from '../../assets/animations';
-import{ technologies } from '../static/services';
+import { technologies } from '../static/services';
 import { ContactFormMobileComponent } from '../contact-form-mobile/contact-form-mobile.component';
+import * as AOS from 'aos';
+
+
+
 
 
 @Component({
@@ -19,20 +28,37 @@ import { ContactFormMobileComponent } from '../contact-form-mobile/contact-form-
   animations: [technologiesCardHover, floatingContainer, contentFadeIn, logoFadeIn]
 })
 export class ServicesComponent implements AfterViewInit, OnDestroy {
+  
   @ViewChild('swiperContainer',{static:false}) public swiper : any;
-  technologies = technologies
+  @ViewChild('techSection',{static:false}) public techSection : any;
+  @HostListener('window:scroll', ['$event']) 
+  onScroll(event) {
 
+
+  
+    if( (window.pageYOffset >= this.techSection.nativeElement.offsetTop ) && !this.states[0] ){
+      for (let i = 0 ; i < this.states.length; i++ ){
+        
+
+        setTimeout(() => this.states[i]= true, i*300);
+        
+      }
+      
+    }
+  }
+
+
+  technologies = technologies
+  mobile = false;
   states: Array<boolean> = [false,false,false,false,false,false];
   swiperStates: Array<boolean> = [false,false,false,false,false,false];
-  
-  
-
-  
   contactFormState = 'active';
-
   currentSlideIndex = 0;
-  mobile = false;
+  
+  
 
+  
+  
   public config: SwiperConfigInterface = {
     a11y: true,
     direction: 'horizontal',
@@ -86,6 +112,8 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.swiperStates[0]=true;
+    AOS.init();
+
     if(window.screen.width <= 480){
       this.mobile = true;
 
@@ -96,6 +124,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    AOS.refresh();
     setTimeout(() => {
       this.contactFormState = 'inactive';
     }, 1000);
@@ -158,7 +187,9 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   //Open contact form bottom sheet :
   openContactSheet() : void {
-    this._bottomSheet.open(ContactFormMobileComponent);
+
+    setTimeout(()=>this._bottomSheet.open(ContactFormMobileComponent),500 );
+    
 
   }
   

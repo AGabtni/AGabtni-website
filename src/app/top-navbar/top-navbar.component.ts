@@ -1,15 +1,28 @@
-import { Component, OnInit, AfterViewInit,ViewEncapsulation,ViewChild,HostBinding, HostListener ,Inject, ElementRef } from '@angular/core';
+import { Component, 
+          OnInit, 
+          AfterViewInit,
+          ViewEncapsulation,
+          ViewChild,
+          HostListener ,
+          Inject,
+          Injectable, 
+          ElementRef, 
+           } from '@angular/core';
+
 import { categories } from '../static/categories';
 import { fromEvent } from 'rxjs';
 import { throttleTime, map, pairwise, distinctUntilChanged, share, filter } from 'rxjs/operators';
 
 import { categorySlide, toggleBar, topCategoryFade } from '../../assets/animations'
+
+
 import { DOCUMENT } from '@angular/common';
 
 
 
 
-import { Injectable } from '@angular/core';
+
+
 
 function _window() : any {
    // return the global native browser window object
@@ -22,6 +35,9 @@ export class WindowRef {
       return _window();
    }
 }
+
+
+
 @Component({
   selector: 'app-top-navbar',
   templateUrl: './top-navbar.component.html',
@@ -38,18 +54,10 @@ export class WindowRef {
 
 export class TopNavbarComponent implements AfterViewInit {
     
-
-
-
-  //Continue here did not find a referenece to calculate position to trigger top bar animation
-
   @ViewChild('MobielOverlay' , {static: true}) overlay : ElementRef;
   @ViewChild('Carousel' , {static: true}) toolbar : any;
-
-
-    
+  
   private isVisible = true;
-
   title = 'Website Title';
   hidden = true;
   categories = categories ;
@@ -59,15 +67,24 @@ export class TopNavbarComponent implements AfterViewInit {
   @HostListener("window:scroll"
   , [])
     onWindowScroll() {
-         console.log(this.winRef.nativeWindow.pageYOffset);
-
-         console.log(this.document.documentElement.scrollTop);
-          console.log(this.toolbar);
-
+        if(400>this.winRef.nativeWindow.pageYOffset){
+            this.isVisible = true;
          
+        }
+        else{
+            this.isVisible = false;
+        }
     }
 
 
+  constructor(@Inject(DOCUMENT) private document: any, private winRef: WindowRef) { 
+  }
+
+  ngAfterViewInit() {
+  } 
+
+
+  //Mobile overlay controls
   openNav(){ 
     this.document.body.style.overflow = "hidden";
     this.overlay.nativeElement.style.width = "100%"
@@ -82,11 +99,5 @@ export class TopNavbarComponent implements AfterViewInit {
 
 
 
-  constructor(@Inject(DOCUMENT) private document: any, private winRef: WindowRef) { 
-  }
-
-  ngAfterViewInit() {
-
-
-  }
+ 
 }

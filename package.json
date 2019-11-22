@@ -24,6 +24,7 @@
     "@angular/router": "~8.2.4",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "@ngmodule/material-carousel": "^0.5.1",
+    "@types/webgl2": "0.0.5",
     "angular-svg-icon": "^8.0.0",
     "aos": "^2.3.4",
     "hammerjs": "^2.0.8",
@@ -37,6 +38,7 @@
     "save": "^2.4.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^5.2.0",
+    "three": "^0.110.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
