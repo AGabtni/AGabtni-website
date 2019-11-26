@@ -24,6 +24,7 @@
     "@angular/router": "~8.2.4",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "@ngmodule/material-carousel": "^0.5.1",
+    "@types/three": "^0.103.2",
     "@types/webgl2": "0.0.5",
     "angular-svg-icon": "^8.0.0",
     "aos": "^2.3.4",

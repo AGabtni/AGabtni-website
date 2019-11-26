@@ -1,79 +1,45 @@
 import * as THREE from 'three';
 
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
-
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-
-
+ function removeArrayElement(array, element) {
+    const ndx = array.indexOf(element);
+    if (ndx >= 0) {
+      array.splice(ndx, 1);
+    }
+  }
 
 export class GameObject{
 	
-	scene : THREE.Scene;
-	model ;
-	animationController;
-	animations = [];
-	
-	constructor( name, scene){
-  		this.scene = scene;
+
+	name = "gameObject";
+	components;
+	transform;
+
+	constructor(parent, name) {
+      this.name = name;
+      this.components = [];
+      this.transform = new THREE.Object3D();
+      parent.add(this.transform);
+    }
 
 
-
-		this.instantiateGlb("Male_Casual").then(gltfModel => {
-
-			this.model = gltfModel;
-			this.scene.add(this.model.scene);
-			console.log(this.model);
-
-			//Get animations
-			this.animationController = new THREE.AnimationMixer( this.model.scene );
-			
-
-			for (let animation of this.model.animations){
-				this.animations.push(animation);
-			
-
-			}
-
-				this.animationController.clipAction( this.animations[4] ).play();
+	addComponent(ComponentType, ...args) {
+      const component = new ComponentType(this, ...args);
+      this.components.push(component);
+      return component;
+    }
 
 
-
-		});
-  	}
-
-
-	instantiateGlb(name){
-		
-		return new Promise(function(resolve, reject){
-
-			var glbLoader = new GLTFLoader();	
-			glbLoader.setPath( '../../../assets/models/' );
-			glbLoader.load(name+".gltf",resolve ,onprogress ,
-					function(error){
-						console.log("ERROR loading model " + name + ".gltf ");
-
-						//console.log("ERROR : "+ error);
-					}
-			);
-		});
-	}
-
-
-	createFromMesh(name){
-
-
-
-	
-	}
-
-
-	
-
-
-
-
+    removeComponent(component) {
+      removeArrayElement(this.components, component);
+    }
+    getComponent(ComponentType) {
+      return this.components.find(c => c instanceof ComponentType);
+    }
+    update() {
+      for (const component of this.components) {
+        component.update();
+      }
+    }
 
 
 

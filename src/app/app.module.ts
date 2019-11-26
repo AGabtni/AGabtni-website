@@ -54,6 +54,11 @@ import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { ContactFormMobileComponent, SnackBarComponent } from './contact-form-mobile/contact-form-mobile.component';
 import { InteractiveLobbyComponent } from './interactive-lobby/interactive-lobby.component';
+
+//Game class :
+
+
+
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
