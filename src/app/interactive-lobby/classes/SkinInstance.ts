@@ -1,8 +1,11 @@
 import * as THREE from 'three';
-
 import {Component} from './Component';
-
 import { SkeletonUtils } from 'three/examples/jsm/utils/SkeletonUtils';
+import {globals} from './globals'
+
+
+
+
 
 export class SkinInstance extends Component {
 

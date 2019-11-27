@@ -8,9 +8,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 
+//Game classes :
 import {GameObject} from './classes/GameObject';
+import {PlayerController} from './classes/PlayerController';
+import {GameObjectManager} from './classes/GameObjectManager';
 import {SkinInstance} from './classes/SkinInstance';
-
+import {globals} from './classes/globals'
 
 
 //--GAME_CODE-------------------
@@ -27,6 +30,9 @@ let then = 0;
 let loadedModels = [];
 let gameObjects = [];
 let animationControllers = [];
+
+const gameObjectManager = new GameObjectManager();
+
 
 //Initialize after models are loaded
 const manager = new THREE.LoadingManager();
@@ -46,12 +52,6 @@ const models = {
   }
 }
 
-export const globals = {
-    time: 0,
-    deltaTime: 0,
-    moveSpeed: 16,
-    camera,
-  };
 
 
 
@@ -68,12 +68,13 @@ function loadAnimations(){
 
 function init(){
 	
-	const canvas = document.querySelector('#scene') ;
 	
 	loadAnimations();
 
 	//-Var initilization
 	scene = new THREE.Scene();
+	const gameObject = gameObjectManager.createGameObject(scene, 'player');
+	gameObject.addComponent(PlayerController);
 
 	//--Camera init
 	camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
@@ -84,6 +85,7 @@ function init(){
 	scene.add(loadedModels[0].scene);
 
 	//--Renderer Init
+	const canvas = document.querySelector('#scene') ;
 	renderer = new THREE.WebGLRenderer({canvas});
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
