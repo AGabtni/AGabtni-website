@@ -1,10 +1,18 @@
 import * as THREE from 'three';
+
 import {Component} from './Component';
 import {SkinInstance} from './SkinInstance';
 
-import {globals} from './globals'
 
 
+import { globals } from './globals';
+import { models, inputManager  } from '../interactive-lobby.component';
+
+
+
+/**
+ Player controller script for player gameobject 
+*/
 export class PlayerController extends Component {
     
     kForward = new THREE.Vector3(0, 0, 1);
@@ -14,11 +22,11 @@ export class PlayerController extends Component {
     maxTimeOffScreen;
 
 
-    constructor(gameObject, modelRef) {
+    constructor(gameObject) {
       super(gameObject);
-      const model = modelRef;
+      const model = models.pig;
       this.skinInstance = gameObject.addComponent(SkinInstance, model);
-      this.skinInstance.setAnimation('Run');
+      this.skinInstance.setAnimation("Man_Idle");
       this.turnSpeed = globals.moveSpeed / 4;
       this.offscreenTimer = 0;
       this.maxTimeOffScreen = 0;
@@ -27,13 +35,14 @@ export class PlayerController extends Component {
 
     update() {
       const {deltaTime, moveSpeed} = globals;
-      const {transform} = this.gameObject;
+
+      const { transform } = this.gameObject;
       const delta = (inputManager.keys.left.down  ?  1 : 0) +
                     (inputManager.keys.right.down ? -1 : 0);
       transform.rotation.y += this.turnSpeed * delta * deltaTime;
       transform.translateOnAxis(this.kForward, moveSpeed * deltaTime);
 
-      const {frustum} = globals.cameraInfo;
+      const { frustum } = globals.cameraInfo;
       if (frustum.containsPoint(transform.position)) {
         this.offscreenTimer = 0;
       } else {

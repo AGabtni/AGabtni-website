@@ -10,9 +10,14 @@ import { Sky } from 'three/examples/jsm/objects/Sky.js';
 
 //Game classes :
 import {GameObject} from './classes/GameObject';
+import {CameraController} from './classes/CameraController'
 import {PlayerController} from './classes/PlayerController';
-import {GameObjectManager} from './classes/GameObjectManager';
 import {SkinInstance} from './classes/SkinInstance';
+import {GameObjectManager} from './classes/GameObjectManager';
+import {InputManager} from './classes/InputManager';
+
+
+
 import {globals} from './classes/globals'
 
 
@@ -32,13 +37,15 @@ let gameObjects = [];
 let animationControllers = [];
 
 const gameObjectManager = new GameObjectManager();
+export let  inputManager = new InputManager() ;
+
 
 
 //Initialize after models are loaded
 const manager = new THREE.LoadingManager();
 manager.onLoad = init;
 
-const models = {
+export let models = {
   pig:    { url: '../../assets/models/Male_Casual.gltf', gltf : null, animations : {} },
   
 };
@@ -47,7 +54,7 @@ const models = {
   for (const model of Object.values(models)) {
     gltfLoader.load(model.url, (gltf) => {
       model.gltf = gltf;
-      loadedModels.push(model.gltf) ;
+      
     });
   }
 }
@@ -60,6 +67,7 @@ function loadAnimations(){
       const animsByName = {};
       model.gltf.animations.forEach((clip) => {
         animsByName[clip.name] = clip;
+        loadedModels.push(model.gltf) ;
       });
       model.animations = animsByName;
     });
@@ -73,16 +81,19 @@ function init(){
 
 	//-Var initilization
 	scene = new THREE.Scene();
-	const gameObject = gameObjectManager.createGameObject(scene, 'player');
-	gameObject.addComponent(PlayerController);
+	
+
+
 
 	//--Camera init
 	camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
 	camera.position.set( 10, 10, 10 );
 	camera.lookAt(scene.position);
+	globals.camera = camera;
+
+
 
 	scene.add( camera );
-	scene.add(loadedModels[0].scene);
 
 	//--Renderer Init
 	const canvas = document.querySelector('#scene') ;
@@ -144,12 +155,25 @@ function init(){
 	controls.update();	
 	window.addEventListener( 'resize', onWindowResize , false );
 
+
+	//Gameobjects : 
+
+	//--Camera gameObject and camera info component atteced to it 
+	const camGameObject = gameObjectManager.createGameObject(scene, 'camera');
+	globals.cameraInfo = camGameObject.addComponent(CameraController);
+
+
+	const gameObject = gameObjectManager.createGameObject(scene, 'player');
+	gameObject.addComponent(PlayerController);
+
+
 	requestAnimationFrame( Render );
 
 
 }
 
 
+//Skybox creation: 
 function initSky() {
 	// Add Sky
 	sky = new Sky();
@@ -201,14 +225,18 @@ function initSky() {
 function Update(){
 	water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
 	
+	//Update all instanciated gameobjects :
+	gameObjectManager.update();
 
 }
 
 //Draws scene : 
 function Render (now){
-	now *= 0.001;  // convert to seconds
-    const deltaTime = now - then;
-    then = now;
+	// convert to seconds
+    globals.time = now * 0.001;
+    // make sure delta time isn't too big.
+    globals.deltaTime = Math.min(globals.time - then, 1 / 20);
+    then = globals.time;
 
 	
 	

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
-import {Component} from './Component';
 import { SkeletonUtils } from 'three/examples/jsm/utils/SkeletonUtils';
+
+import {Component} from './Component';
 import {globals} from './globals'
 
 
@@ -17,6 +18,7 @@ export class SkinInstance extends Component {
     constructor(gameObject, model) {
       super(gameObject);
       this.model = model;
+      console.log(this.model)
       this.animRoot = SkeletonUtils.clone(this.model.gltf.scene);
       this.mixer = new THREE.AnimationMixer(this.animRoot);
       gameObject.transform.add(this.animRoot);
@@ -26,6 +28,7 @@ export class SkinInstance extends Component {
 
     setAnimation(animName) {
       const clip = this.model.animations[animName];
+      console.log(this.model.animations[animName]);
       // turn off all current actions
       for (const action of Object.values(this.actions)) {
         action.enabled = false;
