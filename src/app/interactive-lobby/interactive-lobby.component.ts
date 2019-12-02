@@ -37,7 +37,7 @@ let gameObjects = [];
 let animationControllers = [];
 
 const gameObjectManager = new GameObjectManager();
-export let  inputManager = new InputManager() ;
+export let  inputManager  ;
 
 
 
@@ -76,7 +76,7 @@ function loadAnimations(){
 
 function init(){
 	
-	
+	inputManager = new InputManager()
 	loadAnimations();
 
 	//-Var initilization
@@ -90,11 +90,11 @@ function init(){
 	camera.position.set( 10, 10, 10 );
 	camera.lookAt(scene.position);
 	globals.camera = camera;
+	scene.add(camera);
 
 
 
-	scene.add( camera );
-
+	
 	//--Renderer Init
 	const canvas = document.querySelector('#scene') ;
 	renderer = new THREE.WebGLRenderer({canvas});
@@ -165,7 +165,7 @@ function init(){
 
 	const gameObject = gameObjectManager.createGameObject(scene, 'player');
 	gameObject.addComponent(PlayerController);
-
+	
 
 	requestAnimationFrame( Render );
 
@@ -227,6 +227,7 @@ function Update(){
 	
 	//Update all instanciated gameobjects :
 	gameObjectManager.update();
+	inputManager.update();
 
 }
 

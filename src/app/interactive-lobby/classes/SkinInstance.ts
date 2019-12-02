@@ -14,6 +14,7 @@ export class SkinInstance extends Component {
     animRoot;
     mixer;
     actions;
+    currentAnimation ; 
 
     constructor(gameObject, model) {
       super(gameObject);
@@ -27,8 +28,9 @@ export class SkinInstance extends Component {
 
 
     setAnimation(animName) {
+      this.currentAnimation = animName;
       const clip = this.model.animations[animName];
-      console.log(this.model.animations[animName]);
+        
       // turn off all current actions
       for (const action of Object.values(this.actions)) {
         action.enabled = false;
@@ -44,6 +46,7 @@ export class SkinInstance extends Component {
 
      update() {
       this.mixer.update(globals.deltaTime);
+     
     }
 
 }
