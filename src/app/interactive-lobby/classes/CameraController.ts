@@ -14,7 +14,7 @@ export class CameraController extends Component {
 	frustum;
     public target : THREE.Vector3 ;
     public radius : number = 1;
-    public targetRadius : number = 5;
+    public targetRadius : number = 10;
 
 	constructor(gameObject){
 		super(gameObject);

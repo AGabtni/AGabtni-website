@@ -6,6 +6,7 @@
       "node",
       "webgl2",
       "three",
+      "cannon",
     ]
   },
   "files": [

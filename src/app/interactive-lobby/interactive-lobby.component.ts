@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 
 //threeJS imports :
 import * as THREE from 'three';
+import * as CANNON from 'cannon';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Water } from 'three/examples/jsm/objects/Water.js';
@@ -26,7 +27,7 @@ import {globals} from './classes/globals'
 var renderer;
 
 
-var scene , camera; 
+var scene , camera, world; 
 var controls, loader, matLoader;
 
 var water, sky, sunSphere;
@@ -83,12 +84,24 @@ function init(){
 	scene = new THREE.Scene();
 	
 
+	//Cannon world :
+	world = new CANNON.World();
+	world.gravity.set(0, 0, -9.82); 
+
+	// Create a sphere
+	var radius = 1; // m
+	var sphereBody = new CANNON.Body({
+	   mass: 5, // kg
+	   position: new CANNON.Vec3(0, 0, 10), // m
+	   shape: new CANNON.Sphere(radius)
+	});
+	world.addBody(sphereBody);
 
 
 	//--Camera init
 	camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
-	camera.position.set( 10, 10, 10 );
-	camera.lookAt(scene.position);
+	camera.position.set( 2, 0, 2 );
+	//camera.lookAt(scene.position);
 	globals.camera = camera;
 	scene.add(camera);
 
@@ -252,10 +265,10 @@ function Render (now){
 
 
 function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			requestAnimationFrame(Render);
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	requestAnimationFrame(Render);
 }
 
 

@@ -67,7 +67,7 @@ export class PlayerController extends Component {
         const {cameraInfo} = globals;
         cameraInfo.target.set(
             transform.position.x,
-            transform.position.y+1,
+            transform.position.y+2,
             transform.position.z
         )
 
