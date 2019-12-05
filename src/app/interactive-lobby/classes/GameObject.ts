@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { SystemJsNgModuleLoader } from '@angular/core';
 
  function removeArrayElement(array, element) {
     const ndx = array.indexOf(element);
@@ -18,6 +19,9 @@ export class GameObject{
       this.name = name;
       this.components = [];
       this.transform = new THREE.Object3D();
+      this.transform.rotation.y = -2.8;
+      console.log(this.transform);
+      
       parent.add(this.transform);
     }
 

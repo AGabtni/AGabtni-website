@@ -84,22 +84,10 @@ function init(){
 	scene = new THREE.Scene();
 	
 
-	//Cannon world :
-	world = new CANNON.World();
-	world.gravity.set(0, 0, -9.82); 
-
-	// Create a sphere
-	var radius = 1; // m
-	var sphereBody = new CANNON.Body({
-	   mass: 5, // kg
-	   position: new CANNON.Vec3(0, 0, 10), // m
-	   shape: new CANNON.Sphere(radius)
-	});
-	world.addBody(sphereBody);
 
 
 	//--Camera init
-	camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
+	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 20000 );
 	camera.position.set( 2, 0, 2 );
 	//camera.lookAt(scene.position);
 	globals.camera = camera;
@@ -139,8 +127,8 @@ function init(){
 	water = new Water(
 		waterGeometry,
 		{
-			textureWidth: 512,
-			textureHeight: 512,
+			textureWidth: 100,
+			textureHeight: 100,
 			waterNormals: new THREE.TextureLoader().load( '../../assets/textures/waternormals.jpg', function ( texture ) {
 						texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 					} ),
@@ -159,15 +147,15 @@ function init(){
 
 
 
-	//--ADDING ORBIT CONTROLS :
+	/**--ADDING ORBIT CONTROLS :
 	controls = new OrbitControls( camera, renderer.domElement );
 	controls.maxPolarAngle = Math.PI * 0.495;
-	controls.target.set( 0, 10 , 0);
+	controls.target.set( 0, 0 , 0);
 	controls.minDistance = 40.0;
 	controls.maxDistance = 200.0;
-	controls.update();	
 	window.addEventListener( 'resize', onWindowResize , false );
 
+	*/
 
 	//Gameobjects : 
 
@@ -242,6 +230,7 @@ function Update(){
 	gameObjectManager.update();
 	inputManager.update();
 
+
 }
 
 //Draws scene : 
@@ -266,8 +255,9 @@ function Render (now){
 
 function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
 	renderer.setSize( window.innerWidth, window.innerHeight );
+	camera.updateProjectionMatrix();
+
 	requestAnimationFrame(Render);
 }
 

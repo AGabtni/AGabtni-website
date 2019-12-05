@@ -42,26 +42,14 @@ export class PlayerController extends Component {
       const delta = (inputManager.keys.left.down  ?  1 : 0) +
                     (inputManager.keys.right.down ? -1 : 0);
       transform.rotation.y += this.turnSpeed * delta * deltaTime;
-
+      transform.rotation.y = THREE.Math.clamp(transform.rotation.y,-2.8,-1.9);
+      
 
       //Translation handle
       const deltaX = (inputManager.keys.up.down  ?  1 : 0) +
                     (inputManager.keys.down.down ? -1 : 0);
-      transform.translateOnAxis(this.kForward, deltaX*moveSpeed * deltaTime);
-
-
-      //Animation switch :
-      if(deltaX != 0 && this.skinInstance.currentAnimation != "Man_Run" ){
-          
-        this.skinInstance.setAnimation("Man_Run");
-        
-        
-      }  
-      if (deltaX == 0 && this.skinInstance.currentAnimation != "Man_Idle"){
-
-          this.skinInstance.setAnimation("Man_Idle");
-
-      }
+      transform.translateOnAxis(this.kForward, moveSpeed * deltaTime);
+      
 
       //Update camera target :
         const {cameraInfo} = globals;
