@@ -19,8 +19,7 @@ export class GameObject{
       this.name = name;
       this.components = [];
       this.transform = new THREE.Object3D();
-      this.transform.rotation.y = -2.8;
-      console.log(this.transform);
+      this.transform.rotation.y = -2.35;
       
       parent.add(this.transform);
     }

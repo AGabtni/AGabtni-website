@@ -3,17 +3,19 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 
 //threeJS imports :
 import * as THREE from 'three';
-import * as CANNON from 'cannon';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 
 //Game classes :
-import {GameObject} from './classes/GameObject';
 import {CameraController} from './classes/CameraController'
 import {PlayerController} from './classes/PlayerController';
-import {SkinInstance} from './classes/SkinInstance';
+
+
+import { ObstacleController } from "./classes/ObstacleController";
+import { ObstaclePooler } from "./classes/ObstaclePooler";
+
 import {GameObjectManager} from './classes/GameObjectManager';
 import {InputManager} from './classes/InputManager';
 
@@ -38,6 +40,7 @@ let gameObjects = [];
 let animationControllers = [];
 
 const gameObjectManager = new GameObjectManager();
+const obstaclePooler = new ObstaclePooler();
 export let  inputManager  ;
 
 
@@ -47,7 +50,8 @@ const manager = new THREE.LoadingManager();
 manager.onLoad = init;
 
 export let models = {
-  pig:    { url: '../../assets/models/Male_Casual.gltf', gltf : null, animations : {} },
+  human:    { url: '../../assets/models/Male_Casual.gltf', gltf : null, animations : {} },
+  boulder : { url: '../../assets/models/Rock.gltf', gltf : null, animations : {} },
   
 };
 {
@@ -82,14 +86,15 @@ function init(){
 
 	//-Var initilization
 	scene = new THREE.Scene();
+	scene.fog = new THREE.FogExp2( 0xf0fff0, 0.01 );
 	
 
 
 
 	//--Camera init
-	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 20000 );
-	camera.position.set( 2, 0, 2 );
-	//camera.lookAt(scene.position);
+	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.set( 0, 0, 0 );
+	
 	globals.camera = camera;
 	scene.add(camera);
 
@@ -147,17 +152,8 @@ function init(){
 
 
 
-	/**--ADDING ORBIT CONTROLS :
-	controls = new OrbitControls( camera, renderer.domElement );
-	controls.maxPolarAngle = Math.PI * 0.495;
-	controls.target.set( 0, 0 , 0);
-	controls.minDistance = 40.0;
-	controls.maxDistance = 200.0;
-	window.addEventListener( 'resize', onWindowResize , false );
 
-	*/
-
-	//Gameobjects : 
+	//GAMEOBJECTS CREATION : 
 
 	//--Camera gameObject and camera info component atteced to it 
 	const camGameObject = gameObjectManager.createGameObject(scene, 'camera');
@@ -167,6 +163,20 @@ function init(){
 	const gameObject = gameObjectManager.createGameObject(scene, 'player');
 	gameObject.addComponent(PlayerController);
 	
+
+	const obstacleExample = obstaclePooler.addObstacle(scene, 'obstacle', ObstacleController);
+	
+
+	const control = new TransformControls( camera, renderer.domElement );
+	control.attach(obstacleExample.transform );
+	scene.add( control );
+
+
+	const playerControl = new TransformControls( camera, renderer.domElement );
+	playerControl.attach(gameObject.transform );
+	scene.add( playerControl );
+
+	camera.lookAt(gameObject.transform);
 
 	requestAnimationFrame( Render );
 

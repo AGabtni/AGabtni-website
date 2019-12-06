@@ -19,7 +19,6 @@ export class SkinInstance extends Component {
     constructor(gameObject, model) {
       super(gameObject);
       this.model = model;
-      console.log(this.model)
       this.animRoot = SkeletonUtils.clone(this.model.gltf.scene);
       this.mixer = new THREE.AnimationMixer(this.animRoot);
       gameObject.transform.add(this.animRoot);

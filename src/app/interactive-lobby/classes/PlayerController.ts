@@ -22,14 +22,16 @@ export class PlayerController extends Component {
     maxTimeOffScreen;
 
 
+
     constructor(gameObject) {
       super(gameObject);
-      const model = models.pig;
+      const model = models.human;
       this.skinInstance = gameObject.addComponent(SkinInstance, model);
       this.skinInstance.setAnimation("Man_Run");
       this.turnSpeed = globals.moveSpeed / 4;
       this.offscreenTimer = 0;
       this.maxTimeOffScreen = 0;
+      
     }
 
 
@@ -48,7 +50,7 @@ export class PlayerController extends Component {
       //Translation handle
       const deltaX = (inputManager.keys.up.down  ?  1 : 0) +
                     (inputManager.keys.down.down ? -1 : 0);
-      transform.translateOnAxis(this.kForward, moveSpeed * deltaTime);
+      //transform.translateOnAxis(this.kForward, moveSpeed * deltaTime);
       
 
       //Update camera target :
