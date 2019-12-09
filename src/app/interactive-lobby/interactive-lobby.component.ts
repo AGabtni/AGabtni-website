@@ -87,7 +87,7 @@ function init(){
 	//-Var initilization
 	scene = new THREE.Scene();
 	scene.fog = new THREE.FogExp2( 0xf0fff0, 0.01 );
-	
+	globals.scene = scene;
 
 
 
@@ -149,8 +149,7 @@ function init(){
 	water.rotation.x = - Math.PI / 2;
 	water.material.uniforms[ 'sunDirection' ].value.copy( light.position ).normalize();
 	scene.add( water );
-
-
+	globals.worldGround = waterGeometry;
 
 
 	//GAMEOBJECTS CREATION : 
@@ -163,13 +162,8 @@ function init(){
 	const gameObject = gameObjectManager.createGameObject(scene, 'player');
 	gameObject.addComponent(PlayerController);
 	
-
-	const obstacleExample = obstaclePooler.addObstacle(scene, 'obstacle', ObstacleController);
-	
-
-	const control = new TransformControls( camera, renderer.domElement );
-	control.attach(obstacleExample.transform );
-	scene.add( control );
+	obstaclePooler.createRocksPool();
+	obstaclePooler.addInitialObstacles();
 
 
 	const playerControl = new TransformControls( camera, renderer.domElement );

@@ -55,6 +55,7 @@ export class PlayerController extends Component {
 
       //Update camera target :
         const {cameraInfo} = globals;
+        
         cameraInfo.target.set(
             transform.position.x,
             transform.position.y+2,
@@ -64,6 +65,11 @@ export class PlayerController extends Component {
       //Respawns character if out of camera bounds
        
       const { frustum } = globals.cameraInfo;
+
+
+      //Update player distance :
+      globals.parcouredDistance = transform.position.z; 
+
       /*
       if (frustum.containsPoint(transform.position)) {
         this.offscreenTimer = 0;

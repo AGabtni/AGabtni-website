@@ -4,4 +4,6 @@ export let globals = {
     moveSpeed: 16,
     camera : null,
     cameraInfo : null,
+    scene : null,
+    parcouredDistance : 0,
   };

@@ -16,12 +16,15 @@ export class GameObject{
 	transform;
 
 	constructor(parent, name) {
+
+
       this.name = name;
       this.components = [];
       this.transform = new THREE.Object3D();
       this.transform.rotation.y = -2.35;
       
-      parent.add(this.transform);
+      if(parent != null)
+        parent.add(this.transform);
     }
 
 
