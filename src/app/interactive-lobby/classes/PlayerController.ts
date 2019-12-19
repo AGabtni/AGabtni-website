@@ -37,7 +37,6 @@ export class PlayerController extends Component {
 
     update() {
       const {deltaTime, moveSpeed} = globals;
-
       const { transform } = this.gameObject;
 
       //Rotation handle
@@ -50,7 +49,7 @@ export class PlayerController extends Component {
       //Translation handle
       const deltaX = (inputManager.keys.up.down  ?  1 : 0) +
                     (inputManager.keys.down.down ? -1 : 0);
-      //transform.translateOnAxis(this.kForward, moveSpeed * deltaTime);
+      transform.translateOnAxis(this.kForward, moveSpeed * deltaTime);
       
 
       //Update camera target :

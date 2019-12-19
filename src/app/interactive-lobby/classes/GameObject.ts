@@ -1,6 +1,10 @@
 import * as THREE from 'three';
 import { SystemJsNgModuleLoader } from '@angular/core';
 
+import { globals } from './globals';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import { Scene } from 'three';
+
  function removeArrayElement(array, element) {
     const ndx = array.indexOf(element);
     if (ndx >= 0) {
@@ -23,8 +27,20 @@ export class GameObject{
       this.transform = new THREE.Object3D();
       this.transform.rotation.y = -2.35;
       
-      if(parent != null)
+
+      //DEBUG ONLY 
+      const widgetControl = new TransformControls( globals.camera, globals.renderer.domElement);
+      widgetControl.attach(this.transform );
+    
+
+      //
+      if(parent != null){
         parent.add(this.transform);
+
+        //Debug only
+        parent.add(widgetControl);
+
+      }
     }
 
 

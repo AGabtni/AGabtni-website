@@ -17,14 +17,12 @@ export  class ObstaclePooler {
       this.activeRocksPool = [];
       
     }
-
     //Create gameobject for obstacle
     createObstacle (parent, name){
       const obstacleObject = new GameObject(null,name);
       obstacleObject.addComponent(ObstacleController);
       
-
-
+      
 
       return obstacleObject;
 
@@ -36,7 +34,6 @@ export  class ObstaclePooler {
 
       for(var i =0; i<maxElemsInPool; i++ ){
         const name ="Rocke_"+i;
-
         newObstacle = this.createObstacle(globals.scene, name);
         this.rockPool.push(newObstacle);
 
@@ -48,8 +45,8 @@ export  class ObstaclePooler {
     //Add initial obstacles
     addInitialObstacles (){
 
-      var num = 36;
-      var gap = 6.28/36;
+      var num = 5;
+      var gap = 6.28/5;
       for(var i =0 ; i < num ; i++){
 
         //GameObject.transform.visible = false;
@@ -70,10 +67,11 @@ export  class ObstaclePooler {
       if(inPool){
         if(this.rockPool.length == 0 )
           return;
+
+
         newObstacle = this.rockPool.pop();
         newObstacle.transform.visible = true;
-
-        this.activeRocksPool.add(newObstacle);
+        this.activeRocksPool.push(newObstacle);
 
 
       }else{
@@ -83,13 +81,13 @@ export  class ObstaclePooler {
       }
 
       //set pooled object position
-      newObstacle.transform.position.set(new THREE.Vector3(0,0 , globals.parcouredDistance ));
-
-
+      //newObstacle.transform.position.z =  globals.parcouredDistance*2;
+      //newObstacle.transform.position.x =  0;
+      newObstacle.transform.translateOnAxis(new THREE.Vector3(0,0,1),-globals.parcouredDistance);
+      console.log("pooled")
       
       //attach to world ground :
       globals.scene.add(newObstacle.transform);
-
     }
 
     //Pool obstacle at update
@@ -113,7 +111,8 @@ export  class ObstaclePooler {
 
 
     update() {
-      this.rockPool.forEach(tree => this.rockPool.update());
+      this.activeRocksPool.forEach(rock => rock.update());
+
     }
 
 

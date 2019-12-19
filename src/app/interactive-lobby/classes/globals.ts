@@ -5,5 +5,7 @@ export let globals = {
     camera : null,
     cameraInfo : null,
     scene : null,
+    renderer : null,
     parcouredDistance : 0,
+
   };

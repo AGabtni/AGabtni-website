@@ -4,7 +4,6 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 //threeJS imports :
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 
@@ -33,6 +32,9 @@ var scene , camera, world;
 var controls, loader, matLoader;
 
 var water, sky, sunSphere;
+var clock;
+
+
 
 let then = 0;
 let loadedModels = [];
@@ -84,6 +86,9 @@ function init(){
 	inputManager = new InputManager()
 	loadAnimations();
 
+	clock = new THREE.Clock();
+	clock.start();
+	
 	//-Var initilization
 	scene = new THREE.Scene();
 	scene.fog = new THREE.FogExp2( 0xf0fff0, 0.01 );
@@ -102,12 +107,13 @@ function init(){
 
 	
 	//--Renderer Init
-	const canvas = document.querySelector('#scene') ;
-	renderer = new THREE.WebGLRenderer({canvas});
+	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
-
+	//const canvas = document.querySelector('#scene');
+	document.querySelector("#scene").appendChild(renderer.domElement);
+	globals.renderer = renderer;
 
 	//-SETTING-UP-ENIVRONMENT
 
@@ -149,7 +155,6 @@ function init(){
 	water.rotation.x = - Math.PI / 2;
 	water.material.uniforms[ 'sunDirection' ].value.copy( light.position ).normalize();
 	scene.add( water );
-	globals.worldGround = waterGeometry;
 
 
 	//GAMEOBJECTS CREATION : 
@@ -166,9 +171,7 @@ function init(){
 	obstaclePooler.addInitialObstacles();
 
 
-	const playerControl = new TransformControls( camera, renderer.domElement );
-	playerControl.attach(gameObject.transform );
-	scene.add( playerControl );
+
 
 	camera.lookAt(gameObject.transform);
 
@@ -230,8 +233,17 @@ function initSky() {
 function Update(){
 	water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
 	
+	if(clock.getElapsedTime()> 1){
+
+		clock.start();
+		obstaclePooler.addPathObstacle();
+	}
+
+
+
 	//Update all instanciated gameobjects :
 	gameObjectManager.update();
+	obstaclePooler.update();
 	inputManager.update();
 
 
