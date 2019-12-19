@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ɵConsole } from '@angular/core';
 
 //threeJS imports :
 import * as THREE from 'three';
@@ -234,7 +234,7 @@ function Update(){
 	water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
 	
 	if(clock.getElapsedTime()> 1){
-
+		console.log("here")
 		clock.start();
 		obstaclePooler.addPathObstacle();
 	}

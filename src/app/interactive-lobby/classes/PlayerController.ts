@@ -66,8 +66,10 @@ export class PlayerController extends Component {
       const { frustum } = globals.cameraInfo;
 
 
-      //Update player distance :
+      //Update player position :
+      globals.playerPosition = transform.position;
       globals.parcouredDistance = transform.position.z; 
+      
 
       /*
       if (frustum.containsPoint(transform.position)) {
