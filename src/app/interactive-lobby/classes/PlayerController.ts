@@ -67,9 +67,8 @@ export class PlayerController extends Component {
 
 
       //Update player position :
-      globals.playerPosition = transform.position;
       globals.parcouredDistance = transform.position.z; 
-      
+      globals.playerPosition = transform.position;
 
       /*
       if (frustum.containsPoint(transform.position)) {

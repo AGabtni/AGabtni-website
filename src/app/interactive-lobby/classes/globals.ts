@@ -7,7 +7,6 @@ export let globals = {
     scene : null,
     renderer : null,
     parcouredDistance : 0,
-    horizontalPosition : 0,
     playerPosition : null,
 
   };

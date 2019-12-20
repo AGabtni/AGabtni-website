@@ -168,7 +168,6 @@ function init(){
 	gameObject.addComponent(PlayerController);
 	
 	obstaclePooler.createRocksPool();
-	obstaclePooler.addInitialObstacles();
 
 
 
@@ -227,7 +226,6 @@ function initSky() {
 
 	renderer.render( scene, camera );
 }
-
 
 //Update frame loop : 
 function Update(){

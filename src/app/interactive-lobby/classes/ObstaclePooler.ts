@@ -6,6 +6,8 @@ import { ObstacleController } from './ObstacleController';
 import { globals } from './globals';
 import { resolveSanitizationFn } from '@angular/compiler/src/render3/view/template';
 import { networkInterfaces } from 'os';
+import { Camera } from 'three';
+import { ɵConsole } from '@angular/core';
 
 export  class ObstaclePooler {
     rockPool ;
@@ -26,7 +28,6 @@ export  class ObstaclePooler {
       const obstacleObject = new GameObject(null,name);
       obstacleObject.addComponent(ObstacleController);
       
-      
 
       return obstacleObject;
 
@@ -40,6 +41,7 @@ export  class ObstaclePooler {
         const name ="Rocke_"+i;
         newObstacle = this.createObstacle(globals.scene, name);
         this.rockPool.push(newObstacle);
+
 
       }
 
@@ -76,7 +78,7 @@ export  class ObstaclePooler {
 
 
         newObstacle = this.rockPool.pop();
-        newObstacle.transform.visible = true;
+       
         this.activeRocksPool.push(newObstacle);
         console.log("REUSED OBSTACLE")
 
@@ -88,11 +90,9 @@ export  class ObstaclePooler {
       }
 
       //Set obstacle position 
-      if(globals.playerPosition != null){
-        newObstacle.transform.translateOnAxis(new THREE.Vector3(row,0,globals.playerPosition.z*2),-4);
-        
       
-      }
+      newObstacle.transform.translateOnAxis(new THREE.Vector3(row,0,globals.parcouredDistance),-4);
+      newObstacle.transform.visible = true;
         
       //attach to world ground :
       globals.scene.add(newObstacle.transform);
@@ -101,11 +101,11 @@ export  class ObstaclePooler {
     //Pool obstacle at update
     addPathObstacle(){
       
-      const xOffsetLeft =  Math.random() * (this.xOffsetObstacle ) ;
-      const xOffsetRight =  Math.random() * (0 - (-this.xOffsetObstacle)) + -this.xOffsetObstacle;
+      var xOffsetLeft =  Math.random() * (this.xOffsetObstacle ) ;
+      
       this.addPooledObstacle(true,xOffsetLeft);
       if(Math.random() > 0.5){
-        
+        var xOffsetRight =  Math.random() * (0 - (-this.xOffsetObstacle)) + -this.xOffsetObstacle;
         this.addPooledObstacle(true,xOffsetRight);
       }
 
@@ -118,11 +118,33 @@ export  class ObstaclePooler {
 
    
 
+    obstaclePool(){
+      if(this.activeRocksPool.length == 0 )
+        return;
+      var oneTree;
+      var obstaclesToRemove = [];
 
+      this.activeRocksPool.forEach( function(element,index){
+        
+        //console.log(element.transform.position.distanceTo(globals.playerPosition) );
+        //console.log(element.transform.visible);
+        //element.transform.position.distanceTo(globals.playerPosition) <= 1
+        if( !globals.cameraInfo.frustum.containsPoint(element.transform.position) && element.transform.visible ){
+
+          element.transform.visible = false;
+          
+        }
+      
+      });
+
+    }
 
 
     update() {
+      this.obstaclePool();
       this.activeRocksPool.forEach(rock => rock.update());
+      //console.log(this.activeRocksPool);
+
 
     }
 
