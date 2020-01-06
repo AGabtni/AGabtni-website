@@ -41,6 +41,7 @@
   <a  [routerLink]="" class="closebtn" (click)="closeNav()">&times;</a>
   <div class="overlay-content">
     <a class="mat-h1" *ngFor="let cat of categories" [@messageAnimation]="hidden? 'hidden' : 'visible'"  [routerLink]="[cat.url]" (click)="closeNav()" >{{cat.title}}</a>
+    
   </div>
 </div>
 

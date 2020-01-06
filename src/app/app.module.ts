@@ -53,7 +53,8 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { ContactFormMobileComponent, SnackBarComponent } from './contact-form-mobile/contact-form-mobile.component';
-import { InteractiveLobbyComponent } from './interactive-lobby/interactive-lobby.component';
+import { InfiniteRunner } from './interactive-lobby/infiniteRunner';
+import { ProjectsComponent } from './projects/projects.component';
 
 //Game class :
 
@@ -79,7 +80,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ServicesComponent,
     ParallaxDirective,
     ContactFormMobileComponent,  
-    SnackBarComponent, InteractiveLobbyComponent,
+    SnackBarComponent, InfiniteRunner, ProjectsComponent,
   ],
   entryComponents: [ContactFormMobileComponent,SnackBarComponent],
 

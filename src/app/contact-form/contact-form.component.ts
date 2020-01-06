@@ -69,7 +69,7 @@ export class ContactFormComponent implements OnInit {
     
   }
 
-
+  //Assigned to submit button 
   onFormSubmit(clientInfo){
     console.log(clientInfo);
     

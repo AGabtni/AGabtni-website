@@ -1,6 +1,7 @@
  
 import {GameObject} from './GameObject';
 import {SafeArray} from './SafeArray';
+import { PlayerController } from './PlayerController';
 
 
 export  class GameObjectManager {
@@ -24,6 +25,21 @@ export  class GameObjectManager {
     }
 
 
+    getGameObject(name){
+      var gameObject = null
+      this.gameObjects.forEach(element => {
+        if(element.name === name){
+          gameObject = element;
+        
+        }
+          
+        
+
+        
+      });
+
+      return gameObject;
+    }
 
 
     update() {

@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "@ngmodule/material-carousel": "^0.5.1",
     "@types/cannon": "^0.1.4",
+    "@types/jquery": "^3.3.31",
     "@types/three": "^0.103.2",
     "@types/webgl2": "0.0.5",
     "angular-svg-icon": "^8.0.0",

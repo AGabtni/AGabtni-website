@@ -2,8 +2,11 @@
 
 
 export class InputManager {
+  canvas ;
 	keys ={};
 	constructor(){
+    this.canvas = document.querySelector('#c');
+
 		const keyMap = new Map();
 		const setKey = (keyName, pressed) => {
 			const keyState = this.keys[keyName];
@@ -27,7 +30,7 @@ export class InputManager {
 	    };
 
       	addKey(37, 'left');
-     	addKey(39, 'right');
+     	  addKey(39, 'right');
       	addKey(38, 'up');
       	addKey(40, 'down');
       	addKey(90, 'a');
@@ -69,7 +72,7 @@ export class InputManager {
         }
       };
 
-      const uiElem = document.querySelector('#ui');
+      const uiElem = document.querySelector('#controls');
       uiElem.addEventListener('touchstart', (e) => {
         e.preventDefault();
         checkSides(e);
@@ -94,12 +97,12 @@ export class InputManager {
         window.removeEventListener('mousemove', handleMouseMove, {passive: false});
         window.removeEventListener('mouseup', handleMouseUp);
       }
-
+      
       uiElem.addEventListener('mousedown', (e) => {
         // this is needed because we call preventDefault();
         // we also gave the canvas a tabindex so it can
         // become the focus
-        canvas.focus();
+        this.canvas.focus();
         handleMouseMove(e);
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseup', handleMouseUp);

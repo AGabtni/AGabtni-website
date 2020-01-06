@@ -1,9 +1,5 @@
 import * as THREE from 'three';
-import { SystemJsNgModuleLoader } from '@angular/core';
 
-import { globals } from './globals';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
-import { Scene } from 'three';
 
  function removeArrayElement(array, element) {
     const ndx = array.indexOf(element);
@@ -28,9 +24,9 @@ export class GameObject{
       this.transform.rotation.y = -2.35;
       
 
-      //DEBUG ONLY 
-      const widgetControl = new TransformControls( globals.camera, globals.renderer.domElement);
-      widgetControl.attach(this.transform );
+      //DEBUG ONLY must add rendered in globals
+      //const widgetControl = new TransformControls( globals.camera, globals.renderer.domElement);
+      //widgetControl.attach(this.transform );
     
 
       //
@@ -38,7 +34,7 @@ export class GameObject{
         parent.add(this.transform);
 
         //Debug only
-        parent.add(widgetControl);
+        //parent.add(widgetControl);
 
       }
     }
@@ -63,6 +59,14 @@ export class GameObject{
       }
     }
 
+    destroy(){
+
+      this.components.forEach(element => {
+          this.removeComponent(element);
+      });
+      this.transform = null;
+      this.name="";
+    }
 
 
 

@@ -1,0 +1,131 @@
+
+<mat-card 
+	style="height: 90%;"
+	fxFlex
+	fxLayout="column" 
+	fxLayoutAlign="center">
+	<!--PREVIEW PANEL-->
+	<div	
+		fxFlex
+		fxLayout="column"  
+		id="preview" 
+		fxLayoutAlign="center center"
+		[@HUDFadeIn]="this.isPreviewVisible? 'fadeIn' : 'fadeOut'" >
+		
+			<img style="max-width: 200px ; max-height: 300px" src="https://picsum.photos/200/300">
+			<span class="mat-h2"  style="font-weight: 900;text-align: center; margin: 20px;">Infinite Runner with Three.js</span>
+
+			<button id="playButton"  mat-fab 
+				(click)="onPlayClick()">Play
+			</button>
+			
+
+	
+	</div>
+	<!--MESSAGE PANEL-->
+	<div fxFlex 
+		fxLayout="column" 
+		id="message"  
+		fxLayoutAlign="center center"
+		>
+		<span id="messageContent" class="mat-h1"></span>
+	</div>
+	
+	<div class ="game-container">
+		
+
+		
+		
+		<canvas fxFlex fxLayout="row" fxFlexFill id="c" tabindex="1"></canvas>
+
+		
+		<!--LOADING SCREEN-->
+		<div fxFlex 
+		fxLayout="column" id="loading"  
+		fxLayoutAlign="center center"
+		[@HUDFadeIn]="this.isLoading && !this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
+			<div >
+			  <div>...loading...</div>
+			  <div class="progress"><div id="progressbar"></div></div>
+			</div>
+		  </div>
+
+
+		<!--PLAYERSTATS LAYER-->
+		<div id="playerStats"  
+			fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px"
+			[@HUDFadeIn]="!this.isLoading? 'fadeIn' : 'fadeOut'">
+			<div>
+				<div class="health-box">
+					<div class="health-bar"></div>
+					<div class="health-bar-filled"></div>
+		
+				</div>
+			</div>
+
+
+			<div id="score"
+				fxLayout="row" fxLayoutAlign="center center" >
+				
+				<span class="mat-h2"></span>
+			</div>
+
+
+		</div>
+		
+		<!--PAUSE MENU LAYER-->
+		
+		<div id="pause" 
+			fxLayout="row" 
+			fxLayoutAlign ="center center" 
+			[@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'" >
+
+				<div
+					 
+					id="pauseMenu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
+					<button id="menuButton" (click)="pause()">RESUME</button>
+					<button id="menuButton" (click)="replay()">RESTART</button>
+					<button id="menuButton" (click)="refresh()">QUIT</button>
+				</div>
+			
+		</div>
+
+		<div id="gameOverScreen"
+			 fxLayout="row"
+			 fxLayoutAlign="center center">
+			
+			 <div id="gameOverMenu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
+				<button id="menuButton" >SAVE SCORE</button>
+				<button id="menuButton" (click)="replay()">RESTART</button>
+				<button id="menuButton" (click)="refresh()">QUIT</button>
+			</div>	
+			
+		</div>
+		
+		<!--CONTROLS LAYER-->
+		<div id="ui" fxLayout="column" fxLayoutAlign="center" >
+			<div fxFlex 
+			fxLayout="row" fxLayoutAlign="end end" 
+			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">
+		
+				<button id="pauseButton" (click)="pause()">
+					<img src="../assets/icons/pauseOutline.svg">
+				</button>
+			</div>
+		  <div id="controls" fxLayout="row" fxLayoutAlign="end" [@HUDFadeIn]="this.isControlsVisible? 'fadeIn' : 'fadeOut'">
+			
+			<div id="left"><img src="https://threejsfundamentals.org/threejs/resources/images/left.svg"></div>
+	      	<div id="right"><img src="https://threejsfundamentals.org/threejs/resources/images/right.svg"></div>
+
+		  </div>
+		</div>
+		
+		
+		
+		
+
+		
+		
+	</div>	
+	</mat-card>
+

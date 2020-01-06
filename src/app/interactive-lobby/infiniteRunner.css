@@ -1,0 +1,245 @@
+
+.game-container{
+  
+  width: 100%;
+  margin-top: 100px;
+  max-width: 750px;
+  
+}
+#c {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#message{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-content: stretch;
+  z-index: 2;
+  
+}
+
+#messageContent{
+  opacity: 0.0;
+}
+#preview{
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  text-align: center;
+  z-index: 4;
+
+}
+#playButton{
+  position: absolute; 
+  width:100px;
+  height:100px;
+  top: 50%;
+	left: 50%;  
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+
+
+#loading{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-content: stretch;
+  z-index: 3;
+
+}
+
+.progress {
+  width: 50vw;
+  border: 1px solid black;
+}
+#progressbar {
+  width: 0;
+  height: 1em;
+  background-color: #888;
+  background-image: linear-gradient(
+    -45deg, 
+    rgba(255, 255, 255, .5) 25%, 
+    transparent 25%, 
+    transparent 50%, 
+    rgba(255, 255, 255, .5) 50%, 
+    rgba(255, 255, 255, .5) 75%, 
+    transparent 75%, 
+    transparent
+  );
+  background-size: 50px 50px;
+
+}
+
+
+
+/**HUD CLASSES */
+#ui {
+  
+  padding: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-content: stretch;
+  z-index: 2;
+}
+#controls>div {
+  display: flex;
+  align-items: flex-end;
+  flex: 1 1 auto;
+}
+
+.bright {
+  filter: brightness(2);
+}
+#left {
+  justify-content: flex-end;
+}
+#right {
+  justify-content: flex-start;
+}
+#controls img {
+  padding: 10px;
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+
+
+#pause{
+  position: absolute;
+  padding: 20px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-content: stretch;
+  z-index: 3;
+}
+
+#pauseButton img{
+  
+  width: 100%;
+  height: 100%;
+}
+
+#pauseButton{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0);
+  justify-content: flex-end;
+
+}
+
+#pauseMenu{
+  background-color: rgba(255, 255, 255, 0.5);
+  
+  max-width: 400px;
+  max-height: 400px;
+  margin: 20px;
+  padding : 20px;
+  border-radius: 10px;
+}
+
+#gameOverScreen{
+  position: absolute;
+  padding: 20px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-content: stretch;
+  opacity: 0.0;
+}
+#gameOverMenu{
+  background-color: rgba(255, 255, 255, 0.5);  
+  max-width: 400px;
+  max-height: 400px;
+  margin: 20px;
+  padding : 20px;
+  border-radius: 10px;
+}
+
+#menuButton{
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 60%;
+  height: 40px;
+  justify-content: center;
+  border-radius: 10px;
+  text-align: center;
+  color: black;
+  font-weight: 900;
+}
+
+#playerStats{
+  position: absolute;
+  padding: 20px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+/**HEALTH BAR CLASSES*/
+
+.health-box {
+  background-color: #ccc;
+  width: 80%;
+  height: 25px;
+  position: relative;
+  border: solid 1px #aaa;
+  border-radius: 50px;
+}
+
+.health-bar-filled {
+
+  background-color: #007f00;
+  width: 100%;
+  height: 23px;
+  position : absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50px;
+}
+
+.health-bar {
+  width: 100%;
+  height: 100%;
+  background-color: #cc0000;
+  
+  border-radius: 50px;
+}
+
+
+#score{
+
+  max-width: 100px; 
+  max-height: 50px; 
+  background-color: white;
+  border-radius: 50px;
+  text-align : center;
+}
+/**END OF HUD CLASSES*/
+

@@ -1,0 +1,14 @@
+.all-wrap {
+
+    height: 100vh;
+    
+  }
+
+  .games{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+  }

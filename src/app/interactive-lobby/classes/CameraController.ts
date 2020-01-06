@@ -14,17 +14,14 @@ export class CameraController extends Component {
 	frustum;
     public target : THREE.Vector3 ;
     public radius : number = 1;
-    public targetRadius : number = 10;
+    public targetRadius : number = 15;
 
 	constructor(gameObject){
 		super(gameObject);
 		this.projScreenMatrix = new THREE.Matrix4();
 		this.frustum = new THREE.Frustum();
 
-
-
 		//follow target:
-		this.target = new THREE.Vector3();
 		this.radius= 3;
 
 	}
@@ -47,17 +44,21 @@ export class CameraController extends Component {
 		);
 
 		this.frustum.setFromMatrix(this.projScreenMatrix);
-		//Update camera
-
-		this.radius = THREE.Math.lerp(this.radius,this.targetRadius, 0.1);
+			
+		this.radius = THREE.Math.lerp(this.radius,this.targetRadius, 0.2);
+		camera.position.set(
+			THREE.Math.lerp(camera.position.x,globals.parcouredDistance+this.radius,0.2),
+			THREE.Math.lerp(camera.position.y,2+this.radius,0.2),
+			THREE.Math.lerp(camera.position.z,globals.parcouredDistance+this.radius,0.2)
+		);
 		
-		camera.position.x = this.target.x + this.radius;
-        camera.position.y = this.target.y + this.radius ;
-        camera.position.z = this.target.z + this.radius ;
-        camera.updateMatrix();
-        camera.lookAt(this.target);
+		camera.lookAt(new THREE.Vector3(globals.parcouredDistance,2,globals.parcouredDistance));
 
+		
+			
+		camera.updateMatrix();
 
+		
 	}
 
 

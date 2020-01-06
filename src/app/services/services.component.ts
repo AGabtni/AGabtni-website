@@ -118,9 +118,6 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
       this.mobile = true;
 
     }
-
-
-    console.log(this.mobile);
   }
 
   ngAfterViewInit() {

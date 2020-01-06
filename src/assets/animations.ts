@@ -396,15 +396,31 @@ export const fadeIn =
 
     })),
 
-    transition ('faded=>fadeend',[animate ('600ms 1000ms ease-out')
+    transition ('faded<=>fadeend',[animate ('600ms 1000ms ease-out')]),
 
-    ]),
 
 
 
 
 
   ]);
+
+
+//Game HUD animations
+export const pauseMenu = 
+  trigger('HUDFadeIn',[
+    state('fadeIn',style({
+      opacity : '1.0',
+      transform : 'scale(1)',
+    })),
+    state('fadeOut',style({
+      opacity : '0.0',
+      transform : 'scale(0)',
+    })),
+
+    transition('fadeIn<=>fadeOut',[animate ('600ms ease-out')]),
+  ]);
+
 
 //CAROUSEL ANIMATIONS :
 

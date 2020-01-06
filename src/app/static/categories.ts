@@ -1,47 +1,24 @@
 export const categories = [
-
+  {
+    title: 'Home',
+    url: '/home',
+   
+  },
+  
   {
     title: 'Services',
     url: '/services',
-    nest: [
-      {
-        subcategory: 1
-      },
-      {
-        subcategory: 2
-      },{
-
-        subcategory: 1
-      }
-
-    ]
+    
   },
   {
     title: 'Our Projects',
-    url: '/',
-    nest: [
-      {
-        subcategory: 1
-      },
-      {
-        subcategory: 2
-      },
-     
-
-    ]
+    url: '/projects',
+   
   },
   {
     title: 'Contact',
     url: '/contact',
-    nest: [
-      {
-        subcategory: 1
-      },
-      {
-        subcategory: 2
-      }
-
-    ]
+   
   },
   
 ];
