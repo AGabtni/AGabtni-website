@@ -8,7 +8,7 @@ import {SkinInstance} from './SkinInstance';
 import { models, inputManager, soundsLibrary  } from '../infiniteRunner';
 import { globals } from './globals';
 import { PlayerController } from './PlayerController';
-import { Vector3 } from 'three';
+import { Vector3, PositionalAudio } from 'three';
 
 
 /**
@@ -39,8 +39,13 @@ export class ObstacleController extends Component {
         super(gameObject);
         const model = models.mine;
         this.skinInstance = gameObject.addComponent(SkinInstance, model);
-        this.triggerAudio = soundsLibrary.explosion.clip[0];
-        gameObject.transform.add(soundsLibrary.explosion.clip[0])
+
+        //Audio setup
+        this.triggerAudio =  new THREE.PositionalAudio( globals.audioListener );
+        this.triggerAudio.setBuffer( soundsLibrary.explosion.clip );
+	    this.triggerAudio.setVolume(0.5);
+        gameObject.transform.add(this.triggerAudio)
+        
         this.transform = gameObject.transform;
         this.explosionPower = 1.06;
         this.addExplosion();
@@ -119,8 +124,8 @@ export class ObstacleController extends Component {
         this.explosionPower=1.5;
         this.player.onCollisionEnter(this.gameObject);
         
-        this.triggerAudio.play()
-        this.transform.add(this.triggerAudio)
+        if(!this.triggerAudio.isPlaying)
+            this.transform.children[1].play()
         
         globals.screenShaker.shake( globals.camera, new THREE.Vector3(2.5, 1,2.5), 350 );
         

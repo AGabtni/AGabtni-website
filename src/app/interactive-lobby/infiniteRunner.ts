@@ -67,9 +67,9 @@ export let models = {
 };
 
 export let soundsLibrary = {
-	waves: {url:'../../assets/sound/waves.ogg',clip :{}},
-
-	explosion: {url:'../../assets/sound/explosion.ogg',clip :{}},
+	
+	waves: {url:'../../assets/sound/waves.ogg',clip : null},
+	explosion: {url:'../../assets/sound/explosion.ogg',clip :null},
 
 
 }
@@ -95,6 +95,9 @@ function init(){
 	canvas.height = document.body.clientHeight;
 	//--Renderer Init
 	renderer = new THREE.WebGLRenderer({canvas});
+
+
+	globals.audioListener = listener;
 
 }
 
@@ -194,9 +197,15 @@ function Start(){
 	//Set up sound 
 	var waterMesh = new THREE.Mesh(water.geometry);
 	
-	waterMesh.add(soundsLibrary.waves.clip[0])
-
-	waterMesh.children[0].play();
+	
+	var clip = new THREE.Audio( listener );
+		
+	clip.setBuffer( soundsLibrary.waves.clip );
+	clip.setVolume(0.1);
+	clip.setLoop(true);
+	clip.play();
+	 
+	waterMesh.add(clip)
 
 	inputManager = new InputManager();
 	
@@ -529,7 +538,6 @@ export class InfiniteRunner implements AfterViewInit{
 	};
 	//Load 3d models
 	const gltfLoader = new GLTFLoader(manager);
-	var audioLoader = new THREE.AudioLoader(manager);
 
 	for (const model of Object.values(models)) {
 	 	gltfLoader.load(model.url, (gltf) => {
@@ -540,18 +548,13 @@ export class InfiniteRunner implements AfterViewInit{
 	}
 
 	//Load sounds :
+	const audioLoader = new THREE.AudioLoader(manager);
+
 	for (const sound of Object.values(soundsLibrary)){
 		
-		var clip = new THREE.PositionalAudio( listener );
 		audioLoader.load( sound.url, function( buffer ) {
-			clip.setBuffer( buffer );
-			clip.setVolume(0.5);
-			clip.setLoop(true);
-			sound.clip[0] = clip;
-		  }
-		); 
-		console.log(soundsLibrary)
-		
+				sound.clip = buffer;
+		}); 
 		
 	}
 	 
@@ -583,6 +586,8 @@ export class InfiniteRunner implements AfterViewInit{
   replay(){
 	  
 	this.isPauseMenuVisible = false;
+	this.isControlsVisible = true;
+	this.isMessageVisible = true;
 	Restart();
   }
   refresh(){

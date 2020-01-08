@@ -1,5 +1,6 @@
 export let globals = {
     isPlaying : false,
+    audioListener : null,
     time: 0,
     deltaTime: 0,
     moveSpeed: 0.4,
