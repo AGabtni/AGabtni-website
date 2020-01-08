@@ -15,7 +15,7 @@ export class SkinInstance extends Component {
     mixer;
     actions;
     currentAnimation ; 
-
+    sound ; 
     constructor(gameObject, model) {
       super(gameObject);
       this.model = model;
@@ -23,6 +23,8 @@ export class SkinInstance extends Component {
       this.mixer = new THREE.AnimationMixer(this.animRoot);
       gameObject.transform.add(this.animRoot);
       this.actions = {};
+     
+
     }
 
 
@@ -41,6 +43,10 @@ export class SkinInstance extends Component {
       action.play();
       this.actions[animName] = action;
     }
+
+
+
+
 
 
      update() {

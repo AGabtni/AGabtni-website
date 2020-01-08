@@ -27,6 +27,7 @@ import {InputManager} from './classes/InputManager';
 
 import {globals} from './classes/globals'
 import { ResolveStart } from '@angular/router';
+import { SkinInstance } from './classes/SkinInstance';
 
 
 //--GAME_CODE-------------------
@@ -34,7 +35,8 @@ import { ResolveStart } from '@angular/router';
 var renderer;
 
 
-var scene , camera,screenShaker; 
+var scene , camera,screenShaker;
+var listener = new THREE.AudioListener(); 
 
 var water, sky, sunSphere;
 var playerGameObject;
@@ -57,12 +59,20 @@ export let  inputManager  ;
 
 
 export let models = {
-  human:    { url: '../../assets/models/Male_Casual.gltf', gltf : null, animations : {} },
+  human:    { url: '../../assets/models/Male_Casual.gltf', gltf : null, animations : {}  },
   boulder : { url: '../../assets/models/Rock.gltf', gltf : null, animations : {} },
   mine : { url: '../../assets/models/Mine.gltf', gltf : null, animations : {} }, 
-  boat : { url: '../../assets/models/Boat.gltf', gltf : null, animations : {} },
+  boat : { url: '../../assets/models/Boat.gltf', gltf : null, animations : {}},
   
 };
+
+export let soundsLibrary = {
+	waves: {url:'../../assets/sound/waves.ogg',clip :{}},
+
+	explosion: {url:'../../assets/sound/explosion.ogg',clip :{}},
+
+
+}
 
 
 function loadAnimations(){
@@ -72,9 +82,11 @@ function loadAnimations(){
         animsByName[clip.name] = clip;
         loadedModels.push(model.gltf) ;
       });
-      model.animations = animsByName;
+	  model.animations = animsByName;
+	  
     });
 }
+
 
 function init(){
 	
@@ -115,7 +127,8 @@ function Start(){
 	//--Camera init
 	camera = new THREE.PerspectiveCamera( 70, canvas.clientWidth / canvas.clientHeight, 1, 1000 );
 	camera.position.set( 0, 2, 0 );
-	
+	camera.add( listener );
+
 	globals.camera = camera;
 	scene.add(camera);
 
@@ -124,10 +137,9 @@ function Start(){
 
 	
 
+	
 
 	//-SETTING-UP-ENIVRONMENT
-
-	
 
 	//--ADDING-SKY
 	initSky();
@@ -178,13 +190,17 @@ function Start(){
 	playerGameObject.addComponent(PlayerController);
 	
 	obstaclePooler.createRocksPool();
+	
+	//Set up sound 
+	var waterMesh = new THREE.Mesh(water.geometry);
+	
+	waterMesh.add(soundsLibrary.waves.clip[0])
 
-
+	waterMesh.children[0].play();
 
 	inputManager = new InputManager();
 	
 	playerGameObject.getComponent(PlayerController).targetSpeed= 0;
-	
 	globals.isPlaying = true;
 	
 	$('#messageContent').animate({
@@ -193,7 +209,7 @@ function Start(){
 	});
 
 	$('#messageContent').text("Ready ?");
-	
+	//Countdown 
 	setTimeout(() => {
 		$('#messageContent').text("3");
 
@@ -475,9 +491,6 @@ export class InfiniteRunner implements AfterViewInit{
 
   }
 
-
- 
-
   
   onLoadFinished(){
 	init();
@@ -514,13 +527,39 @@ export class InfiniteRunner implements AfterViewInit{
 		}
 			
 	};
+	//Load 3d models
 	const gltfLoader = new GLTFLoader(manager);
+	var audioLoader = new THREE.AudioLoader(manager);
+
 	for (const model of Object.values(models)) {
 	 	gltfLoader.load(model.url, (gltf) => {
 		model.gltf = gltf;
 			
 		});
+
 	}
+
+	//Load sounds :
+	for (const sound of Object.values(soundsLibrary)){
+		
+		var clip = new THREE.PositionalAudio( listener );
+		audioLoader.load( sound.url, function( buffer ) {
+			clip.setBuffer( buffer );
+			clip.setVolume(0.5);
+			clip.setLoop(true);
+			sound.clip[0] = clip;
+		  }
+		); 
+		console.log(soundsLibrary)
+		
+		
+	}
+	 
+	
+	
+	
+
+
 
 
   }

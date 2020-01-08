@@ -5,7 +5,7 @@ import {SkinInstance} from './SkinInstance';
 
 
 
-import { models, inputManager  } from '../infiniteRunner';
+import { models, inputManager, soundsLibrary  } from '../infiniteRunner';
 import { globals } from './globals';
 import { PlayerController } from './PlayerController';
 import { Vector3 } from 'three';
@@ -30,15 +30,17 @@ export class ObstacleController extends Component {
     explosionPower;
     hasCollided ; 
     savedSpeed;
-
+    
     maxTimeStandby = 0.4;
 
     forwardVector;
-    
+    triggerAudio
     constructor(gameObject) {
         super(gameObject);
         const model = models.mine;
         this.skinInstance = gameObject.addComponent(SkinInstance, model);
+        this.triggerAudio = soundsLibrary.explosion.clip[0];
+        gameObject.transform.add(soundsLibrary.explosion.clip[0])
         this.transform = gameObject.transform;
         this.explosionPower = 1.06;
         this.addExplosion();
@@ -75,10 +77,10 @@ export class ObstacleController extends Component {
 		    obj.initialRotation = obj.rotation;
             
         }
-        obj.time += 0.02;
-        obj.position.y = obj.initialPosition.y + Math.cos(obj.time) * -0.01;
+        obj.time += 0.01;
+        obj.position.y = obj.initialPosition.y + Math.cos(obj.time) * -0.005;
         
-        var factor = Math.random()*0.1+0.05;
+        var factor = Math.random()*0.03 +0.05;
         obj.position.x = obj.position.x + Math.cos(obj.time) * factor;
         obj.position.z = obj.position.z - Math.cos(obj.time) * factor;
         
@@ -117,6 +119,9 @@ export class ObstacleController extends Component {
         this.explosionPower=1.5;
         this.player.onCollisionEnter(this.gameObject);
         
+        this.triggerAudio.play()
+        this.transform.add(this.triggerAudio)
+        
         globals.screenShaker.shake( globals.camera, new THREE.Vector3(2.5, 1,2.5), 350 );
         
 
@@ -130,7 +135,8 @@ export class ObstacleController extends Component {
             vertex.z = 0.2+Math.random() * 0.4;
             this.particleGeometry.vertices[i]=vertex;
         }
-
+        
+        
         this.hasCollided = true;
         
 
