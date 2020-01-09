@@ -62,7 +62,7 @@ export let models = {
   human:    { url: '../../assets/models/Male_Casual.gltf', gltf : null, animations : {}  },
   boulder : { url: '../../assets/models/Rock.gltf', gltf : null, animations : {} },
   mine : { url: '../../assets/models/Mine.gltf', gltf : null, animations : {} }, 
-  boat : { url: '../../assets/models/Boat.gltf', gltf : null, animations : {}},
+  boat : { url: '../../assets/models/Tugboat.gltf', gltf : null, animations : {}},
   
 };
 
@@ -70,7 +70,9 @@ export let soundsLibrary = {
 	
 	waves: {url:'../../assets/sound/waves.ogg',clip : null},
 	explosion: {url:'../../assets/sound/explosion.ogg',clip :null},
-
+	engine_slow: {url:'../../assets/sound/engine_slow.ogg',clip :null},
+	engine_medium: {url:'../../assets/sound/engine_medium.ogg',clip :null},
+	engine_fast: {url:'../../assets/sound/engine_fast.ogg',clip :null},
 
 }
 
@@ -201,7 +203,7 @@ function Start(){
 	var clip = new THREE.Audio( listener );
 		
 	clip.setBuffer( soundsLibrary.waves.clip );
-	clip.setVolume(0.1);
+	clip.setVolume(0.2);
 	clip.setLoop(true);
 	clip.play();
 	 
@@ -230,6 +232,11 @@ function Start(){
 				setTimeout(()=>{
 
 					$('#messageContent').text("GO !")
+					
+					$("#ui").animate({
+
+						opacity : "1.0"
+					})
 					setTimeout(()=>{
 						$('#messageContent').animate({
 
@@ -307,10 +314,11 @@ function initSky() {
 //Update frame loop : 
 function Update(){
 	
+
 	if(!globals.isPlaying)
 		return;	
 	
-
+	//Check if player still alive
 	if(playerGameObject.getComponent(PlayerController).health <= 0 && globals.isPlaying){
 		
 		$("#messageContent").animate({
@@ -319,16 +327,8 @@ function Update(){
 		$("#messageContent").text("GAME OVER");
 		
 
-		setTimeout(()=>{
-			$("#messageContent").text("");
 	
-				$("#messageContent").animate({
-					opacity : '0.0',
-				  })
-			},2000);
-			
-
-		}
+	}
 	
 	if(Math.abs(globals.parcouredDistance)>upgradedDistance[0] ){
 		upgrade(0);
@@ -447,6 +447,11 @@ function Restart(){
 		opacity: '0.0',
 		zIndex : '0'
 	});
+
+	$("#ui").animate({
+
+		opacity : "0.0"
+	})
 	Start();
 }
 

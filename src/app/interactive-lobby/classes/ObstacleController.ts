@@ -5,10 +5,9 @@ import {SkinInstance} from './SkinInstance';
 
 
 
-import { models, inputManager, soundsLibrary  } from '../infiniteRunner';
+import { models, soundsLibrary  } from '../infiniteRunner';
 import { globals } from './globals';
 import { PlayerController } from './PlayerController';
-import { Vector3, PositionalAudio } from 'three';
 
 
 /**
@@ -43,9 +42,10 @@ export class ObstacleController extends Component {
         //Audio setup
         this.triggerAudio =  new THREE.PositionalAudio( globals.audioListener );
         this.triggerAudio.setBuffer( soundsLibrary.explosion.clip );
-	    this.triggerAudio.setVolume(0.5);
+	    this.triggerAudio.setVolume(3);
         gameObject.transform.add(this.triggerAudio)
         
+
         this.transform = gameObject.transform;
         this.explosionPower = 1.06;
         this.addExplosion();

@@ -6,10 +6,8 @@ import {SkinInstance} from './SkinInstance';
 
 
 import { globals } from './globals';
-import { models, inputManager  } from '../infiniteRunner';
+import { models, inputManager, soundsLibrary  } from '../infiniteRunner';
 
-declare var jquery:any;
-declare var $ :any;
 
 /**
  Player controller script for player gameobject 
@@ -28,6 +26,11 @@ export class PlayerController extends Component {
     maxRightAngle ;
     maxLeftAngle;
 
+
+    engineSlowAudio;
+    engineMediumAudio;
+    engineFastAudio;
+
     maxHealth;
     private _current_health;
     get health(): number{
@@ -44,6 +47,11 @@ export class PlayerController extends Component {
     set targetSpeed(speed : number) {
       this._targetSpeed = speed;    
     }
+
+
+   
+
+
     constructor(gameObject) {
 
       super(gameObject);
@@ -59,11 +67,11 @@ export class PlayerController extends Component {
       this.targetSpeed = globals.moveSpeed;
       this.maxHealth = 100;
       this.health = this.maxHealth;
-      
-
+    
       gameObject.transform.rotation.y = -2.35625;
       globals.playerPosition = new THREE.Vector3(0,0,0);
 
+      this.initSound()
       this.updateUI();
     }
 
@@ -107,7 +115,6 @@ export class PlayerController extends Component {
 
 
       //Update parcouredDistance if the player is rotating (FOR THE CAMERA):
-
       //is Right
       if(transform.position.x < transform.position.z){
         globals.parcouredDistance = THREE.Math.lerp(globals.parcouredDistance,transform.position.x, 0.2);
@@ -123,7 +130,6 @@ export class PlayerController extends Component {
       transform.rotation.y = THREE.Math.lerp(transform.rotation.y,-2.35625,deltaTime*this.turnSpeed);
       
       
-
       //Check if player is out of screen and reposition
       if(frustum.containsPoint(transform.position)){
 
@@ -139,11 +145,72 @@ export class PlayerController extends Component {
       
 
       
+      
+     
       this.buoancyUpdate();
+      this.updateAudio();
+
       globals.playerPosition = transform.position;
       
 
     }
+
+    initSound(){
+
+      //Audio setup
+      this.engineSlowAudio =  new THREE.PositionalAudio( globals.audioListener );
+      this.engineMediumAudio =  new THREE.PositionalAudio( globals.audioListener );
+      this.engineFastAudio =  new THREE.PositionalAudio( globals.audioListener );
+
+      //init slow audio
+      this.engineSlowAudio.setBuffer( soundsLibrary.engine_slow.clip );
+      this.engineSlowAudio.setVolume(5);
+      this.engineSlowAudio.setLoop(true);
+      this.engineSlowAudio.play();
+
+
+      //init medium and fast audio
+
+      this.engineMediumAudio.setBuffer( soundsLibrary.engine_medium.clip );
+      this.engineMediumAudio.setVolume(5);
+      this.engineMediumAudio.setLoop(true);
+
+        
+      this.engineFastAudio.setBuffer( soundsLibrary.engine_fast.clip );
+      this.engineFastAudio.setVolume(5);
+      this.engineFastAudio.setLoop(true);
+
+
+      this.gameObject.transform.add(this.engineSlowAudio);
+
+
+    }
+
+    changeAudio(oldAudio , newAudio){
+
+      oldAudio.stop();
+      this.gameObject.transform.remove(oldAudio);
+      this.gameObject.transform.add(newAudio);
+      this.gameObject.transform.children[1].play();
+
+
+    }
+
+    updateAudio(){
+      
+      if(globals.moveSpeed>0.4 && this.engineSlowAudio.isPlaying){
+        
+        this.changeAudio(this.engineSlowAudio,this.engineMediumAudio);
+      }
+
+      if(globals.moveSpeed>0.6 && this.engineMediumAudio.isPlaying){
+        
+        this.changeAudio(this.engineMediumAudio,this.engineFastAudio);
+      }
+
+
+    }
+
 
     dealDamage(factor){
       var damage = 10 * factor;
@@ -165,6 +232,8 @@ export class PlayerController extends Component {
       },500);
     }
     
+    
+
     buoancyUpdate(){
       var obj = this.gameObject.transform;
       if(!obj.visible)
