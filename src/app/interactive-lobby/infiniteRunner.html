@@ -8,7 +8,7 @@
 	<div	
 		fxFlex
 		fxLayout="column"  
-		id="preview" 
+		id="previewScreen" 
 		fxLayoutAlign="center center"
 		[@HUDFadeIn]="this.isPreviewVisible? 'fadeIn' : 'fadeOut'" >
 		
@@ -25,7 +25,8 @@
 	<!--MESSAGE PANEL-->
 	<div fxFlex 
 		fxLayout="column" 
-		id="message"  
+		class="overlay-panel"
+		id="messagesScreen"  
 		fxLayoutAlign="center center"
 		>
 		<span id="messageContent" class="mat-h1"></span>
@@ -37,18 +38,31 @@
 		
 		
 		<canvas fxFlex fxLayout="row" fxFlexFill id="c" tabindex="1"></canvas>
-
+		<!--START SCREEN-->
+		<div fxFlex 
+		fxLayout="column" 
+		class="overlay-panel"
+		id="loadingScreen"  
+		fxLayoutAlign="center center"
+		[@HUDFadeIn]="this.isLoading && !this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
+		<div id="pauseMenu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
+			<button id="menuButton" (click)="pause()">NEW GAME</button>
+			<button id="menuButton" (click)="refresh()">QUIT</button>
+		</div>
+		</div>
 		
 		<!--LOADING SCREEN-->
 		<div fxFlex 
-		fxLayout="column" id="loading"  
+		fxLayout="column" 
+		class="overlay-panel"
+		id="loadingScreen"  
 		fxLayoutAlign="center center"
 		[@HUDFadeIn]="this.isLoading && !this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
 			<div >
 			  <div>...loading...</div>
 			  <div class="progress"><div id="progressbar"></div></div>
 			</div>
-		  </div>
+		</div>
 
 
 		<!--PLAYERSTATS LAYER-->
@@ -75,7 +89,8 @@
 		
 		<!--PAUSE MENU LAYER-->
 		
-		<div id="pause" 
+		<div id="pauseScreen" 
+			class="overlay-panel" 
 			fxLayout="row" 
 			fxLayoutAlign ="center center" 
 			[@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'" >
@@ -90,7 +105,10 @@
 			
 		</div>
 
+
+		<!--GAME OVER LAYER-->
 		<div id="gameOverScreen"
+			 class="overlay-panel"
 			 fxLayout="row"
 			 fxLayoutAlign="center center">
 			
@@ -103,7 +121,7 @@
 		</div>
 		
 		<!--CONTROLS LAYER-->
-		<div id="ui" fxLayout="column" fxLayoutAlign="center" >
+		<div class="overlay-panel" id="ui" fxLayout="column" fxLayoutAlign="center" >
 			<div fxFlex 
 			fxLayout="row" fxLayoutAlign="end end" 
 			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">

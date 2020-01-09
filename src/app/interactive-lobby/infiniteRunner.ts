@@ -214,6 +214,20 @@ function Start(){
 	playerGameObject.getComponent(PlayerController).targetSpeed= 0;
 	globals.isPlaying = true;
 	
+	
+	
+	startCountdown();
+		
+
+	requestAnimationFrame( Render );
+	
+
+
+
+}
+
+function startCountdown (){
+
 	$('#messageContent').animate({
 
 		opacity : '1.0',
@@ -235,7 +249,8 @@ function Start(){
 					
 					$("#ui").animate({
 
-						opacity : "1.0"
+						opacity : "1.0",
+						display : 'flex'
 					})
 					setTimeout(()=>{
 						$('#messageContent').animate({
@@ -253,13 +268,6 @@ function Start(){
 		},1000)
 		
 	},3000)
-	
-  
-
-	requestAnimationFrame( Render );
-	
-
-
 
 }
 
@@ -450,7 +458,8 @@ function Restart(){
 
 	$("#ui").animate({
 
-		opacity : "0.0"
+		opacity : "0.0",
+		display : "none"
 	})
 	Start();
 }
@@ -470,21 +479,17 @@ function Restart(){
   animations: [pauseMenu]
 })
 export class InfiniteRunner implements AfterViewInit{
-  @ViewChild('Scene',{static:false}) scene : ElementRef;
 
   isPreviewVisible;
   isControlsVisible;
   isPauseMenuVisible
   isLoading;
-  isMessageVisible;
 
-  message = "Anyong"
 
  
-  constructor(private elementRef: ElementRef) {
+  constructor() {
 
 		this.isPreviewVisible = true;
-		this.isMessageVisible = false;
 		this.isControlsVisible = false;
 		this.isPauseMenuVisible = false;
 		this.isLoading = true;
@@ -592,7 +597,6 @@ export class InfiniteRunner implements AfterViewInit{
 	  
 	this.isPauseMenuVisible = false;
 	this.isControlsVisible = true;
-	this.isMessageVisible = true;
 	Restart();
   }
   refresh(){
