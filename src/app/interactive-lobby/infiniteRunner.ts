@@ -216,7 +216,6 @@ function Start(){
 	
 	
 	
-	startCountdown();
 		
 
 	requestAnimationFrame( Render );
@@ -462,6 +461,7 @@ function Restart(){
 		display : "none"
 	})
 	Start();
+	startCountdown();
 }
 
 
@@ -484,21 +484,22 @@ export class InfiniteRunner implements AfterViewInit{
   isControlsVisible;
   isPauseMenuVisible
   isLoading;
+  isStartScreenVisible;
 
 
  
   constructor() {
-
-		this.isPreviewVisible = true;
-		this.isControlsVisible = false;
-		this.isPauseMenuVisible = false;
-		this.isLoading = true;
+	
+	this.isPreviewVisible = true;
+	this.isControlsVisible = false;
+	this.isPauseMenuVisible = false;
+	this.isLoading = true;
+	this.isStartScreenVisible = true;
 
    }
 
   ngOnInit() {
-	
-	  }
+	}
 
   ngAfterViewInit(){
 
@@ -511,12 +512,15 @@ export class InfiniteRunner implements AfterViewInit{
   }
 
   
+
+  //Called after loading assets
   onLoadFinished(){
 	init();
 	Start();
 
   }
 
+  //From preview screen
   onPlayClick(){
 	console.log("Started game")
 	
@@ -526,6 +530,17 @@ export class InfiniteRunner implements AfterViewInit{
 	this.loadAssets();
 
   }
+
+
+  //From start screen
+  onStartClick(){
+	
+	this.isStartScreenVisible = false;
+
+	startCountdown();
+
+  }
+
 
   loadAssets(){
 
@@ -578,8 +593,8 @@ export class InfiniteRunner implements AfterViewInit{
   }
 
   
-
-  pause(){
+  //From pause menu in pauseScreen
+  togglePause(){
 	console.log("Paused")
 	this.isControlsVisible = !this.isControlsVisible;
 	this.isPauseMenuVisible = !this.isPauseMenuVisible;
@@ -593,12 +608,37 @@ export class InfiniteRunner implements AfterViewInit{
 
   }
 
+  toggleAudio(){
+
+	var icon = '../assets/icons/audio_';
+	$("#audioButton").toggleClass("clicked");
+	if($("#audioButton").hasClass("clicked")) {
+
+		icon +='off.svg' ;
+		
+		camera.children[0].setMasterVolume(0);
+
+	}else{
+		icon +='on.svg';
+		camera.children[0].setMasterVolume(1);
+	} 
+	
+	$('#audioButton').find('img').attr('src',icon);
+
+  }
+
+  //In both gameOverScreen and pauseScreen
   replay(){
 	  
 	this.isPauseMenuVisible = false;
 	this.isControlsVisible = true;
+	this.isStartScreenVisible = false;
+	
 	Restart();
   }
+
+
+  
   refresh(){
 	window.location.reload();
   }

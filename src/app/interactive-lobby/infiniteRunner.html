@@ -38,17 +38,35 @@
 		
 		
 		<canvas fxFlex fxLayout="row" fxFlexFill id="c" tabindex="1"></canvas>
+		
 		<!--START SCREEN-->
 		<div fxFlex 
-		fxLayout="column" 
-		class="overlay-panel"
-		id="loadingScreen"  
-		fxLayoutAlign="center center"
-		[@HUDFadeIn]="this.isLoading && !this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
-		<div id="pauseMenu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
-			<button id="menuButton" (click)="pause()">NEW GAME</button>
-			<button id="menuButton" (click)="refresh()">QUIT</button>
-		</div>
+			fxLayout="column" 
+			class="overlay-panel"
+			id="startScreen"  
+			fxLayoutAlign="center center"
+			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
+
+
+					<span style="text-align: center;" class="mat-h1">Infinite runner</span>
+					<div fxFlexFill class="menu"  id="startMenu" fxFlex fxLayout="column"  fxLayoutGap="20px" fxLayoutAlign="end center" > 
+							<button fxFlexLayout="row"  id="menuButton" (click)="onStartClick()">NEW GAME</button>
+							<button fxFlexLayout="row"  id="menuButton" (click)="refresh()">QUIT</button>
+
+							
+
+						<button 
+							[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'"
+							fxLayout="row" fxLayoutAlign="end end"  
+							id="audioButton" 
+							(click)="toggleAudio()">
+								<img src="../assets/icons/audio_on.svg">
+						</button>
+					</div>
+
+				
+			
+				
 		</div>
 		
 		<!--LOADING SCREEN-->
@@ -68,7 +86,7 @@
 		<!--PLAYERSTATS LAYER-->
 		<div id="playerStats"  
 			fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px"
-			[@HUDFadeIn]="!this.isLoading? 'fadeIn' : 'fadeOut'">
+			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
 			<div>
 				<div class="health-box">
 					<div class="health-bar"></div>
@@ -96,9 +114,9 @@
 			[@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'" >
 
 				<div
-					 
+					class="menu"
 					id="pauseMenu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
-					<button id="menuButton" (click)="pause()">RESUME</button>
+					<button id="menuButton" (click)="togglePause()">RESUME</button>
 					<button id="menuButton" (click)="replay()">RESTART</button>
 					<button id="menuButton" (click)="refresh()">QUIT</button>
 				</div>
@@ -112,7 +130,7 @@
 			 fxLayout="row"
 			 fxLayoutAlign="center center">
 			
-			 <div id="gameOverMenu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
+			 <div class="menu" id="gameOverMenu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
 				<button id="menuButton" >SAVE SCORE</button>
 				<button id="menuButton" (click)="replay()">RESTART</button>
 				<button id="menuButton" (click)="refresh()">QUIT</button>
@@ -122,11 +140,12 @@
 		
 		<!--CONTROLS LAYER-->
 		<div class="overlay-panel" id="ui" fxLayout="column" fxLayoutAlign="center" >
+			
 			<div fxFlex 
 			fxLayout="row" fxLayoutAlign="end end" 
 			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">
 		
-				<button id="pauseButton" (click)="pause()">
+				<button id="pauseButton" (click)="togglePause()">
 					<img src="../assets/icons/pauseOutline.svg">
 				</button>
 			</div>
