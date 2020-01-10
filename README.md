@@ -1,6 +1,7 @@
-# Shop
+# AGabtni
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
+This is a personal project to showcase my projects and to show my portfolio (not really)
+
 
 ## Development server
 
