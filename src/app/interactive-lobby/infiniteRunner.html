@@ -47,26 +47,13 @@
 			fxLayoutAlign="center center"
 			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
 
+				<span style="text-align: center;" class="mat-h1">Infinite runner</span>
+				<div fxFlexFill class="menu"  id="startMenu" fxFlex fxLayout="column"  fxLayoutGap="20px" fxLayoutAlign="end center" > 
+					<button fxFlexLayout="row"  id="menuButton" (click)="onStartClick()">NEW GAME</button>
+					<button fxFlexLayout="row"  id="menuButton" (click)="refresh()">QUIT</button>
 
-					<span style="text-align: center;" class="mat-h1">Infinite runner</span>
-					<div fxFlexFill class="menu"  id="startMenu" fxFlex fxLayout="column"  fxLayoutGap="20px" fxLayoutAlign="end center" > 
-							<button fxFlexLayout="row"  id="menuButton" (click)="onStartClick()">NEW GAME</button>
-							<button fxFlexLayout="row"  id="menuButton" (click)="refresh()">QUIT</button>
-
-							
-
-						<button 
-							[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'"
-							fxLayout="row" fxLayoutAlign="end end"  
-							id="audioButton" 
-							(click)="toggleAudio()">
-								<img src="../assets/icons/audio_on.svg">
-						</button>
-					</div>
-
-				
-			
-				
+					
+				</div>		
 		</div>
 		
 		<!--LOADING SCREEN-->
@@ -106,7 +93,6 @@
 		</div>
 		
 		<!--PAUSE MENU LAYER-->
-		
 		<div id="pauseScreen" 
 			class="overlay-panel" 
 			fxLayout="row" 
@@ -139,22 +125,34 @@
 		</div>
 		
 		<!--CONTROLS LAYER-->
-		<div class="overlay-panel" id="ui" fxLayout="column" fxLayoutAlign="center" >
-			
-			<div fxFlex 
-			fxLayout="row" fxLayoutAlign="end end" 
-			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">
-		
-				<button id="pauseButton" (click)="togglePause()">
-					<img src="../assets/icons/pauseOutline.svg">
+		<div class="overlay-panel"  fxLayout="column" fxLayoutAlign="center" >
+			<div style="z-index: 4;"
+				[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'"
+				fxLayout="row wrap" 
+				fxLayoutAlign="end end">
+				
+				<button 
+				id="audioButton" 
+				(click)="toggleAudio()">
+					<img src="../assets/icons/audio_on.svg">
 				</button>
-			</div>
-		  <div id="controls" fxLayout="row" fxLayoutAlign="end" [@HUDFadeIn]="this.isControlsVisible? 'fadeIn' : 'fadeOut'">
-			
-			<div id="left"><img src="https://threejsfundamentals.org/threejs/resources/images/left.svg"></div>
-	      	<div id="right"><img src="https://threejsfundamentals.org/threejs/resources/images/right.svg"></div>
 
-		  </div>
+			</div>
+			<div fxFlex fxLayout="column" id="ui">
+				<div fxFlex 
+					fxLayout="row" fxLayoutAlign="end end" 
+					[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">
+					<button id="pauseButton" (click)="togglePause()">
+						<img src="../assets/icons/pauseOutline.svg">
+					</button>
+				  </div>
+				  
+		  		<div id="controls" fxLayout="row" fxLayoutAlign="end" [@HUDFadeIn]="this.isControlsVisible? 'fadeIn' : 'fadeOut'">
+					<div id="left"><img src="https://threejsfundamentals.org/threejs/resources/images/left.svg"></div>
+					<div id="right"><img src="https://threejsfundamentals.org/threejs/resources/images/right.svg"></div>
+			  	</div>
+			</div>
+
 		</div>
 		
 		

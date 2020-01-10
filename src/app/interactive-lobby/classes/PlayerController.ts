@@ -88,7 +88,7 @@ export class PlayerController extends Component {
         $("#gameOverScreen").animate({
 
           opacity:'1.0',
-          zIndex : '99'
+          zIndex : '99',
         });
         return;
       }
