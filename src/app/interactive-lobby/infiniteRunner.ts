@@ -519,6 +519,13 @@ export class InfiniteRunner implements AfterViewInit{
 
   ngOnInit() {
 	 
+	this._apiservice.saveScore("Ahmed", "20").subscribe(
+
+
+		val => {console.log("Sucessfully saved score ", val);},
+		response => {console.log("Error saving score ", response)},
+		()=> console.log("put call complete")
+	);
   }
 
   ngAfterViewInit(){
@@ -537,7 +544,7 @@ export class InfiniteRunner implements AfterViewInit{
 	this._apiservice.getScores().subscribe(
 		data => {this.scores = data;console.log(this.scores[0]);this.isHomeMenuVisible = false;},
 		err => console.error(err),
-		() => console.log('done loading scores')
+		() => console.log('get call complete')
 
 		
 	)

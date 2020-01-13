@@ -13,7 +13,20 @@ export class APIService {
  
     // Uses http.get() to load data from a single API endpoint
     getScores() {
-        return this.http.get(('https://infinite-runner-api.herokuapp.com/scores'));
+        return this.http.get('https://infinite-runner-api.herokuapp.com/scores');
+    }
+
+
+    saveScore(name, score){
+
+
+        var body = {
+
+            "name" : name,
+            "score": score,
+        }
+        return this.http.post('https://infinite-runner-api.herokuapp.com/scores',body);
+
     }
 
 }
