@@ -67,20 +67,30 @@ export class TopNavbarComponent implements AfterViewInit {
   @HostListener("window:scroll"
   , [])
     onWindowScroll() {
-        if(400>this.winRef.nativeWindow.pageYOffset){
-            this.isVisible = true;
+
+        if(this.winRef.nativeWindow.pageYOffset > 10){
+            this.isVisible = false;
          
         }
         else{
-            this.isVisible = false;
+            this.isVisible = true;
         }
+
+
+
     }
 
 
   constructor(@Inject(DOCUMENT) private document: any, private winRef: WindowRef) { 
   }
 
+  ngOnInit(){
+    
+  }
+
   ngAfterViewInit() {
+
+    
   } 
 
 

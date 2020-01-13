@@ -26,28 +26,17 @@ export class ProductHighlightComponent implements OnChanges {
 	constructor() {}
 
 	
-
-
-
-	 public scroll() {
-
+	public scroll() {
       this.titleWrapper.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start'});
-
     }
 
 
-	ngOnInit(){
-			
+	ngOnInit(){			
 		this.serviceDescription = services[Number(this.containerIndex)].description;
 		AOS.init();
-
-
 	}
 	ngOnChanges() {
-
-			this.serviceDescription = services[Number(this.containerIndex)].description;
-
-
+		this.serviceDescription = services[Number(this.containerIndex)].description;
 	}
 
 }

@@ -8,6 +8,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParallaxDirective } from './directives/parallax.directive';
 import { HttpClientModule } from '@angular/common/http';
+
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

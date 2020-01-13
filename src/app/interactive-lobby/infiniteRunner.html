@@ -1,18 +1,25 @@
-
+<div fxFlex #gameContainer>
 <mat-card 
+	
 	style="height: 90%;"
 	fxFlex
 	fxLayout="column" 
 	fxLayoutAlign="center">
 	<!--PREVIEW PANEL-->
+
 	<div	
 		fxFlex
 		fxLayout="column"  
 		id="previewScreen" 
 		fxLayoutAlign="center center"
 		[@HUDFadeIn]="this.isPreviewVisible? 'fadeIn' : 'fadeOut'" >
-		
-			<img style="max-width: 200px ; max-height: 300px" src="https://picsum.photos/200/300">
+			<div fxFlex>
+				<video controls (click)="toggleVideo()" id="videoPlayer">
+					<source src="https://gfycat.com/enviousgigantickiwi" />
+					Browser not supported
+				</video>
+
+			</div>
 			<span class="mat-h2"  style="font-weight: 900;text-align: center; margin: 20px;">Infinite Runner with Three.js</span>
 
 			<button id="playButton"  mat-fab 
@@ -22,6 +29,7 @@
 
 	
 	</div>
+	
 	<!--MESSAGE PANEL-->
 	<div fxFlex 
 		fxLayout="column" 
@@ -48,11 +56,30 @@
 			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
 
 				<span style="text-align: center;" class="mat-h1">Infinite runner</span>
-				<div fxFlexFill class="menu"  id="startMenu" fxFlex fxLayout="column"  fxLayoutGap="20px" fxLayoutAlign="end center" > 
-					<button fxFlexLayout="row"  id="menuButton" (click)="onStartClick()">NEW GAME</button>
-					<button fxFlexLayout="row"  id="menuButton" (click)="refresh()">QUIT</button>
+				<div fxFlexFill class="menu"  
+					id="startMenu" 
+					fxFlex fxLayout="column"  
+					fxLayoutGap="20px" fxLayoutAlign="center center"> 
 
-					
+					<div class="sub-menu" 
+						[@HUDFadeIn]="this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'"
+						fxFlex fxLayout="column"  
+						fxLayoutGap="20px" 
+						fxLayoutAlign="center center">
+							<button id="menuButton" (click)="onStartClick()">NEW GAME</button>
+							<button id="menuButton" (click)="getScores()">Most wanted sailors</button>
+							<button id="menuButton" (click)="refresh()">QUIT</button>
+					</div>
+
+					<!--Score board -->
+					<div class="sub-menu"
+						[@HUDFadeIn]="!this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'"
+						fxFlex fxLayout="column"  
+						fxLayoutGap="20px" fxLayoutAlign="center center" >
+							<button fxFlexLayout="row"  id="menuButton" (click)="onStartClick()">NEW GAME</button>
+							<button fxFlexLayout="row"  id="menuButton" (click)="getScores()">Most wanted sailors</button>
+							<button fxFlexLayout="row"  id="menuButton" (click)="refresh()">QUIT</button>
+					</div>
 				</div>		
 		</div>
 		
@@ -130,7 +157,6 @@
 				[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'"
 				fxLayout="row wrap" 
 				fxLayoutAlign="end end">
-				
 				<button 
 				id="audioButton" 
 				(click)="toggleAudio()">
@@ -164,3 +190,4 @@
 	</div>	
 	</mat-card>
 
+</div>

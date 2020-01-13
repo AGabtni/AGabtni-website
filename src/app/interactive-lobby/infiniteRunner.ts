@@ -1,6 +1,7 @@
 
-import { Component, ViewChild, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
-
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {APIService} from './classes/apiService.service';
+import {Observable} from 'rxjs/Rx';
 
 
 import { pauseMenu } from '../../assets/animations';
@@ -25,9 +26,9 @@ import {InputManager} from './classes/InputManager';
 
 
 
-import {globals} from './classes/globals'
-import { ResolveStart } from '@angular/router';
-import { SkinInstance } from './classes/SkinInstance';
+import {globals} from './classes/globals';
+
+
 
 
 //--GAME_CODE-------------------
@@ -424,6 +425,26 @@ function resizeRendererToDisplaySize(renderer) {
 
 function Restart(){
 	
+
+	
+	$("#messageContent").animate({
+		opacity : '0.0',
+	});
+	$("#messageContent").text("");
+
+	$("#gameOverScreen").animate({
+
+		opacity: '0.0',
+		zIndex : '0'
+	});
+
+	$("#ui").animate({
+
+		opacity : "0.0",
+		display : "none"
+	})
+
+
 	scene = null;
 	camera = null;
 	playerGameObject = null;
@@ -443,23 +464,8 @@ function Restart(){
 	globals.scene = null;
 	globals.camera = null;
 	globals.cameraInfo = null;
+
 	
-	$("#messageContent").animate({
-		opacity : '0.0',
-	});
-	$("#messageContent").text("");
-
-	$("#gameOverScreen").animate({
-
-		opacity: '0.0',
-		zIndex : '0'
-	});
-
-	$("#ui").animate({
-
-		opacity : "0.0",
-		display : "none"
-	})
 	Start();
 	startCountdown();
 }
@@ -475,31 +481,45 @@ function Restart(){
 @Component({
   selector: 'infiniteRunner-game',
   templateUrl: './infiniteRunner.html',
+  providers: [APIService],
+
   styleUrls: ['./infiniteRunner.css'],
+  
   animations: [pauseMenu]
 })
 export class InfiniteRunner implements AfterViewInit{
+  @ViewChild('gameContainer', {static: true}) gameContainer : ElementRef;
+  @ViewChild('videoPlayer', {static: true}) videoplayer: any;
 
   isPreviewVisible;
   isControlsVisible;
   isPauseMenuVisible
   isLoading;
+
   isStartScreenVisible;
+  isHomeMenuVisible
 
 
- 
-  constructor() {
+   
+  public scores ; 
+
+
+  constructor(private _apiservice : APIService) {
 	
 	this.isPreviewVisible = true;
 	this.isControlsVisible = false;
 	this.isPauseMenuVisible = false;
 	this.isLoading = true;
-	this.isStartScreenVisible = true;
+	this.isStartScreenVisible = false;
+
+
+	this.isHomeMenuVisible = false;
 
    }
 
   ngOnInit() {
-	}
+	 
+  }
 
   ngAfterViewInit(){
 
@@ -511,6 +531,21 @@ export class InfiniteRunner implements AfterViewInit{
 
   }
 
+
+  getScores() {
+
+	this._apiservice.getScores().subscribe(
+		data => {this.scores = data;console.log(this.scores[0]);this.isHomeMenuVisible = false;},
+		err => console.error(err),
+		() => console.log('done loading scores')
+
+		
+	)
+
+	
+
+	
+  }
   
 
   //Called after loading assets
@@ -522,11 +557,10 @@ export class InfiniteRunner implements AfterViewInit{
 
   //From preview screen
   onPlayClick(){
-	console.log("Started game")
-	
-	
 	this.isPreviewVisible = false;
-
+	this.isStartScreenVisible = true;
+	this.isHomeMenuVisible = true;
+	this.gameContainer.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start'});
 	this.loadAssets();
 
   }
@@ -536,12 +570,12 @@ export class InfiniteRunner implements AfterViewInit{
   onStartClick(){
 	
 	this.isStartScreenVisible = false;
-
+	
 	startCountdown();
 
   }
 
-
+  //Load models and init scene when finished
   loadAssets(){
 
 	const manager = new THREE.LoadingManager();
@@ -595,10 +629,8 @@ export class InfiniteRunner implements AfterViewInit{
   
   //From pause menu in pauseScreen
   togglePause(){
-	console.log("Paused")
 	this.isControlsVisible = !this.isControlsVisible;
 	this.isPauseMenuVisible = !this.isPauseMenuVisible;
-
 	var icon = '../assets/icons/pause';
 	$("#pauseButton").toggleClass("clicked");
 	icon += $("#pauseButton").hasClass("clicked") ? 'Filled.svg' : 'Outline.svg';
@@ -608,6 +640,7 @@ export class InfiniteRunner implements AfterViewInit{
 
   }
 
+  //Toggle global volume for the audio listener and toggle ui icon
   toggleAudio(){
 
 	var icon = '../assets/icons/audio_';
@@ -627,6 +660,11 @@ export class InfiniteRunner implements AfterViewInit{
 
   }
 
+  //Play video
+   toggleVideo(){
+
+
+   }
   //In both gameOverScreen and pauseScreen
   replay(){
 	  
@@ -636,6 +674,8 @@ export class InfiniteRunner implements AfterViewInit{
 	
 	Restart();
   }
+
+
 
 
   
