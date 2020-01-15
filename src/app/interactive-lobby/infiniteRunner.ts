@@ -18,7 +18,6 @@ import {ScreenShake} from './classes/ScreenShake';
 
 import {PlayerController} from './classes/PlayerController';
 
-
 import { ObstaclePooler } from "./classes/ObstaclePooler";
 
 import {GameObjectManager} from './classes/GameObjectManager';
