@@ -88,6 +88,10 @@
 .sub-menu div{
   width: 100%;
 }
+#scoreBoard{
+
+  background-color: white;
+}
 
 #loadingScreen{
 
@@ -194,7 +198,8 @@
 
 
 #pauseMenu{
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color : midnightblue;
+
   
   
 }

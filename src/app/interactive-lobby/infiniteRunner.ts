@@ -519,13 +519,7 @@ export class InfiniteRunner implements AfterViewInit{
 
   ngOnInit() {
 	 
-	this._apiservice.saveScore("Ahmed", "20").subscribe(
-
-
-		val => {console.log("Sucessfully saved score ", val);},
-		response => {console.log("Error saving score ", response)},
-		()=> console.log("put call complete")
-	);
+	
   }
 
   ngAfterViewInit(){
@@ -540,18 +534,35 @@ export class InfiniteRunner implements AfterViewInit{
 
 
   getScores() {
-
+	
+	this.isHomeMenuVisible = false;
 	this._apiservice.getScores().subscribe(
-		data => {this.scores = data;console.log(this.scores[0]);this.isHomeMenuVisible = false;},
+		data => {
+			this.scores = data;
+			console.log(this.scores[0]);},
 		err => console.error(err),
 		() => console.log('get call complete')
 
 		
 	)
-
 	
+  }
 
-	
+
+  return(){
+
+	this.isHomeMenuVisible = true;
+  }
+
+  saveScore(){
+
+	this._apiservice.saveScore("Ahmed", "20").subscribe(
+
+
+		val => {console.log("Sucessfully saved score ", val);},
+		response => {console.log("Error saving score ", response)},
+		()=> console.log("put call complete")
+	);
   }
   
 

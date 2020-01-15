@@ -1,10 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpHeaders, HttpClient } from '@angular/common/http';
+import {HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import { TransitionCheckState } from '@angular/material';
+import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
  
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
+const apiUrl = 'https://infinite-runner-api.herokuapp.com/scores'
  
 @Injectable()
 export class APIService {
@@ -13,7 +17,7 @@ export class APIService {
  
     // Uses http.get() to load data from a single API endpoint
     getScores() {
-        return this.http.get('https://infinite-runner-api.herokuapp.com/scores');
+        return this.http.get(apiUrl);
     }
 
 
@@ -25,8 +29,11 @@ export class APIService {
             "name" : name,
             "score": score,
         }
-        return this.http.post('https://infinite-runner-api.herokuapp.com/scores',body);
+        return this.http.post(apiUrl,body);
 
     }
+
+
+
 
 }

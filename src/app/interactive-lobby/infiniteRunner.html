@@ -75,10 +75,15 @@
 					<div class="sub-menu"
 						[@HUDFadeIn]="!this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'"
 						fxFlex fxLayout="column"  
-						fxLayoutGap="20px" fxLayoutAlign="center center" >
-							<button fxFlexLayout="row"  id="menuButton" (click)="onStartClick()">NEW GAME</button>
-							<button fxFlexLayout="row"  id="menuButton" (click)="getScores()">Most wanted sailors</button>
-							<button fxFlexLayout="row"  id="menuButton" (click)="refresh()">QUIT</button>
+						fxLayoutGap="20px" fxLayoutAlign="end" >
+							
+							<div id="scoreBoard"
+								*ngFor="let score of scores" fxLayoutAlign="center" >
+								<span>{{score.name}}</span>
+								<span>{{score.score}}</span>
+
+							</div>
+
 					</div>
 				</div>		
 		</div>
@@ -125,14 +130,18 @@
 			fxLayout="row" 
 			fxLayoutAlign ="center center" 
 			[@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'" >
-
-				<div
-					class="menu"
-					id="pauseMenu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
+			<div class="menu" 
+				id="pauseMenu"
+				fxFlex fxLayout="column"  
+				fxLayoutGap="20px" fxLayoutAlign="center center"> 
+				
+				<div class="sub-menu"
+					 fxFlexFill fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
 					<button id="menuButton" (click)="togglePause()">RESUME</button>
 					<button id="menuButton" (click)="replay()">RESTART</button>
 					<button id="menuButton" (click)="refresh()">QUIT</button>
 				</div>
+			</div>
 			
 		</div>
 
