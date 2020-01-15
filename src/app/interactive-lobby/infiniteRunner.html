@@ -56,14 +56,23 @@
 			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
 
 				<span style="text-align: center;" class="mat-h1">Infinite runner</span>
-				<div fxFlexFill class="menu"  
+				<div fxFlexFill 
+					class="menu"
 					id="startMenu" 
-					fxFlex fxLayout="column"  
-					fxLayoutGap="20px" fxLayoutAlign="center center"> 
-
+					fxFlex 
+					fxLayout="column" 
+					fxLayoutAlign="center center"
+					fxLayoutGap="20px" > 
+					<!-- Home Menu -->
+					
+					<div [@HUDFadeIn]="!this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'" 
+					fxLayout="row" fxLayoutAlign="end end">
+						
+					</div>
 					<div class="sub-menu" 
 						[@HUDFadeIn]="this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'"
-						fxFlex fxLayout="column"  
+						fxFlex
+						fxLayout="column"  
 						fxLayoutGap="20px" 
 						fxLayoutAlign="center center">
 							<button id="menuButton" (click)="onStartClick()">NEW GAME</button>
@@ -74,18 +83,31 @@
 					<!--Score board -->
 					<div class="sub-menu"
 						[@HUDFadeIn]="!this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'"
-						fxFlex fxLayout="column"  
-						fxLayoutGap="20px" fxLayoutAlign="end" >
-							
-							<div id="scoreBoard"
-								*ngFor="let score of scores" fxLayoutAlign="center" >
+						fxFlex 
+						fxFlexFill
+						fxLayout="column"  
+						fxLayoutGap="20px" 
+						id="scoreBoard"
+						fxLayoutAlign="center center" >
+							<button 
+							fxLayout="row"
+							fxFlex
+							fxLayoutAlign="end end"
+							id="backButton" 
+							(click)="return()">
+								<img src="../assets/icons/arrow_back.svg">
+							</button>
+							<div  *ngFor="let score of scores"fxLayout="row" >
 								<span>{{score.name}}</span>
 								<span>{{score.score}}</span>
 
 							</div>
 
 					</div>
-				</div>		
+				
+				
+				</div>
+				
 		</div>
 		
 		<!--LOADING SCREEN-->
@@ -127,20 +149,34 @@
 		<!--PAUSE MENU LAYER-->
 		<div id="pauseScreen" 
 			class="overlay-panel" 
-			fxLayout="row" 
+			fxLayout="column" 
 			fxLayoutAlign ="center center" 
 			[@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'" >
 			<div class="menu" 
 				id="pauseMenu"
+				fxFlexFill
 				fxFlex fxLayout="column"  
 				fxLayoutGap="20px" fxLayoutAlign="center center"> 
-				
 				<div class="sub-menu"
-					 fxFlexFill fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"> 
+					fxFlex 
+					fxLayout="column" 
+					dxLayoutAlign = "center center"
+					fxLayoutGap = "20px">
+
+					jkzebfjbezjfbezufbujebfuib
+
+
+				</div>
+				<div class="sub-menu"
+					  fxFlex 
+					  fxLayout="column" 
+					  fxLayoutAlign="center center" 
+					  fxLayoutGap="20px"> 
 					<button id="menuButton" (click)="togglePause()">RESUME</button>
 					<button id="menuButton" (click)="replay()">RESTART</button>
 					<button id="menuButton" (click)="refresh()">QUIT</button>
 				</div>
+				
 			</div>
 			
 		</div>

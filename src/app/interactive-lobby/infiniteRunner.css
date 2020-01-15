@@ -85,12 +85,23 @@
   
   
 }
-.sub-menu div{
-  width: 100%;
-}
 #scoreBoard{
 
   background-color: white;
+}
+
+#backButton{
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0);
+  justify-content: flex-end;
+
+}
+#backButton img{
+  
+  width: 80%;
+  height: 80%;
 }
 
 #loadingScreen{
