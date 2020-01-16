@@ -547,7 +547,6 @@ export class InfiniteRunner implements AfterViewInit{
 	
   }
 
-
   return(){
 
 	this.isHomeMenuVisible = true;

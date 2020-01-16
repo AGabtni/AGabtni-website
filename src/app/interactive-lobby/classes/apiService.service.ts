@@ -23,7 +23,6 @@ export class APIService {
 
     saveScore(name, score){
 
-
         var body = {
 
             "name" : name,

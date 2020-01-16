@@ -50,26 +50,27 @@
 		<!--START SCREEN-->
 		<div 
 		    fxFlex 
-			fxFlexFill
 			fxLayout="column" 
 			class="overlay-panel"
 			id="startScreen"  
-			fxLayoutAlign="center center"
 			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
+				<div fxLayout="row" fxLayoutAlign ="center">
 
-				<span style="text-align: center;" class="mat-h1">Infinite runner</span>
+					<span  style="text-align: center;" class="mat-h1">Infinite runner</span>
 
+				</div>
+				
 				<div
 					fxFlex 
-					fxLayout="column" 
+					fxLayout="row wrap"  
 					class="sub-menu" 
-					id="startMenu" 
 					fxLayoutAlign="center center"
 					fxLayoutGap="20px" > 
 					<!-- Home Menu -->
-					
-					
 					<div 
+						id="startMenu" 
+
+						class="menu"
 						[@HUDFadeIn]="this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'"
 						fxFlex
 						fxLayout="column"  
@@ -83,8 +84,10 @@
 					
 
 					<!--Score board -->
-					
 					<div 
+						id="startMenu" 
+
+						class="menu"
 						[@HUDFadeIn]="!this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'"
 						fxFlex 
 						fxLayout="column"  
@@ -208,7 +211,7 @@
 			<div style="z-index: 4;"
 				[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'"
 				fxLayout="row wrap" 
-				fxLayoutAlign="end end">
+				fxLayoutAlign="end">
 				<button 
 				id="audioButton" 
 				(click)="toggleAudio()">
