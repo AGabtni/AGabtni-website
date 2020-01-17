@@ -200,8 +200,7 @@
 
 .menu{
   
-  min-width: 100px;
-  min-height: 100px;
+  
   max-width: 600px;
   max-height: 600px;
   margin: 10px;
@@ -221,12 +220,13 @@
 #gameOverScreen{
   
   opacity: 0.0;
+  padding: 20px;
 }
 
 
 #gameOverMenu{
   background-color: rgba(255, 255, 255, 0.5);  
-  
+  padding: 10px;
 }
 
 #saveButton{

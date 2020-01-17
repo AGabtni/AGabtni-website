@@ -144,7 +144,9 @@
 			
 			
 			<div 	
-			 	fxFlex fxLayout="column" 
+				 fxFlex 
+				 fxFlexFill
+				 fxLayout="column" 
 			 	fxLayoutAlign="center center" fxLayoutGap="20px"
 			 	class="menu" 
 				id="gameOverMenu" > 
@@ -153,10 +155,12 @@
 				
 				<div class="sub-menu"
 					fxFlex 
+					
 					fxLayout="column" 
 					fxLayoutGap = "20px"
 					[@HUDFadeIn]="!this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
 					<div
+					fxFlexFill
 					fxLayoutAlign="end">
 							<button 
 								id="saveButton" 
@@ -170,7 +174,7 @@
 						fxLayout = "column"
 						fxFlex
 						fxFlexFill
-						fxLayoutAlign="center"
+						fxLayoutAlign="start center"
 						>
 
 
@@ -192,11 +196,11 @@
 
 				<div class="sub-menu"
 					fxFlex 
-					fxLayout="column" 
-					dxLayoutAlign = "center center"
+					fxLayout = "column"
+					fxLayoutAlign = "center center"
 					fxLayoutGap = "20px"
 					[@HUDFadeIn]="this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
-
+					
 					<button id="menuButton" (click)="onSaveScoreClick()">SAVE SCORE</button>
 					<button id="menuButton" (click)="replay()">RESTART</button>
 					<button id="menuButton" (click)="refresh()">QUIT</button>
