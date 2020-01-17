@@ -106,6 +106,12 @@ function init(){
 
 function Start(){
 
+	//-- Hide controls :
+	$("#ui").animate({
+
+		opacity:"0.0",
+		display : 'none'
+	})
 	
 
 
@@ -324,7 +330,26 @@ function Update(){
 
 	if(!globals.isPlaying)
 		return;	
-	
+
+
+		
+	//Stop updating when no health left
+	if(playerGameObject.getComponent(PlayerController).health <= 0 ){
+
+		globals.isPlaying = false;
+
+        $("#gameOverScreen").animate({
+
+          opacity:'1.0',
+          zIndex : '99',
+		});
+
+		$("")
+
+
+		return;
+	  }
+	  
 	//Check if player still alive
 	if(playerGameObject.getComponent(PlayerController).health <= 0 && globals.isPlaying){
 		
@@ -393,7 +418,6 @@ function Render (now){
 
 //Up the player target speed
 function upgrade(index){
-	
 	if(upgrades[index])
 		return ; 
 	
@@ -435,12 +459,6 @@ function Restart(){
 
 		opacity: '0.0',
 		zIndex : '0'
-	});
-
-	$("#ui").animate({
-
-		opacity : "0.0",
-		display : "none"
 	})
 
 
@@ -490,30 +508,33 @@ export class InfiniteRunner implements AfterViewInit{
   @ViewChild('gameContainer', {static: true}) gameContainer : ElementRef;
   @ViewChild('videoPlayer', {static: true}) videoplayer: any;
 
+  public scores ;
+
+  public score ;
   isPreviewVisible;
-  isControlsVisible;
   isPauseMenuVisible
   isLoading;
 
   isStartScreenVisible;
-  isHomeMenuVisible
+  isHomeMenuVisible;
 
-
+  isGameOverMenuVisible;
+  apiMessage;
    
-  public scores ; 
 
 
   constructor(private _apiservice : APIService) {
 	
 	this.isPreviewVisible = true;
-	this.isControlsVisible = false;
 	this.isPauseMenuVisible = false;
 	this.isLoading = true;
 	this.isStartScreenVisible = false;
-
+	
 
 	this.isHomeMenuVisible = false;
-
+	this.isGameOverMenuVisible = true;
+	this.score = 0;
+	this.apiMessage = "";
    }
 
   ngOnInit() {
@@ -544,24 +565,44 @@ export class InfiniteRunner implements AfterViewInit{
 
 		
 	)
+  }
+
+  backHome(){
+
+	this.isHomeMenuVisible = true;
 	
   }
 
-  return(){
+  backGameOver(){
 
-	this.isHomeMenuVisible = true;
+	this.isGameOverMenuVisible = true;
+	this.apiMessage = "";
   }
 
+  onSaveScoreClick(){
+	this.score = Math.abs(Math.floor(globals.parcouredDistance));
+	this.isGameOverMenuVisible = false;
+	
+
+  }
   saveScore(){
 
-	this._apiservice.saveScore("Ahmed", "20").subscribe(
+	this._apiservice.saveScore("Ahmed", this.score).subscribe(
 
 
-		val => {console.log("Sucessfully saved score ", val);},
-		response => {console.log("Error saving score ", response)},
+		val => {
+			console.log("Sucessfully saved score ", val);
+			this.apiMessage="You are good to go sailor !";
+			this.backGameOver();
+		},
+		response => {
+			console.log("Error saving score ", response); 
+			this.apiMessage="Hey ! No rule breaking ! Only one save per sailor .";
+		},
 		()=> console.log("put call complete")
 	);
   }
+  
   
 
   //Called after loading assets
@@ -606,7 +647,6 @@ export class InfiniteRunner implements AfterViewInit{
 		})
 
 		if(itemsLoaded == itemsTotal){
-			this.isControlsVisible = true;
 			this.isLoading = false;
 		}
 			
@@ -645,7 +685,6 @@ export class InfiniteRunner implements AfterViewInit{
   
   //From pause menu in pauseScreen
   togglePause(){
-	this.isControlsVisible = !this.isControlsVisible;
 	this.isPauseMenuVisible = !this.isPauseMenuVisible;
 	var icon = '../assets/icons/pause';
 	$("#pauseButton").toggleClass("clicked");
@@ -685,7 +724,6 @@ export class InfiniteRunner implements AfterViewInit{
   replay(){
 	  
 	this.isPauseMenuVisible = false;
-	this.isControlsVisible = true;
 	this.isStartScreenVisible = false;
 	
 	Restart();

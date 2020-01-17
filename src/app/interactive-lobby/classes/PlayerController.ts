@@ -81,17 +81,7 @@ export class PlayerController extends Component {
       const {frustum} =  cameraInfo;
       const { transform } = this.gameObject;
       
-      //Stop updating when no health left
-      if(this.health <= 0 ){
-
-        globals.isPlaying = false;
-        $("#gameOverScreen").animate({
-
-          opacity:'1.0',
-          zIndex : '99',
-        });
-        return;
-      }
+      
         
       //Translation handle
       transform.translateOnAxis(this.kForward, moveSpeed );
