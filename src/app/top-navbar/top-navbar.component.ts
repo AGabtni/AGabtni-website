@@ -10,8 +10,6 @@ import { Component,
            } from '@angular/core';
 
 import { categories } from '../static/categories';
-import { fromEvent } from 'rxjs';
-import { throttleTime, map, pairwise, distinctUntilChanged, share, filter } from 'rxjs/operators';
 
 import { categorySlide, toggleBar, topCategoryFade } from '../../assets/animations'
 
@@ -68,12 +66,18 @@ export class TopNavbarComponent implements AfterViewInit {
   , [])
     onWindowScroll() {
 
-        if(this.winRef.nativeWindow.pageYOffset > 10){
+        if(this.winRef.nativeWindow.pageYOffset > 20){
             this.isVisible = false;
          
         }
         else{
             this.isVisible = true;
+        }
+
+        if($("infiniteRunner-game").length && $("infiniteRunner-game").hasClass("isPlaying") ){
+
+          this.isVisible = false;
+
         }
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule} from '@angular/forms';
 import { MatBottomSheetRef, MatSnackBar, ErrorStateMatcher} from '@angular/material';
+import {APIService} from './../contact/apiService.service';
 import * as AOS from 'aos';
 
 import { formCard, shake, fadeIn } from '../../assets/animations';
@@ -17,6 +18,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-contact-form-mobile',
   templateUrl: './contact-form-mobile.component.html',
+  providers: [APIService],
   styleUrls: ['./contact-form-mobile.component.css'],
   animations: [ formCard , shake, fadeIn ],
 
@@ -24,6 +26,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class ContactFormMobileComponent implements OnInit {
     contactForm ;
     formState ;
+    message;
 
 
   //NEED TO BE FILLED IN
@@ -40,7 +43,7 @@ export class ContactFormMobileComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private formBuilder : FormBuilder, private _bottomSheetRef: MatBottomSheetRef<ContactFormMobileComponent>,private _snackBar: MatSnackBar) { 
+  constructor(private formBuilder : FormBuilder, private _bottomSheetRef: MatBottomSheetRef<ContactFormMobileComponent>,private _snackBar: MatSnackBar,private _apiservice : APIService) { 
     this.formState = 'shakeend';
   	this.contactForm = this.formBuilder.group({
         'firstName' : this.nameControl,
@@ -52,7 +55,7 @@ export class ContactFormMobileComponent implements OnInit {
         'description' : '',
 
     });
-
+    this.message = "";
 
   }
 
@@ -64,12 +67,24 @@ export class ContactFormMobileComponent implements OnInit {
 
   onFormSubmit(clientInfo){
     console.log(clientInfo);
-    
+    this._apiservice.sendContactRequest(clientInfo).subscribe(
+      
+      val => {
+        console.log("Sucessfully sent email ", val);
+        this.message = "Sucessfully sent email ";
+        this.openSnackBar();
+
+			},
+		  response => {
+			  console.log("Error sending mail", response); 
+        this.message = this.message = "Sucessfully sent email ";
+		  },
+      ()=> console.log("put call complete")
+    );
     if(this.emailFormControl.status == 'VALID' &&  this.projectTypeControl.status == 'VALID' && this.projectTypeControl.status == 'VALID'){
       this.formState = 'submittedForm';
       this.contactForm.reset();
       this._bottomSheetRef.dismiss();
-      this.openSnackBar();
 
     }else
       this.formState= (this.formState === 'shakestart' ? 'shakeend' : 'shakestart');
@@ -100,7 +115,7 @@ export class ContactFormMobileComponent implements OnInit {
   templateUrl: 'snackbar.html',
   styles: [`
     .example-pizza-party {
-      color: hotpink;
+      color: indigo;
     }
   `],
 })

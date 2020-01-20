@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
  
 
-
-const apiUrl = 'https://infinite-runner-api.herokuapp.com/scores'
+const apiUrl = 'https://infinite-runner-api.herokuapp.com/contact'
+const testUrl = 'localhost:3000/contact'
  
 @Injectable()
 export class APIService {
@@ -12,18 +12,9 @@ export class APIService {
     constructor(private http:HttpClient) {}
  
     // Uses http.get() to load data from a single API endpoint
-    getScores() {
-        return this.http.get(apiUrl);
-    }
 
+    sendContactRequest(body){
 
-    saveScore(name, score){
-
-        var body = {
-
-            "name" : name,
-            "score": score,
-        }
         return this.http.post(apiUrl,body);
 
     }

@@ -407,7 +407,38 @@ export const fadeIn =
 
 
 //Game HUD animations
-export const pauseMenu = 
+
+export const gameScreen =
+  trigger('ScaleScreen',[
+    state('scaleDown',style({
+      transform : 'scale(0.7)',
+    })),
+    state('scaleUp',style({
+
+      transform : 'scale(1.0)',
+    })),
+
+    transition('scaleUp<=>scaleDown',[animate ('600ms ease-out')]),
+    
+  ]);
+
+export const previewPanel = 
+  trigger('HUDHide',[
+    state('visible',style({
+      opacity : '1.0',
+      transform : 'scale(1.0)',
+      display: 'inline'
+    })),
+    state('hidden',style({
+      opacity : '0.0',
+      transform : 'scale(0.0)',
+      display: 'none'
+    })),
+
+    transition('visible<=>hidden',[animate ('200ms  ease-out')]),
+  ]);
+
+export const gameMenu = 
   trigger('HUDFadeIn',[
     state('fadeIn',style({
       opacity : '1.0',
@@ -418,7 +449,7 @@ export const pauseMenu =
       transform : 'scale(0)',
     })),
 
-    transition('fadeIn<=>fadeOut',[animate ('600ms ease-out')]),
+    transition('fadeIn<=>fadeOut',[animate ('600ms 200ms ease-out')]),
   ]);
 
 

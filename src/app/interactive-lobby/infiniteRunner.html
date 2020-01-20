@@ -1,7 +1,7 @@
-<div fxFlex #gameContainer>
+<div fxFlex id="gameContainer" [@ScaleScreen]="this.isPreviewVisible ? 'scaleDown':'scaleUp'">
 <mat-card 
 	
-	style="height: 90%;"
+	style="max-height: 50%;"
 	fxFlex
 	fxFlexFill
 	fxLayout="column" 
@@ -12,21 +12,22 @@
 		fxFlex
 		fxLayout="column"  
 		id="previewScreen" 
-		fxLayoutAlign="center center"
-		[@HUDFadeIn]="this.isPreviewVisible? 'fadeIn' : 'fadeOut'" >
-			<div fxFlex>
-				<video controls (click)="toggleVideo()" id="videoPlayer">
-					<source src="https://gfycat.com/enviousgigantickiwi" />
-					Browser not supported
-				</video>
+		fxLayoutAlign="center"
+		[@HUDFadeIn]="this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
+			
+			<div fxFlex fXFlexFill fxLayout="row" fxLayoutAlign="center center">  
+
+				
+				<button id="playButton"  mat-fab 
+					(click)="onPlayClick()">Play
+				</button>
 
 			</div>
-			<span class="mat-h2"  style="font-weight: 900;text-align: center; margin: 20px;">Infinite Runner with Three.js</span>
-
-			<button id="playButton"  mat-fab 
-				(click)="onPlayClick()">Play
-			</button>
-			
+			<div fxFlex fxLayout="row" fxLayoutAlign="center end">
+				<span class="mat-h2"  style="font-weight: 900;text-align: center; margin: 20px;">
+					Infinite Runner with Three.js
+				</span>
+			</div>
 
 	
 	</div>
@@ -227,7 +228,8 @@
 
 
 		<!--PLAYERSTATS LAYER-->
-		<div id="playerStats"  
+		<div id="playerStats"
+		class="overlay-panel"  
 			fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px"
 			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
 			<div>
@@ -277,11 +279,15 @@
 
 		
 		<!--CONTROLS LAYER-->
-		<div class="overlay-panel"  fxLayout="column" fxLayoutAlign="center" 
-			[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'">
+		<div class="overlay-panel"  
+			fxLayout="column" 
+			fxLayoutAlign="center" 
+			
+			>
 			<div style="z-index: 4;"
 				fxLayout="row wrap" 
-				fxLayoutAlign="end">
+				fxLayoutAlign="end"
+				[@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'">
 				<button 
 				id="audioButton" 
 				(click)="toggleAudio()">
@@ -290,10 +296,12 @@
 
 			</div>
 			<div fxFlex fxLayout="column" 
-				id="ui"
-				[@HUDFadeIn]="!this.isPauseMenuVisible ? 'fadeIn' : 'fadeOut'">
+				id="ui">
 				<div fxFlex 
-					fxLayout="row" fxLayoutAlign="end end" >
+					fxLayout="row" 
+					fxLayoutAlign="end end" >
+
+
 					<button id="pauseButton" (click)="togglePause()">
 						<img src="../assets/icons/pauseOutline.svg">
 					</button>
@@ -301,6 +309,7 @@
 				  
 		  		<div id="controls" fxLayout="row" fxLayoutAlign="end" >
 					<div id="left"><img src="https://threejsfundamentals.org/threejs/resources/images/left.svg"></div>
+					<div fxFlex></div>
 					<div id="right"><img src="https://threejsfundamentals.org/threejs/resources/images/right.svg"></div>
 			  	</div>
 			</div>

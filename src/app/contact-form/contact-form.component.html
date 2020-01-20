@@ -138,16 +138,28 @@
 
 
 <!--Feedback on submission form-->
-<div fxFlexFill [@fadeFormIn]="this.overlayState"  style="position: absolute; padding: 20px, z-index : 0;">
+<div fxFlex 
+	fxFlexFill
+	fxLayoutAlign = "center center"	
+	[@fadeFormIn]="this.overlayState"  
+
+	style="position: absolute; padding: 20px; z-index: 0">
 		<div
 			
-			fxFlexFill 
-			style="margin: 0 auto; color: white" 
+			fxFlex  
+			class="feedback"
 			fxLayout="column" 
-			fxLayoutAlign = "center" >
-			<div class="mat-h2" #overlayContainer fxLayout="row" fxLayoutAlign = "center">
+			fxLayoutAlign = "center center" >
+			<span class="mat-h2" style="text-align: center;"  #overlayContainer>
+				
+				{{this.message}}
+
+				
+			</span>
+
+			<span class="mat-h2" style="text-align: center;">
 				Your inquiry was received . We will respond to your inquiry promptly
-			</div>
+			</span>
 		</div>
 	
 </div>

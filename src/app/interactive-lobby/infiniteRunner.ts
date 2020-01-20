@@ -1,10 +1,9 @@
 
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {APIService} from './classes/apiService.service';
-import {Observable} from 'rxjs/Rx';
 
 
-import { pauseMenu } from '../../assets/animations';
+import { previewPanel, gameScreen, gameMenu } from '../../assets/animations';
 //--GAME IMPORTS :
 //threeJS imports :
 import * as THREE from 'three';
@@ -102,14 +101,9 @@ function init(){
 }
 
 
+
+
 function Start(){
-
-	//-- Hide controls :
-	$("#ui").animate({
-
-		opacity:"0.0",
-		display : 'none'
-	})
 	
 
 
@@ -229,6 +223,49 @@ function Start(){
 
 }
 
+
+function Restart(){
+	
+
+	
+	$("#messageContent").animate({
+		opacity : '0.0',
+	});
+	$("#messageContent").text("");
+
+	$("#gameOverScreen").animate({
+
+		opacity: '0.0',
+		zIndex : '0'
+	})
+
+
+	scene = null;
+	camera = null;
+	playerGameObject = null;
+	upgrades = [false,false,false];
+	gameObjectManager = null;
+	obstaclePooler = null;
+	then = 0 ;
+	screenShaker= null; 
+	water= null; sky= null; sunSphere= null;
+
+	globals.moveSpeed = 0.4;
+	globals.deltaTime = 0;
+	globals.time = 0;
+	globals.playerPosition = null;
+	globals.lastObstaclePosition = null;
+	globals.parcouredDistance = 0;
+	globals.scene = null;
+	globals.camera = null;
+	globals.cameraInfo = null;
+
+	
+	Start();
+	startCountdown();
+}
+
+
 function startCountdown (){
 
 	$('#messageContent').animate({
@@ -250,15 +287,14 @@ function startCountdown (){
 
 					$('#messageContent').text("GO !")
 					
-					$("#ui").animate({
+					//Reveal controllers :
+					toggleControllers();
 
-						opacity : "1.0",
-						display : 'flex'
-					})
 					setTimeout(()=>{
 						$('#messageContent').animate({
 
 							opacity : '0.0',
+
 						},500);
 						$('#messageContent').text("");
 
@@ -335,6 +371,7 @@ function Update(){
 	if(playerGameObject.getComponent(PlayerController).health <= 0 ){
 
 		globals.isPlaying = false;
+		toggleControllers();
 
         $("#gameOverScreen").animate({
 
@@ -342,7 +379,7 @@ function Update(){
           zIndex : '99',
 		});
 
-		$("")
+		
 
 
 		return;
@@ -428,6 +465,27 @@ function upgrade(index){
 	
 }
 
+
+function toggleControllers(){
+
+	$("#ui").toggleClass("visible");
+	if($("#ui").hasClass("visible")) {
+		$("#ui").animate({
+
+			opacity : "1.0",
+			zIndex : "2",
+		})
+		
+	}else{
+		$("#ui").animate({
+
+			opacity : "0.0",
+			zIndex : "-1",
+		})
+	} 
+	
+
+}
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
     const width = document.body.clientWidth;
@@ -444,47 +502,6 @@ function resizeRendererToDisplaySize(renderer) {
 }
 
 
-function Restart(){
-	
-
-	
-	$("#messageContent").animate({
-		opacity : '0.0',
-	});
-	$("#messageContent").text("");
-
-	$("#gameOverScreen").animate({
-
-		opacity: '0.0',
-		zIndex : '0'
-	})
-
-
-	scene = null;
-	camera = null;
-	playerGameObject = null;
-	upgrades = [false,false,false];
-	gameObjectManager = null;
-	obstaclePooler = null;
-	then = 0 ;
-	screenShaker= null; 
-	water= null; sky= null; sunSphere= null;
-
-	globals.moveSpeed = 0.4;
-	globals.deltaTime = 0;
-	globals.time = 0;
-	globals.playerPosition = null;
-	globals.lastObstaclePosition = null;
-	globals.parcouredDistance = 0;
-	globals.scene = null;
-	globals.camera = null;
-	globals.cameraInfo = null;
-
-	
-	Start();
-	startCountdown();
-}
-
 
 
 
@@ -500,241 +517,267 @@ function Restart(){
 
   styleUrls: ['./infiniteRunner.css'],
   
-  animations: [pauseMenu]
+  animations: [previewPanel, gameMenu, gameScreen]
 })
 export class InfiniteRunner implements AfterViewInit{
-  @ViewChild('gameContainer', {static: true}) gameContainer : ElementRef;
-  @ViewChild('videoPlayer', {static: true}) videoplayer: any;
+  	@ViewChild('videoPlayer', {static: true}) videoplayer: any;
 
-  public scores ;
+  	public scores ;
 
-  public score ;
-  isPreviewVisible;
-  isPauseMenuVisible
-  isLoading;
+  	public score ;
+  	apiMessage;
 
-  isStartScreenVisible;
-  isHomeMenuVisible;
+  	//Animation variables
+  	isPreviewVisible;
+  	isLoading;
 
-  isGameOverMenuVisible;
-  apiMessage;
+ 	isStartScreenVisible;
+	isHomeMenuVisible;
+	isPauseMenuVisible;
+  	isGameOverMenuVisible;
+  
    
 
 
-  constructor(private _apiservice : APIService) {
+	constructor(private _apiservice : APIService) {
 	
-	this.isPreviewVisible = true;
-	this.isPauseMenuVisible = false;
-	this.isLoading = true;
-	this.isStartScreenVisible = false;
-	
+		this.isPreviewVisible = true;
+		this.isPauseMenuVisible = false;
+		this.isLoading = true;
+		this.isStartScreenVisible = false;
+		
 
-	this.isHomeMenuVisible = false;
-	this.isGameOverMenuVisible = true;
-	this.score = 0;
-	this.apiMessage = "";
-   }
+		this.isHomeMenuVisible = false;
+		this.isGameOverMenuVisible = true;
+		this.score = 0;
+		this.apiMessage = "";
+   	}
 
-  ngOnInit() {
+ 	ngOnInit() {
 	 
 	
-  }
+	}
 
-  ngAfterViewInit(){
+	ngAfterViewInit(){
 
-  }
+	}
 
-  ngOnDestroy(){
-	
-	this.refresh();
-
-  }
-
-
-  getScores() {
-	
-	this.isHomeMenuVisible = false;
-	this._apiservice.getScores().subscribe(
-		data => {
-			this.scores = data;
-			console.log(this.scores[0]);},
-		err => console.error(err),
-		() => console.log('get call complete')
-
+	ngOnDestroy(){
 		
-	)
-  }
+		this.refresh();
 
-  backHome(){
-
-	this.isHomeMenuVisible = true;
-	
-  }
-
-  backGameOver(){
-
-	this.isGameOverMenuVisible = true;
-	this.apiMessage = "";
-  }
-
-  onSaveScoreClick(){
-	this.score = Math.abs(Math.floor(globals.parcouredDistance));
-	this.isGameOverMenuVisible = false;
-	
-
-  }
-  saveScore(){
-
-	this._apiservice.saveScore("Ahmed", this.score).subscribe(
+	}
 
 
-		val => {
-			console.log("Sucessfully saved score ", val);
-			this.apiMessage="You are good to go sailor !";
-			this.backGameOver();
-		},
-		response => {
-			console.log("Error saving score ", response); 
-			this.apiMessage="Hey ! No rule breaking ! Only one save per sailor .";
-		},
-		()=> console.log("put call complete")
-	);
-  }
-  
-  
-
-  //Called after loading assets
-  onLoadFinished(){
-	init();
-	Start();
-
-  }
-
-  //From preview screen
-  onPlayClick(){
-	this.isPreviewVisible = false;
-	this.isStartScreenVisible = true;
-	this.isHomeMenuVisible = true;
-	this.gameContainer.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start'});
-	this.loadAssets();
-
-  }
-
-
-  //From start screen
-  onStartClick(){
-	
-	this.isStartScreenVisible = false;
-	
-	startCountdown();
-
-  }
-
-  //Load models and init scene when finished
-  loadAssets(){
-
-	const manager = new THREE.LoadingManager();
-	this.isLoading = true;
-	manager.onLoad = this.onLoadFinished;
-
-	manager.onProgress = (url, itemsLoaded, itemsTotal) => {
+	getScores() {
 		
-		var n = (itemsLoaded / itemsTotal * 100 | 0)+'%';
-		$('#progressbar').animate({
-			'width' : n
-		})
+		this.isHomeMenuVisible = false;
+		this._apiservice.getScores().subscribe(
+			data => {
+				this.scores = data;
+				console.log(this.scores[0]);},
+			err => console.error(err),
+			() => console.log('get call complete')
 
-		if(itemsLoaded == itemsTotal){
-			this.isLoading = false;
-		}
 			
-	};
-	//Load 3d models
-	const gltfLoader = new GLTFLoader(manager);
+		)
+	}
 
-	for (const model of Object.values(models)) {
-	 	gltfLoader.load(model.url, (gltf) => {
-		model.gltf = gltf;
-			
+	backHome(){
+
+		this.isHomeMenuVisible = true;
+		
+	}
+
+	backGameOver(){
+
+		this.isGameOverMenuVisible = true;
+		this.apiMessage = "";
+	}
+
+	onSaveScoreClick(){
+		this.score = Math.abs(Math.floor(globals.parcouredDistance));
+		this.isGameOverMenuVisible = false;
+		
+
+	}
+	saveScore(){
+
+		this._apiservice.saveScore("Ahmed", this.score).subscribe(
+
+
+			val => {
+				console.log("Sucessfully saved score ", val);
+				this.apiMessage="You are good to go sailor !";
+				this.backGameOver();
+			},
+			response => {
+				console.log("Error saving score ", response); 
+				this.apiMessage="Hey ! No rule breaking ! Only one save per sailor .";
+			},
+			()=> console.log("put call complete")
+		);
+	}
+	
+	
+
+	//Called after loading assets
+	onLoadFinished(){
+		init();
+		Start();
+
+	}
+
+	//From preview screen
+	onPlayClick(){
+		$(document).ready(function(){
+			$("infiniteRunner-game").addClass("isPlaying");
 		});
 
+		$("footer").animate({
+			opacity : '0.0'
+		});
+
+
+		this.isPreviewVisible = false;
+		this.isStartScreenVisible = true;
+		this.isHomeMenuVisible = true;
+
+		//Scroll to middle of screen
+		$([document.documentElement,document.body]).animate({
+
+			scrollTop: $("#gameContainer").offset().top
+		})
+		
+		$("app-root").css({
+			'background-color' : 'rgba(0,0,0,0.95)'
+		});
+
+		document.body.style.overflowY = "hidden";
+
+
+		
+		this.loadAssets();
+
 	}
 
-	//Load sounds :
-	const audioLoader = new THREE.AudioLoader(manager);
 
-	for (const sound of Object.values(soundsLibrary)){
+	//From start screen
+	onStartClick(){
 		
-		audioLoader.load( sound.url, function( buffer ) {
-				sound.clip = buffer;
-		}); 
+		this.isStartScreenVisible = false;
 		
+		startCountdown();
+
 	}
-	 
-	
-	
-	
 
+	//Load models and init scene when finished
+	loadAssets(){
 
+		const manager = new THREE.LoadingManager();
+		this.isLoading = true;
+		manager.onLoad = this.onLoadFinished;
 
+		manager.onProgress = (url, itemsLoaded, itemsTotal) => {
+			
+			var n = (itemsLoaded / itemsTotal * 100 | 0)+'%';
+			$('#progressbar').animate({
+				'width' : n
+			})
 
-  }
+			if(itemsLoaded == itemsTotal){
+				this.isLoading = false;
+			}
+				
+		};
+		//Load 3d models
+		const gltfLoader = new GLTFLoader(manager);
 
-  
-  //From pause menu in pauseScreen
-  togglePause(){
-	this.isPauseMenuVisible = !this.isPauseMenuVisible;
-	var icon = '../assets/icons/pause';
-	$("#pauseButton").toggleClass("clicked");
-	icon += $("#pauseButton").hasClass("clicked") ? 'Filled.svg' : 'Outline.svg';
-	$('#pauseButton').find('img').attr('src',icon);
-	
-	globals.isPlaying = !globals.isPlaying;
+		for (const model of Object.values(models)) {
+			gltfLoader.load(model.url, (gltf) => {
+			model.gltf = gltf;
+				
+			});
 
-  }
+		}
 
-  //Toggle global volume for the audio listener and toggle ui icon
-  toggleAudio(){
+		//Load sounds :
+		const audioLoader = new THREE.AudioLoader(manager);
 
-	var icon = '../assets/icons/audio_';
-	$("#audioButton").toggleClass("clicked");
-	if($("#audioButton").hasClass("clicked")) {
-
-		icon +='off.svg' ;
+		for (const sound of Object.values(soundsLibrary)){
+			
+			audioLoader.load( sound.url, function( buffer ) {
+					sound.clip = buffer;
+			}); 
+			
+		}
 		
-		camera.children[0].setMasterVolume(0);
+		
+		
+		
 
-	}else{
-		icon +='on.svg';
-		camera.children[0].setMasterVolume(1);
-	} 
+
+
+
+	}
+
 	
-	$('#audioButton').find('img').attr('src',icon);
+	//From pause menu in pauseScreen
+	togglePause(){
+		
+		toggleControllers();
+		this.isPauseMenuVisible = !this.isPauseMenuVisible;
+		var icon = '../assets/icons/pause';
+		$("#pauseButton").toggleClass("clicked");
+		icon += $("#pauseButton").hasClass("clicked") ? 'Filled.svg' : 'Outline.svg';
+		$('#pauseButton').find('img').attr('src',icon);
+		
+		globals.isPlaying = !globals.isPlaying;
 
-  }
+	}
 
-  //Play video
-   toggleVideo(){
+	//Toggle global volume for the audio listener and toggle ui icon
+	toggleAudio(){
+
+		var icon = '../assets/icons/audio_';
+		$("#audioButton").toggleClass("clicked");
+		if($("#audioButton").hasClass("clicked")) {
+
+			icon +='off.svg' ;
+			
+			camera.children[0].setMasterVolume(0);
+
+		}else{
+			icon +='on.svg';
+			camera.children[0].setMasterVolume(1);
+		} 
+		
+		$('#audioButton').find('img').attr('src',icon);
+
+	}
+
+	//Play video
+	toggleVideo(){
 
 
-   }
-  //In both gameOverScreen and pauseScreen
-  replay(){
-	  
-	this.isPauseMenuVisible = false;
-	this.isStartScreenVisible = false;
+	}
+	//In both gameOverScreen and pauseScreen
+	replay(){
+		
+		this.isPauseMenuVisible = false;
+		this.isStartScreenVisible = false;
+		
+		Restart();
+	}
+
+
+
+
 	
-	Restart();
-  }
+	refresh(){
+		window.location.reload();
+	}
 
+	
 
-
-
-  
-  refresh(){
-	window.location.reload();
-  }
-
-  
-
-}
+	}

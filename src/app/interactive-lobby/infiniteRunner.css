@@ -1,7 +1,6 @@
 .game-container{
   
   width: 100%;
-  margin-top: 100px;
   max-width: 750px;
   
 }
@@ -144,10 +143,9 @@
 
 /**HUD CLASSES */
 #ui {
-  
+  opacity: 0;
   padding: 20px;
   z-index: 2;
-  opacity: 0.0;
 }
 
 #controls>div {
@@ -211,7 +209,7 @@
 
 
 #pauseMenu{
-  background-color : midnightblue;
+  background-color : rgba(0,20,40,0.7);
 
   
   
@@ -251,14 +249,23 @@
   color: black;
   font-weight: 900;
 }
+.overlay-panel{
 
-#playerStats{
   position: absolute;
-  padding: 20px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+#playerStats{
+ 
+  padding: 20px;
+  
+ 
   z-index: 1;
 }
 /**HEALTH BAR CLASSES*/

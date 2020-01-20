@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
 import {FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {APIService} from './../contact/apiService.service';
 import * as AOS from 'aos';
 
 import { formCard, shake, fadeIn } from '../../assets/animations';
@@ -18,6 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
+  providers: [APIService],
   styleUrls: ['./contact-form.component.css'],
   animations: [ formCard , shake, fadeIn ],
 })
@@ -30,6 +32,7 @@ export class ContactFormComponent implements OnInit {
   isOverForm = false;
   formState ;
   overlayState ;
+  message;
   
   //NEED TO BE FILLED IN
   projectTypes : string[] = [
@@ -47,7 +50,7 @@ export class ContactFormComponent implements OnInit {
 
 
   
-  constructor(public renderer: Renderer, private formBuilder : FormBuilder){
+  constructor(public renderer: Renderer, private formBuilder : FormBuilder, private _apiservice : APIService){
 
     this.formState = 'shakeend';
     this.overlayState = 'faded'
@@ -61,6 +64,7 @@ export class ContactFormComponent implements OnInit {
         'description' : '',
 
     });
+    this.message = "";
 
   }
   ngOnInit() {
@@ -72,7 +76,20 @@ export class ContactFormComponent implements OnInit {
   //Assigned to submit button 
   onFormSubmit(clientInfo){
     console.log(clientInfo);
+    this._apiservice.sendContactRequest(clientInfo).subscribe(
+      
+      val => {
+        console.log("Sucessfully sent email ", val);
+        this.message = "Sucessfully sent email ";
+			},
+		  response => {
+			  console.log("Error sending mail", response); 
+        this.message = this.message = "Sucessfully sent email ";
+		  },
+      ()=> console.log("put call complete")
+    );
     
+
     if(this.emailFormControl.status == 'VALID' &&  this.projectTypeControl.status == 'VALID' && this.projectTypeControl.status == 'VALID'){
       this.formState = 'submittedForm';
       this.overlayState = 'fadeend';
