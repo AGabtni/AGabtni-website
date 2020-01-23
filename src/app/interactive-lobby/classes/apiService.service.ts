@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
  
 
 
-const apiUrl = 'https://infinite-runner-api.herokuapp.com/scores'
+const apiUrl = 'https://a-gabtni.herokuapp.com/scores'
  
 @Injectable()
 export class APIService {

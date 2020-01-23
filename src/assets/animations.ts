@@ -407,7 +407,6 @@ export const fadeIn =
 
 
 //Game HUD animations
-
 export const gameScreen =
   trigger('ScaleScreen',[
     state('scaleDown',style({

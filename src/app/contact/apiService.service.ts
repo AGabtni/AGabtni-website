@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
  
 
-const apiUrl = 'https://infinite-runner-api.herokuapp.com/contact'
+const apiUrl = 'https://a-gabtni.herokuapp.com/contact'
 const testUrl = 'localhost:3000/contact'
  
 @Injectable()
