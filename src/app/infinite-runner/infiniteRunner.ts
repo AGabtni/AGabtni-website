@@ -1,5 +1,5 @@
 
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import {APIService} from './classes/apiService.service';
 
 

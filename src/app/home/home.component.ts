@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Lobby } from './interactive-lobby/Lobby'
 import * as THREE from 'three';
+import { Sky } from 'three/examples/jsm/objects/Sky.js';
+
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 let  renderer, scene;
@@ -8,7 +10,52 @@ let camera, hemiLight, hemiLightHelper
 let dirLight, dirLightHeper
 
 
+//Skybox creation: 
+function initSky() {
+	// Add Sky
+	var sky = new Sky();
+	sky.scale.setScalar( 450000 );
+	scene.add( sky );
 
+	// Add Sun Helper
+	var sunSphere = new THREE.Mesh(
+		new THREE.SphereBufferGeometry( 80000, 16, 8 ),
+		new THREE.MeshBasicMaterial( { color: 0xffffff } )
+	);
+	sunSphere.position.y = - 700000;
+	sunSphere.visible = false;
+	scene.add( sunSphere );
+
+	var effectController = {
+		turbidity: 10,
+		rayleigh: 2,
+		mieCoefficient: 0.005,
+		mieDirectionalG: 0.8,
+		luminance: 0.9,
+		inclination: 0.49, // elevation / inclination
+		azimuth: 0.125, // Facing front,
+		sun: ! true
+	};
+	var distance = 400000;
+
+	var uniforms = sky.material.uniforms;
+	uniforms[ "turbidity" ].value = effectController.turbidity;
+	uniforms[ "rayleigh" ].value = effectController.rayleigh;
+	uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
+	uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
+	uniforms[ "luminance" ].value = effectController.luminance;
+				
+	var theta = Math.PI * ( effectController.inclination - 0.5 );
+	var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
+	sunSphere.position.x = distance * Math.cos( phi );
+	sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+	sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+	sunSphere.visible = effectController.sun;
+	uniforms[ "sunPosition" ].value.copy( sunSphere.position );
+	
+
+	renderer.render( scene, camera );
+}
 function init() {
   const canvas = document.querySelector('#c');
 	canvas.width = document.body.clientWidth;
@@ -27,51 +74,18 @@ function init() {
   
 
 
-  camera = new THREE.PerspectiveCamera( 70, canvas.clientWidth / canvas.clientHeight, 1, 1000 );
-	camera.position.set( 0, 2, 0 );
+  camera = new THREE.PerspectiveCamera( 30, canvas.clientWidth / canvas.clientHeight, 1, 1000 );
+	camera.position.set( 0, 0, 0 );
   scene.add(camera)
 
-  dirLight = new THREE.DirectionalLight(0xffffff, 1);
-  dirLight.color.setHSL(0.1, 1, 0.95);
-  dirLight.position.set(- 1, 1.75, 1);
-  dirLight.position.multiplyScalar(30);
-  scene.add(dirLight);
+  initSky()
 
-  dirLight.castShadow = true;
-
-  dirLight.shadow.mapSize.width = 2048;
-  dirLight.shadow.mapSize.height = 2048;
-
-  var d = 50;
-
-  dirLight.shadow.camera.left = - d;
-  dirLight.shadow.camera.right = d;
-  dirLight.shadow.camera.top = d;
-  dirLight.shadow.camera.bottom = - d;
-
-  dirLight.shadow.camera.far = 3500;
-  dirLight.shadow.bias = - 0.0001;
-
-  dirLightHeper = new THREE.DirectionalLightHelper(dirLight, 10);
-  scene.add(dirLightHeper);
-
-  // GROUND
-
-  var groundGeo = new THREE.PlaneBufferGeometry(10000, 10000);
-  var groundMat = new THREE.MeshLambertMaterial({ color: 0xffffff });
-  groundMat.color.setHSL(0.095, 1, 0.75);
-
-  var ground = new THREE.Mesh(groundGeo, groundMat);
-  ground.position.y = - 33;
-  ground.rotation.x = - Math.PI / 2;
-  ground.receiveShadow = true;
-  scene.add(ground);
 
   
+  
   // RENDERER
-
+  renderer.render( scene, camera );
  
-  animate()
 }
 
 
@@ -129,7 +143,7 @@ export class HomeComponent implements OnInit {
 
     
     init()
-
+    animate()
   }
 
   ngAfterViewInit() {
