@@ -508,7 +508,6 @@ export const toggleBar =
         state(
           VisibilityState.Hidden,
           style({
-            background : 'rgba(63,81,181, 0)',
             transform: 'translate(0, -100%)',
             filter: 'blur(4px)',
 
@@ -518,26 +517,21 @@ export const toggleBar =
         state(
           VisibilityState.Visible,
           style({
-              background : 'rgba(63, 81, 181, 1)',
               transform: 'translate(0, 0)',
               filter: 'blur(0px)',
 
 
           })
         ),
-        transition('visible => hidden', [
+        transition('visible <=> hidden', [
              query('@titleFade', animateChild()),
-              animate('400ms ease-in-out'),
+              animate('400ms 100ms ease-in-out'),
                        
 
         ]),
 
 
-        transition('hidden => visible', [
-            query('@titleFade', animateChild()),
-            animate('400ms  ease-in-out'),
-            
-        ])
+       
 
   ]);
     

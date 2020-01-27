@@ -56,7 +56,7 @@ export class TopNavbarComponent implements AfterViewInit {
   @ViewChild('Carousel' , {static: true}) toolbar : any;
   
   private isVisible = true;
-  title = 'Website Title';
+  title = 'A Gabtni';
   hidden = true;
   categories = categories ;
 

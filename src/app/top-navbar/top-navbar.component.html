@@ -1,38 +1,52 @@
   <mat-toolbar [@toggle]="isVisible? 'visible' : 'hidden'" #Toolbar 
               [ngClass]="{'mat-elevation-z6' : true}"
-              style="background : rgba(63, 81, 181, 1)"
+              
               >
     
-    <div   fxLayout="row" fxLayoutAlign="center center">
+    <div fxHide.gt-sm  fxLayoutAlign="center center" fxLayoutGap="20px">
       
-      <div  fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="40px" >
+      
+      <!--Mobile burger menu-->
+        
           <button mat-icon-button 
                   (click)="openNav()" 
                   [@titleFade]="isVisible? 'visible' : 'hidden'"
-                  fxShow="true" 
-                  fxHide.gt-sm class="toggle-button">
-            
-            <mat-icon>
-              menu
-            </mat-icon>
+                  class="toggle-button">
+  
+            <mat-icon>menu</mat-icon>
+          </button>
 
-        </button>
-        <h3  class="mat-h2">{{this.title}}</h3>
-      </div>
+         
       
-      <div fxShow="true" fxHide.lt-md style="text-align: center;" [@titleFade]="isVisible? 'visible' : 'hidden'">
+      
+
+      
+    </div>
+    <div fxHide.gt-sm  style="display:flex; flex-grow: 0.5;"></div>
+    <span  id="title">{{this.title}}</span>  
+    <div  fxHide.lt-md style="display:flex;flex-grow: 0.5;"></div>
+    <div fxShow="true" 
+          fxLayout="row"
+          fxLayoutGap="15px"
+          fxLayoutAlign="center center" 
+          fxHide.lt-md style="text-align: center;" 
+          [@titleFade]="isVisible? 'visible' : 'hidden'">
         
 
           
+
           <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-          <div *ngFor="let cat of categories" class="category">
-  				  <button mat-button class="dropbtn mat-h4" [routerLink]="[cat.url]">{{cat.title}}</button>		
+          <div *ngFor="let cat of categories" class="category"
+                fxLayout="row"
+                fxLayoutAlign="center center" >
+            
+                <button mat-button class="dropbtn" [routerLink]="[cat.url]">{{cat.title}}</button>		
   			  </div>
 
       </div>
 
 
-    </div>
+    
   </mat-toolbar>
 
 

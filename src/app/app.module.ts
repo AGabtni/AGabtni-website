@@ -29,7 +29,7 @@ import  { MatGridListModule,
           MatSelectModule,
           MatButtonModule,
           MatSnackBarModule,
-
+          MatDialogModule,
           MatBottomSheetModule} from '@angular/material';
 
 
@@ -41,7 +41,6 @@ import  { MatGridListModule,
 
 import { TopNavbarComponent , WindowRef } from './top-navbar/top-navbar.component';
 import { HighlightsCarouselComponent } from './highlights-carousel/highlights-carousel.component';
-import { ProductComponent } from './product/product.component';
 import { ProductHighlightComponent } from './product-highlight/product-highlight.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
@@ -49,12 +48,11 @@ import { HomeComponent } from './home/home.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ServicesComponent } from './services/services.component';
 
-
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { ContactFormMobileComponent, SnackBarComponent } from './contact-form-mobile/contact-form-mobile.component';
-import { InfiniteRunner } from './interactive-lobby/infiniteRunner';
+import { InfiniteRunner } from './infinite-runner/infiniteRunner';
 import { ProjectsComponent } from './projects/projects.component';
 
 //Game class :
@@ -70,7 +68,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
-    ProductComponent,
     TopNavbarComponent,
     HighlightsCarouselComponent,
     ProductHighlightComponent,
@@ -102,6 +99,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatButtonModule,
     MatBottomSheetModule,
     MatSnackBarModule,
+    MatDialogModule,
     FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     NgbModule,

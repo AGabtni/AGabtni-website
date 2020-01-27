@@ -20,8 +20,6 @@ import { ObstaclePooler } from "./classes/ObstaclePooler";
 import {GameObjectManager} from './classes/GameObjectManager';
 import {InputManager} from './classes/InputManager';
 
-
-
 import {globals} from './classes/globals';
 
 

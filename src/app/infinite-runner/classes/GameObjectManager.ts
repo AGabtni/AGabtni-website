@@ -1,7 +1,6 @@
  
 import {GameObject} from './GameObject';
 import {SafeArray} from './SafeArray';
-import { PlayerController } from './PlayerController';
 
 
 export  class GameObjectManager {

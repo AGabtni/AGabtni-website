@@ -8,7 +8,7 @@ import {  Component,
           ElementRef,
           HostListener 
         } from '@angular/core';
-import { SwiperComponent, SwiperDirective, SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
+import {  SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 import { MatIconRegistry } from "@angular/material/icon";
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { DomSanitizer } from "@angular/platform-browser";
@@ -30,14 +30,26 @@ import * as AOS from 'aos';
 export class ServicesComponent implements AfterViewInit, OnDestroy {
   
   @ViewChild('swiperContainer',{static:false}) public swiper : any;
-  @ViewChild('techSection',{static:false}) public techSection : any;
+  @ViewChild('webDevSection',{static:false}) public webDevSection : any;
+  @ViewChild('gameDevSection',{static:false}) public gameDevSection : any;
+
   @HostListener('window:scroll', ['$event']) 
   onScroll(event) {
 
 
   
-    if( (window.pageYOffset >= this.techSection.nativeElement.offsetTop ) && !this.states[0] ){
-      for (let i = 0 ; i < this.states.length; i++ ){
+    if( (window.pageYOffset >= this.webDevSection.nativeElement.offsetTop+20 ) && !this.states[0] ){
+      for (let i = 0 ; i < this.states.length/2; i++ ){
+        
+
+        setTimeout(() => this.states[i]= true, i*300);
+        
+      }
+      
+    }
+
+    if( (window.pageYOffset >= this.gameDevSection.nativeElement.offsetTop+10 ) && !this.states[3] ){
+      for (let i = 3 ; i < this.states.length; i++ ){
         
 
         setTimeout(() => this.states[i]= true, i*300);
@@ -112,6 +124,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.swiperStates[0]=true;
+    this.swiperStates[3]=true;
     AOS.init();
 
     if(window.screen.width <= 480){

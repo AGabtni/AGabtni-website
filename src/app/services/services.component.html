@@ -1,38 +1,25 @@
-<div fxLayout="column" fxFlexFill style="background-color:rgba(0,179,179,1)" >
+<div fxLayout="column" style="background-color:rgba(0,179,179,1)" >
 
 	<div fxFlexFill appParallax [ratio]="-0.6" fxLayout="column" class="ParallaxContainer">
 	  	<span class="mat-h1 title" style="text-align: center;">Let us help you in your journey</span>
 		<p class="mat-h2">services works!</p>
 	    
 	</div>
-	<div fxFlexFill appParallax [ratio]="-0.3" fxLayout="column" 
-					class="ParallaxContainer2" 
-					data-aos="zoom-out-down"
-		  			data-aos-duration="800"
-		  			data-aos-delay="300"
-		  			data-aos-once="true">
 
-	  	<!--SERVICES  DESCRIPTION SECTION-->
-		<div 	fxLayout="row" 
-				fxFlexFill
-				fxLayoutAlign="center"
-				>
-	  	  	<span    class="mat-h1">Services</span>
-
-	  	</div>
-	  	<div fxLayout.gt-sm="row" fxLayoutGap="20px">
+	<!--GAME DEV  DESCRIPTION SECTION-->
+	<div	#gameDevSection
+			fxFlexFill appParallax [ratio]="-0.3" 
+			fxLayout="column" 
+			class="ParallaxContainer2" 
+			data-aos="zoom-out-down"
+		  	data-aos-duration="800"
+		  	data-aos-delay="300"
+		  	data-aos-once="true">
+	
+	
+	  	<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="50px">
 	  			    
-		    <div 	class="service-highlight" [class.mat-elevation-z4]="true" 
-		    		style="background-color: lightblue"
-		    	 	data-aos="zoom-out-down"
-		  			data-aos-duration="800"
-		  			data-aos-delay="700"
-		  			data-aos-once="true">
-		      <span class="mat-h2">Web development</span>
-		      <p>ʻO Lorem Ipsum kahi haʻahaʻa wale nō o ka paʻi a me keʻano o nāʻoihana. ʻO Lorem Ipsum ka 'ōlelo papahana maʻamau o kaʻoihana o ka makahiki 1500, i ka wā i lawe ai kekahi mea paʻi kiʻiʻole i keʻano o ka type a scrambled iā ia e hana i kahi puke kiko'ī. ʻAʻole i ola wale i kaʻelima mau kenekulia, akā,ʻo ka leleʻana hoʻi i nāʻano o ka lolouila, e hoʻololiʻoleʻia ana. Ua hoʻolahaʻia i nā makahiki 1960 me ka hoʻokuʻuʻana i nā pepa Letraset i loko o nā moʻolelo Lorem Ipsum, a me nā mea hou aku me ka polokalamu hoʻopuka pākī e like me Aldus PageMaker me nā papa o Lorem Ipsum.
-		      </p>
-		     
-		    </div>
+		    <span class="mat-h1" style="padding:20px; text-align: center;">Game Development</span>
 		    <div 	class="service-highlight" [class.mat-elevation-z4]="true" 
 		    	 	style="background-color: lightgreen"
 			     	data-aos="zoom-out-down"
@@ -42,16 +29,100 @@
 
 		      <span class="mat-h2">Game development</span>
 		      <p>ʻO Lorem Ipsum kahi haʻahaʻa wale nō o ka paʻi a me keʻano o nāʻoihana. ʻO Lorem Ipsum ka 'ōlelo papahana maʻamau o kaʻoihana o ka makahiki 1500, i ka wā i lawe ai kekahi mea paʻi kiʻiʻole i keʻano o ka type a scrambled iā ia e hana i kahi puke kiko'ī. ʻAʻole i ola wale i kaʻelima mau kenekulia, akā,ʻo ka leleʻana hoʻi i nāʻano o ka lolouila, e hoʻololiʻoleʻia ana. Ua hoʻolahaʻia i nā makahiki 1960 me ka hoʻokuʻuʻana i nā pepa Letraset i loko o nā moʻolelo Lorem Ipsum, a me nā mea hou aku me ka polokalamu hoʻopuka pākī e like me Aldus PageMaker me nā papa o Lorem Ipsum.
-		      </p>
+			  </p>
+			  
+
 		     
-		    </div>		
+			</div>
+			
+
+			<!--Technologies swiper ONLY ON MOBILE-->
+			<div fxFlexFill fxShow.gt-md="false" fxShow="true"	>
+	  	
+				<div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+				  <swiper class="swiper-container" 
+						  fxFlex="auto"
+
+						  [disabled]="false" 
+						  [config]="config"  
+						  (indexChange)="onIndexChange($event)" 
+						  (swiperTransitionStart)="onSwiperEvent('transitionStart')" 
+						  (swiperTransitionEnd)="onSwiperEvent('transitionEnd')"
+						  #swiperContainer >
+						<div   *ngFor="let technology of technologies.slice(3, technologies.length); let i=index" class="swiper-slide" >
+						  <div  fxFlexFill fxLayout="row"  fxLayoutAlign="center">
+								<mat-card 	[@onHover]="swiperStates[i]? 'transitionStart' : 'transitionEnd'" 
+											fxFlexFill 
+											class="swiper-mat-card">
+									<mat-card-header [@onSwipe]="swiperStates[i]? 'transitionStart' : 'transitionEnd'" fxLayout="column" fxLayoutAlign="start center" class="custom-card-header">
+										<svg-icon 
+											
+											src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
+									</mat-card-header>
+
+
+									<mat-card-content	fxLayout="row" fxLayoutAlign="center" 
+														[@onSlide]="swiperStates[i] ? 'transitionStart' : 'transitionEnd'"
+														class="custom-card-content">
+										<span class="mat-h2">{{technology.name}}</span>
+											
+									</mat-card-content>
+
+									
+								</mat-card>
+						  </div>
+						</div>
+				  </swiper>
+
+				 
+				</div>
+			</div>	
+				
+	      	<!--Technologies grid ONLY ON LARGE VIEWPORT-->
+	      	<div fxShow.gt-md="true" fxShow="false" >
+				
+
+				<div fxLayout="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
+
+						<mat-card 
+						  *ngFor="let technology of technologies.slice(3, technologies.length); let k=index "
+							fxLayout="column"
+							[@onHover]="states[k+3] ? 'up' : 'stable'"
+							class="non-mobile-card">
+							
+							<mat-card-header 	fxLayout="column" 
+												[@onSwipe]="states[k+3] ? 'transitionStart' : 'transitionEnd'"
+												class="logo">
+									<svg-icon  src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
+								
+								
+							</mat-card-header>
+							<mat-card-content 
+							[@onSlide]="states[k+3] ? 'transitionStart' : 'transitionEnd'"   
+							fxLayout="column"
+							style="margin-top: 50px; font-weight: 1500">
+							<button fxLayoutAlign="center center"  id="detailsBtn">
+							  <span  class="mat-h2">{{technology.name}}</span>
+
+							</button>
+								
+						</mat-card-content>
+
+
+						</mat-card>
+			  </div>
+		  </div>
+
+
+
+
 	  	</div>
 
 
 	</div>
 
-
-	<div #techSection 
+	<!--WEB DEV DESCRIPTION SECTION-->
+	<div #webDevSection 
 					fxFlexFill
 					appParallax [ratio]="-0.1"
 					fxLayout="column" 
@@ -64,16 +135,29 @@
 					>
 
 
-	  	<!--TECHNOLOGIES SECTION-->
-	  	<div fxLayout="column" fxLayoutAlign="center" class="technologies-container" >
+	  	
+	  	<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="technologies-container" >
 		  	
 
-		  	<div  	fxLayout="row" 
-		  			fxLayoutAlign="center"  
-		  			data-aos-once="true">
-		  	  	<span class="mat-h1" style="padding:20px; text-align: center;">The technologies we use</span>
+		  	  	<span class="mat-h1" style="padding:20px; text-align: center;">Web Development</span>
 
-		  	</div>
+			  
+			  <div 	class="service-highlight" [class.mat-elevation-z4]="true" 
+		    		style="background-color: lightblue"
+		    	 	data-aos="zoom-out-down"
+		  			data-aos-duration="800"
+		  			data-aos-delay="700"
+		  			data-aos-once="true">
+		      <span class="mat-h2">Web development</span>
+		      	<p>ʻO Lorem Ipsum kahi haʻahaʻa wale nō o ka paʻi a me keʻano o nāʻoihana. 
+					ʻO Lorem Ipsum ka 'ōlelo papahana maʻamau o kaʻoihana o ka makahiki 1500, 
+					i ka wā i lawe ai kekahi mea paʻi kiʻiʻole i keʻano o ka type a scrambled iā ia e hana i kahi puke kiko'ī. 
+					ʻAʻole i ola wale i kaʻelima mau kenekulia, akā,ʻo ka leleʻana hoʻi i nāʻano o ka lolouila, e hoʻololiʻoleʻia ana. 
+					Ua hoʻolahaʻia i nā makahiki 1960 me ka hoʻokuʻuʻana i nā pepa Letraset i loko o nā moʻolelo Lorem Ipsum, 
+					a me nā mea hou aku me ka polokalamu hoʻopuka pākī e like me Aldus PageMaker me nā papa o Lorem Ipsum.
+		      	</p>
+		     
+		    </div>
 			
 			<!--Technologies swiper ONLY ON MOBILE-->
 			<div fxFlexFill fxShow.gt-md="false" fxShow="true"	>
@@ -89,11 +173,10 @@
 			        		(swiperTransitionStart)="onSwiperEvent('transitionStart')" 
 			        		(swiperTransitionEnd)="onSwiperEvent('transitionEnd')"
 			        		#swiperContainer >
-			          	<div   *ngFor="let technology of technologies; let i=index" class="swiper-slide" >
+			          	<div   *ngFor="let technology of technologies.slice(0,3); let i=index" class="swiper-slide" >
 			            	<div  fxFlexFill fxLayout="row"  fxLayoutAlign="center">
 			              		<mat-card 	[@onHover]="swiperStates[i]? 'transitionStart' : 'transitionEnd'" 
 			              					fxFlexFill 
-			              					(click)="onCardClick(i)"
 			              					class="swiper-mat-card">
 			              			<mat-card-header [@onSwipe]="swiperStates[i]? 'transitionStart' : 'transitionEnd'" fxLayout="column" fxLayoutAlign="start center" class="custom-card-header">
 					  					<svg-icon 
@@ -122,14 +205,17 @@
 
 	      	<!--Technologies grid ONLY ON LARGE VIEWPORT-->
 	      	<div fxShow.gt-md="true" fxShow="false" >
-			  	<div  fxLayout="row"  fxLayoutAlign="center" style="margin: 0 auto; padding: 20px 20px 0 20px;">
+				  <div  fxLayout="row"  
+				  		fxLayoutAlign="center" 
+				  		style="margin: 0 auto; padding: 20px 20px 0 20px;">
 				  		<div 	*ngFor="let technology of technologies.slice(0,3); let i=index "
 				  			  
 				  				>	
 					  		<mat-card 
 					  			(scroll)="onScroll($event)"
 				  				[@onHover]="states[i] ? 'up' : 'stable'" 
-				  				fxLayout="column"
+								  fxLayout="column"
+								  fxLayoutAlign="center center"
 				  				class="non-mobile-card">
 					  			
 					  			<mat-card-header	fxLayout="column"
@@ -141,8 +227,14 @@
 
 
 					  			</mat-card-header>
-					  			<mat-card-content style="margin-top: 50px; font-weight: 1500">
-					  				<span [@onSlide]="!states[i] ? 'transitionStart' : 'transitionEnd'" class="mat-h2">{{technology.name}}</span>
+								  <mat-card-content 
+								  	[@onSlide]="states[i] ? 'transitionStart' : 'transitionEnd'"  
+									  fxLayout="column"
+									  style="margin-top: 50px; font-weight: 1500">
+									  <button fxLayoutAlign="center center"  id="detailsBtn">
+										<span  class="mat-h2">{{technology.name}}</span>
+
+									  </button>
 					  					
 					  			</mat-card-content>
 
@@ -152,31 +244,6 @@
 					  	</div>
 				</div>
 
-			  	<div fxLayout="row" fxLayoutAlign="center" style="margin: 0 auto; padding: 0px 20px 20px 20px;">
-
-				  		<mat-card 
-							*ngFor="let technology of technologies.slice(3, technologies.length); let k=index "
-			  				fxLayout="column"
-			  				[@onHover]="states[k+3] ? 'up' : 'stable'"
-			  				class="non-mobile-card">
-				  			
-				  			<mat-card-header 	fxLayout="column" 
-				  								[@onSwipe]="states[k+3] ? 'transitionStart' : 'transitionEnd'"
-				  								class="logo">
-				  					<svg-icon  src={{technology.source}} [svgStyle]="{ 'width.px':technology.logo_width }" ></svg-icon>
-				  				
-				  				
-				  			</mat-card-header>
-
-				  			<mat-card-content style="margin-top: 50px; font-weight: 1500">
-				  				<span [@onSlide]="!states[k+3] ? 'transitionStart' : 'transitionEnd'" class="mat-h2">{{technology.name}}</span>
-				  					
-				  			</mat-card-content>
-
-				  			
-
-				  		</mat-card>
-				</div>
 			</div>
 		</div>
 
