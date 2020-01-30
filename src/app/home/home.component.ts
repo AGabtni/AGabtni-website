@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import * as THREE from 'three';
+/*
 import {
-	TextureEffect, BlendFunction, EffectPass, RenderPass, BloomEffect, KernelSize,
+	TextureEffect, BlendFunction, EffectPass,EffectComposer, RenderPass, BloomEffect, KernelSize,
 	OutlineEffect
-} from "postprocessing";
+} from "postprocessing";*/
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 
 
 let renderer, scene;
@@ -16,7 +18,7 @@ let camera;
 let cloudParticles;
 
 let raycaster;
-let composer, effectFXAA, outlinePass;;
+let composer, effectFXAA, outlinePass;
 let mouse = new THREE.Vector2();
 let selectedObjects = [];
 var shaderParams = {
@@ -40,8 +42,8 @@ function init() {
 
 	//--Vars init :
 	cloudParticles = [];
-	composer = new EffectComposer(renderer);
 	
+
 	raycaster = new THREE.Raycaster;
 
 	//--Scene setup
@@ -130,7 +132,7 @@ function init() {
 
 
 	//Postprocessing :
-
+	/*
 	loader.load("../../assets/textures/stars.jpg", function (texture) {
 
 		const textureEffect = new TextureEffect({
@@ -149,25 +151,46 @@ function init() {
 		});
 		bloomEffect.blendMode.opacity.value = 1.5;
 
-		 outlinePass = new OutlineEffect(scene, camera)
+		outlinePass = new OutlinePass( new THREE.Vector2( window.innerWidth, window.innerHeight ), scene, camera );
+        outlinePass.edgeStrength = 3;
+        outlinePass.edgeGlow = 3.0;
+        outlinePass.edgeThickness = 0.1;
+        outlinePass.visibleEdgeColor.setHex(0x19C0EE);
 		let effectPass = new EffectPass(
 			camera,
 			bloomEffect,
 			textureEffect,
-			outlinePass
 
 		);
 		effectPass.renderToScreen = true;
 		
-		composer.addPass(effectPass)
-		var renderPass = new RenderPass( scene, camera );
-		composer.addPass( renderPass );
 
+		effectFXAA = new ShaderPass( FXAAShader );
+        effectFXAA.uniforms[ 'resolution' ].value.set( 1 / window.innerWidth, 1 / window.innerHeight );
+		effectFXAA.renderToScreen = true;
 		
-		
-		composer.addPass(new RenderPass())
+
+
+		composer = new EffectComposer(renderer);
+		var renderPass = new RenderPass( scene, camera );
+		composer.addPass( renderPass );	
+
+		composer.addPass( effectPass );
+	
+
 
 	});
+	*/
+
+	//Test on ly
+	composer = new EffectComposer( renderer );
+
+	var renderPass = new RenderPass( scene, camera );
+	composer.addPass( renderPass );
+
+	outlinePass = new OutlinePass( new THREE.Vector2( window.innerWidth, window.innerHeight ), scene, camera );
+	composer.addPass( outlinePass );
+
 
 	var geometry = new THREE.TorusBufferGeometry( 1, 0.3, 16, 100 );
 				var material = new THREE.MeshPhongMaterial( { color: 0xffaaff } );
@@ -182,6 +205,9 @@ function init() {
 				torus.castShadow = true;
 					
 
+
+
+	// End of test
 	window.addEventListener( 'mousemove', onTouchMove );
 	window.addEventListener( 'touchmove', onTouchMove );
 
@@ -227,7 +253,7 @@ function checkIntersection() {
 		var selectedObject = intersects[ 0 ].object;
 		addSelectedObject( selectedObject );
 
-		outlinePass.selection = selectedObjects;
+		outlinePass.selectedObjects = selectedObjects;
 
 		console.log(outlinePass)
 	} else {
@@ -243,10 +269,13 @@ function animate() {
 
 	render();
 	renderer.render(scene, camera);
+	
+	if(composer != undefined)
+		composer.render(0.1);
+	
 	requestAnimationFrame(animate);
 
-	if(outlinePass != undefined)
-		outlinePass.update()
+
 }
 
 function resizeRendererToDisplaySize(renderer) {
@@ -279,7 +308,6 @@ function render() {
 		p.rotation.z -= 0.001;
 	});
 
-	composer.render()
 
 
 }
