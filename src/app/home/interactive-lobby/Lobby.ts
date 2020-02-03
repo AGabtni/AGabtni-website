@@ -1,148 +1,282 @@
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
+import { User } from './User';
+
 
 
 export class Lobby {
+    private static instance: Lobby;
 
-    container;
-    renderer; 
-    scene; 
+    renderer;
+    scene;
     camera;
-    hemiLight;
-    hemiLightHelper
-    dirLight
-    dirLightHeper
 
-    
+    raycaster;
+    composer;
+    effectFXAA;
+    outlinePass;
+    texturePass;
+    mouse = new THREE.Vector2();
+    selectedObjects;
+    cloudParticles;
 
-    init(){
-        this.container = document.getElementById( 'container' );
-
-	    
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color().setHSL( 0.6, 0, 1 );
-		this.scene.fog = new THREE.Fog( this.scene.background, 1, 5000 );
-
-        this.camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.1, 1000 );
-        this.camera.position.set( 0, 0, 250 )
-        this.scene.add(this.camera)
-        this.hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
-        this.hemiLight.color.setHSL( 0.6, 1, 0.6 );
-        this.hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
-        this.hemiLight.position.set( 0, 50, 0 );
-        this.scene.add( this.hemiLight );
-
-        this.hemiLightHelper = new THREE.HemisphereLightHelper( this.hemiLight, 10 );
-        this.scene.add( this.hemiLightHelper );
-
-        this.dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
-		this.dirLight.color.setHSL( 0.1, 1, 0.95 );
-		this.dirLight.position.set( - 1, 1.75, 1 );
-		this.dirLight.position.multiplyScalar( 30 );
-		this.scene.add( this.dirLight );
-
-		this.dirLight.castShadow = true;
-
-		this.dirLight.shadow.mapSize.width = 2048;
-		this.dirLight.shadow.mapSize.height = 2048;
-
-		var d = 50;
-
-		this.dirLight.shadow.camera.left = - d;
-		this.dirLight.shadow.camera.right = d;
-		this.dirLight.shadow.camera.top = d;
-		this.dirLight.shadow.camera.bottom = - d;
-
-		this.dirLight.shadow.camera.far = 3500;
-		this.dirLight.shadow.bias = - 0.0001;
+    models ; 
+    userInstance ;
+    private constructor() {
         
-		this.dirLightHeper = new THREE.DirectionalLightHelper( this.dirLight, 10 );
-		this.scene.add( this.dirLightHeper );
-
-        // GROUND
-
-		var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
-		var groundMat = new THREE.MeshLambertMaterial( { color: 0xffffff } );
-		groundMat.color.setHSL( 0.095, 1, 0.75 );
-
-		var ground = new THREE.Mesh( groundGeo, groundMat );
-		ground.position.y = - 33;
-		ground.rotation.x = - Math.PI / 2;
-		ground.receiveShadow = true;
-		this.scene.add( ground );
-
-        var vertexShader = document.getElementById( 'vertexShader' ).textContent;
-				var fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
-				var uniforms = {
-					"topColor": { value: new THREE.Color( 0x0077ff ) },
-					"bottomColor": { value: new THREE.Color( 0xffffff ) },
-					"offset": { value: 33 },
-					"exponent": { value: 0.6 }
-				};
-				uniforms[ "topColor" ].value.copy( this.hemiLight.color );
-
-				this.scene.fog.color.copy( uniforms[ "bottomColor" ].value );
-        var skyGeo = new THREE.SphereBufferGeometry( 4000, 32, 15 );
-				var skyMat = new THREE.ShaderMaterial( {
-					uniforms: uniforms,
-					vertexShader: vertexShader,
-					fragmentShader: fragmentShader,
-					side: THREE.BackSide
-				} );
-
-				var sky = new THREE.Mesh( skyGeo, skyMat );
-				this.scene.add( sky );
-
-        // RENDERER
-
-		this.renderer = new THREE.WebGLRenderer(  );
-		this.container.appendChild( this.renderer.domElement );
-		
-
+            this.cloudParticles = [];
+            this.selectedObjects = [];
+            this.models = [];
     }
-
     
-    
-    animate= () => {
 
-         
-        this.render();
-        requestAnimationFrame( this.animate );
-       
-
-    }
-
-    resizeRendererToDisplaySize(renderer) {
-        const canvas = renderer.domElement;
-        const width = document.body.clientWidth;
-        const height = document.body.clientHeight;
-        const needResize = canvas.width !== width || canvas.height !== height;
-        if (needResize) {
-          renderer.setSize(width, height, false);
-         
-            
-    
-    
+    public static getInstance(): Lobby {
+        if (!Lobby.instance) {
+            Lobby.instance = new Lobby();
         }
-        return needResize;
+
+        return Lobby.instance;
+    }
+    init() {
+
+        //Setup renderer container
+
+        const canvas = document.querySelector('#c');
+        canvas.width = document.body.clientWidth;
+        canvas.height = document.body.clientHeight;
+        this.renderer = new THREE.WebGLRenderer({ canvas });
+
+
+        //--Vars init :
+        
+
+
+        this.raycaster = new THREE.Raycaster;
+
+        //--Scene setup
+
+        this.scene = new THREE.Scene();
+        this.scene.fog = new THREE.FogExp2("rgba(7,13,24)", 0.001);
+        this.renderer.setClearColor(this.scene.fog.color);
+
+        //--Camera setup
+
+        this.camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 1000);
+        
+
+
+        this.scene.add(this.camera)
+
+
+
+		const manager = new THREE.LoadingManager();
+		manager.onLoad = this.onLoadFinished;
+        //--Load textures : 
+        let loader = new THREE.TextureLoader();
+        loader.load("../../assets/textures/smoke.png", (texture)=> {
+            //--Cloud geometry init  :
+            let cloudGeo = new THREE.PlaneBufferGeometry(750, 750);
+            let cloudMaterial = new THREE.MeshLambertMaterial
+                ({
+
+                    map: texture,
+                    transparent: true
+
+                })
+
+
+            for (var p = 0; p < 200; p++) {
+                let cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
+                cloud.position.set(
+                    Math.random() * 2500 - 1000,
+                    500,
+                    Math.random() * 2000 - 1100
+                );
+                cloud.rotation.x = 1.16;
+                cloud.rotation.y = -0.12;
+                cloud.rotation.z = Math.random() * 2 * Math.PI;
+                cloud.material.opacity = 0.55;
+                this.cloudParticles.push(cloud);
+                this.scene.add(cloud)
+            }
+
+
+
+
+        });
+
+        //--Load models :
+        var gltfLoader = new GLTFLoader();
+        var model;
+
+        //Load Spaceship
+        gltfLoader.load('../../assets/models/Spaceship.gltf',  (gltf) => {
+            model = gltf;
+            console.log(model.scene.position)
+
+            
+            model.scene.rotation.x = 1.45;
+            model.scene.rotation.y = -3.1;
+            model.scene.rotation.z = -0.27;
+            model.scene.position.z = 0;
+            model.scene.position.y = 2;
+            model.scene.position.x = 0.275;
+            model.scene.scale.set(0.2,0.2,0.2)
+            this.userInstance = new User("User", model, this.scene);
+            this.camera.lookAt(model.scene.position)
+            this.camera.position.z = 1.7;
+            this.camera.position.y -= 1.5;
+            this.camera.rotation.x = 1.16;
+            this.camera.rotation.y = -0.12;
+            this.camera.rotation.z = 0.27;
+        });
+
+        //Load asteroids
+        /*
+        gltfLoader.load('../../assets/models/Spaceship.gltf',  (gltf) => {
+
+        }*/
+        //--Lightning setup  :
+        let ambient = new THREE.AmbientLight(0x555555);
+        this.scene.add(ambient);
+
+
+        //Nebula lights 
+        let directionalLight = new THREE.DirectionalLight(0xff8c19);
+        directionalLight.position.set(0, 0, 1);
+        this.scene.add(directionalLight);
+
+        let orangeLight = new THREE.PointLight(0xcc6600, 50, 450, 1.7);
+        orangeLight.position.set(200, 300, 100);
+        this.scene.add(orangeLight);
+
+        let redLight = new THREE.PointLight(0xd8547e, 50, 450, 1.7);
+        redLight.position.set(100, 300, 100);
+        this.scene.add(redLight);
+
+        let blueLight = new THREE.PointLight(0x3677ac, 50, 450, 1.7);
+        blueLight.position.set(300, 300, 200);
+        this.scene.add(blueLight)
+
+
+
+
+
+        //Postprocessing :
+        this.composer = new EffectComposer(this.renderer);
+        var renderPass = new RenderPass(this.scene, this.camera);
+        this.composer.addPass(renderPass);
+
+        this.outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), this.scene, this.camera);
+        this.composer.addPass(this.outlinePass);
+
+        window.addEventListener('mousemove', Lobby.instance.onTouchMove);
+        window.addEventListener('mousedown', Lobby.instance.onMouseClick)
+        window.addEventListener('touchmove', Lobby.instance.onTouchMove);
+        window.addEventListener( 'resize', Lobby.instance.onWindowResize, false );
+
+
+        this.animate();
+    }
+    onLoadFinished(){
+
+
+
+    }
+    onMouseClick(event) {
+
+        if (Lobby.instance.selectedObjects.length > 0)
+            console.log(Lobby.instance.selectedObjects[0].material.opacity = 0)
+    }
+    onTouchMove(event) {
+
+        var x, y;
+
+        if (event.changedTouches) {
+
+            x = event.changedTouches[0].pageX;
+            y = event.changedTouches[0].pageY;
+
+        } else {
+
+            x = event.clientX;
+            y = event.clientY;
+
+        }
+
+        Lobby.instance.mouse.x = (x / window.innerWidth) * 2 - 1;
+        Lobby.instance.mouse.y = - (y / window.innerHeight) * 2 + 1;
+
+        Lobby.instance.checkIntersection();
     }
 
+    addSelectedObject(object) {
 
+        Lobby.instance.selectedObjects = [];
+        Lobby.instance.selectedObjects.push(object);
+
+    }
+
+    checkIntersection() {
+
+        this.raycaster.setFromCamera(this.mouse, this.camera);
+
+        var intersects = this.raycaster.intersectObjects([this.scene], true);
+        var currentHex;
+        if (intersects.length > 0) {
+
+            var selectedObject = intersects[0].object;
+            this.addSelectedObject(selectedObject);
+
+            this.outlinePass.selectedObjects = this.selectedObjects;
+
+            console.log(this.outlinePass)
+        } else {
+
+            // outlinePass.selectedObjects = [];
+
+        }
+
+    }
+    
     render() {
 
-        
-        if (this.resizeRendererToDisplaySize(this.renderer)) {
-            const canvas = this.renderer.domElement;
-            this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            this.camera.updateProjectionMatrix();
-        }
 
-        this.renderer.render( this.scene, this.camera );
+
+        //Animate clouds position
+        Lobby.instance.cloudParticles.forEach(p => {
+            p.rotation.z -= 0.001;
+        });
+
+
+
+    }
+    animate() {
+
+        Lobby.instance.render();
+        Lobby.instance.renderer.render(Lobby.instance.scene, Lobby.instance.camera);
+
+        if (Lobby.instance.composer != undefined)
+            Lobby.instance.composer.render(0.1);
+
+        if(Lobby.instance.userInstance != undefined)
+            Lobby.instance.userInstance.update();
+        requestAnimationFrame(Lobby.instance.animate);
+
 
     }
 
-   
+    onWindowResize() {
+        Lobby.instance.camera.aspect = window.innerWidth / window.innerHeight;
+        Lobby.instance.camera.updateProjectionMatrix();
 
-    
+        Lobby.instance.renderer.setSize( window.innerWidth, window.innerHeight );
+    }
+
+
+
 }
